@@ -1,0 +1,207 @@
+
+\makeglossaries
+\newglossaryentry{latex}
+{
+    name=latex,
+    description={Is a mark up language specially suited 
+    for scientific documents}
+}
+%%Falta describir meor estas palabras
+\newglossaryentry{HFW}{
+    type=\acronymtype,
+    name=HFW,
+    description={Palabras de alta frecuencia},
+    first={High Frequency Words (HFW)},
+}
+
+\newglossaryentry{F-score}{
+    type=\acronymtype,
+    name=F-score,
+    description={Es una medida de evaluación que correlaciona el recall y la precisión, también se conoce como F-measure, F1-score},
+    first={F-score},
+}
+
+\newglossaryentry{CW}{
+    type=\acronymtype,
+    name=CW,
+    description={Palabras de contenido},
+    first={Content Words (CW)},
+}
+
+\newglossaryentry{DT}{
+    type=\acronymtype,
+    name=DT,
+    description={Decision tree},
+    first={Decision Tree (DT)},
+}
+
+\newglossaryentry{FT}{
+    type=\acronymtype,
+    name=FT,
+    description={Functional trees},
+    first={Functional Trees (FT)},
+}
+
+\newglossaryentry{RF}{
+    type=\acronymtype,
+    name=RF,
+    description={Random forest},
+    first={Random Forest (RF)},
+}
+
+%%Hasta aqui
+\newglossaryentry{NB}{
+    type=\acronymtype,
+    name={NB},
+    description={Naive Bayes},
+    first={Naive Bayes (NB)\glsadd{NBg}},
+    see=[Glosario:]{NBg}
+}
+
+\newglossaryentry{tf-idfg}{
+    name=tf-idf,
+    description={Método de análisis de textos que propone un valor de importancia a las palabras que forman parte de un corpus},
+    first={Term Frequency-Inverse Document Frequency (tf-idf)},
+}
+
+\newglossaryentry{tf-idf}{
+    type=\acronymtype,
+    name={tf-idf},
+    description={Term Frequency-Inverse Document Frequency (TF-IDF)},
+    first={Term Frequency-Inverse Document Frequency    \glsadd{tf-idfg}},
+    see=[Glosario:]{tf-idfg}
+}
+
+\newglossaryentry{n-grams}{
+    name={n-grams},
+    description={Es una forma de obtener el vocabulario con el cual se modelará un texto,n corresponde al número de palabras juntas serán tomadas en cuenta como una entidad única},
+    first={n-grams},
+}
+
+\newglossaryentry{MaxEnt}{
+    type=\acronymtype,
+    name={MaxEnt},
+    description={Maximum Entropy Modeling},
+    first={Maximum Entropy Modeling (MaxEnt)\glsadd{MaxEntg}},
+    see=[Glosario:]{MaxEntg}
+}
+
+\newglossaryentry{MaxEntg}{
+    name={MaxEnt},
+    description={Maximum Entropy Modeling, es una técnica de aprendizaje máquina que consiste en encontrar las reglas de unos hechos, procurando que su probabilidad sea uniforme}
+}
+
+\newglossaryentry{stopwords}{
+    name={stopwords},
+    description={Conjunto de palabras que se deben ignorar, de manera que no se filtre información que no es relevante para la tarea}
+}
+
+\newglossaryentry{NBg}{
+    name=NB,
+    description={Clasificador que aplica el teorema de Bayes, asumiendo que los hechos entre ellos son independientes}
+}
+
+\newglossaryentry{API}{
+    type=\acronymtype,
+    name={API},
+    description={Application Programming Interface},
+    first={Application Programming Interface (API)},
+}
+
+\newglossaryentry{SVM}{
+    type=\acronymtype,
+    name={SVM},
+    description={Support Vector Machine},
+    first={Support Vector Machine (SVM) \glsadd{SVMg}},
+    see=[Glosario:]{SVMg}
+}
+\newglossaryentry{POS}{
+    type=\acronymtype,
+    name={POS},
+    description={POS (Categoria gramatical, del inglés Part Of Speech)},
+    first={Part of speech (POS)\glsadd{POSg}},
+    see=[Glosario:]{POSg}
+}
+
+\newglossaryentry{POSg}{
+    name=POS,
+    description={\textit{Part of speech} es la clase a la cual pertenecen las palabras ej. verbo, adverbio, sustantivo,etc.}
+}
+
+\newglossaryentry{SVMg}{
+    name=SVM,
+    description={Método de clasificación que maximiza la distancia entre las clases}
+}
+
+\newglossaryentry{embedding}{
+    name=embedding,
+    description={Encaje en español, es un concepto matemático que corresponde a una estancia de una estructura matemática la cual es contenida por otra instancia, en nuestro problema es la correspondencia entre dos objetos de diferentes espacios, por ejemplo el índice de una palabra y un vector que califica esa palabra según sus características: bueno, malo, etc. }
+}
+
+
+\newglossaryentry{bi-lstm}{
+    type=\acronymtype,
+    name={BI-LSTM},
+    description={Bidirectional Long Short Term Memory},
+    first={Bidirectional Long Short Term Memory (BI-LSTM)\glsadd{bi-lstmg}},
+    see=[Glosario:]{bi-lstmg}
+}
+
+\newglossaryentry{bi-lstmg}{
+    name=bi-lstm,
+    description={Es una arquitectura de red neuronal que pertenece a la clasificación de recurrentes ya que pueden recordar lo que ya han visto, la bi-lstm consiste en una red neuronal que recuerda hacia adelante y puede olvidar dependiendo de su entrada actual y al resumen que se tiene de lo visto}
+}
+
+\newglossaryentry{mlp}{
+    type=\acronymtype,
+    name={MLP},
+    description={multi layer perceptron },
+    first={multi layer perceptron \glsadd{mlpg}},
+    see=[Glosario:]{mlpg}
+}
+
+\newglossaryentry{mlpg}{
+    name={mlp},
+    description={Es uno de los nombres que se le da una red neuronal completamente conectada}
+}
+
+\newglossaryentry{backpropagation}{
+    name={backpropagation},
+    description={Es un método para entrenar redes neuronales que consiste en retroalimentar la red neuronal a la inversa, en lugar de predecir, se modifican los pesos de la red para obtener el resultado que minimice la función de costo}
+}
+
+\newglossaryentry{ReLU}{
+    name={Rectified Linear Unit (ReLU)},
+    description={Es una función que se emplea a la salida de una neurona, su formula generalmente es $f(x) = max(0,x)$}
+}
+
+\newglossaryentry{SGD}{
+    type=\acronymtype,
+    name={SGD},
+    description={Stochastic Gradient Descent},
+    first={Stochastic Gradient Descent(SGD)\glsadd{SGDg}},
+    see=[Glosario:]{SGDg}
+}
+
+\newglossaryentry{SGDg}{
+    name={SGDg},
+    description={Algoritmo de optimización similar a gradient descent, pero que actua con cada error que se computa}
+}
+
+\newglossaryentry{lstm}{
+    type=\acronymtype,
+    name={LSTM},
+    description={Long Short Term Memory},
+    first={Long Short Term Memory(LSTM)\glsadd{lstmg}},
+    see=[Glosario:]{lstmg}
+}
+
+\newglossaryentry{lstmg}{
+    name={LSTM},
+    description={Arquitectura de redes neuronales recurrentes que tienen la capacidad de retener información de lo que ya han visto}
+}
+
+\newglossaryentry{padding}{
+    name={padding},
+    description={Es el proceso por el cual un vector de cierta naturaleza se normaliza a una longitud específica, rellenando o truncando el vector original, en nuestro caso se lleno con 0 ya que el vector era numérico}
+}

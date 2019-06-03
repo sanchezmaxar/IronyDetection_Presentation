@@ -1,0 +1,30 @@
+\if\amboslados1
+  	% Si se imprime por los dos lados
+    % Pagina de atras de la portada	
+  	\newpage
+	\thispagestyle{empty} 
+	\textit{ }
+	% Pagina de enfrente de la pagina vacia
+	\newpage
+	\thispagestyle{empty} 
+	\textit{ }
+	% Pagina de atras de la pagina vacia
+	\newpage
+	\thispagestyle{empty} 
+	\textit{ }
+	
+	
+    \input{Capitulos/0_Agradecimientos.tex}
+	
+	% Pagina de atras de la pagina de agradecimientos
+	\newpage
+	\thispagestyle{empty} 
+	\textit{ }
+ \else
+  	\newpage
+	\thispagestyle{empty} 
+	\textit{ }
+	\input{Capitulos/0_Agradecimientos.tex}
+ \fi
+
+

@@ -1,0 +1,152 @@
+% \documentclass[11pt,spanish]{report}
+\documentclass[oneside,letterpapper,openany]{book}
+\usepackage{setspace}  
+\usepackage{parskip}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\parskip=15pt
+\usepackage{lscape}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[spanish]{babel} 
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{caption}
+\usepackage{natbib}
+\usepackage{xcolor}
+ 
+\usepackage[acronym]{glossaries}
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{chngpage}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{listingsutf8}
+\usepackage{listings}
+% \usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[titletoc]{appendix}
+\usepackage[bottom]{footmisc}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\usepackage{pdfpages}
+%IMPORTANTE--IMPORTANTE--IMPORTANTE--IMPORTANTE
+%Es probable que debas compilar esto dos veces para corregir el error de
+% footnote per page
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+\captionsetup[table]{name=Tabla}
+\usepackage{array}
+\makeindex
+\allowdisplaybreaks
+\lstset{columns=fullflexible,
+literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {η}{{$\eta$}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\newcommand*{\addheight}[2][1ex]{%
+  \raisebox{0pt}[\dimexpr\height+(#1)\relax]{#2}%
+}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\input{misc/abreviaturas.tex}
+\begin{document}
+
+    \includepdf[]{portada_tesis}
+    
+    %modificar asi solo va a ser un lado
+    \def\amboslados{0}	
+    % \input{misc/scripts.tex}
+    \input{Capitulos/0_Agradecimientos.tex}
+
+	\tableofcontents
+
+	\input{Capitulos/1_Introduccion.tex}
+	\input{Capitulos/2_EstadoDelArte.tex}
+	\input{Capitulos/3_Metodologia.tex}
+	\input{Capitulos/4_Experimentos.tex}
+	\input{Capitulos/5_Conclusiones.tex}
+	
+	
+	
+	\newpage
+	\bibliographystyle{Estilos/UNAMThesis.bst}
+% 	\bibliographystyle{Estilos/te.bst}
+
+\nocite{*}
+	\bibliography{bibliografias}
+	\printglossary[type=\acronymtype,title=Abreviaturas]
+
+    \newpage
+    \printglossary[type=main]
+    \appendix
+    
+%     \chapter{Preprocesamiento por palabra}
+% 	\lstinputlisting[language=Python,breaklines,numbers=left,
+%     stepnumber=1]{codigos/Preprocesamiento.py}
+	
+% 	\chapter{Experimento por palabra}
+% 	\lstinputlisting[language=Python,breaklines,numbers=left,
+%     stepnumber=1]{codigos/experimento1_porpalabras.py}
+    
+%     \chapter{Preprocesamiento por caracter}
+% 	\lstinputlisting[language=Python,breaklines,numbers=left,
+%     stepnumber=1]{codigos/Preprocesamiento2.py}
+	
+% 	\chapter{Experimento por caracter}
+% 	\lstinputlisting[language=Python,breaklines,numbers=left,
+%     stepnumber=1]{codigos/experimento1_porpalabras.py}
+    
+    
+%     \chapter{Modelo.json}
+%     \lstinputlisting[language=json,firstnumber=1,breaklines,numbers=left]{codigos/modelo.json}
+    
+	
+\end{document}
