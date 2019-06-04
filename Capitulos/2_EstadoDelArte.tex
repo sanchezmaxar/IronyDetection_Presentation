@@ -1,143 +1,143 @@
 \chapter{Antecedentes}\label{cap.antecedentes}
-	
-	    \par La ironía como un recurso lingüístico se destaca entre otras por su facilidad para satisfacer al lector, la ironía da un valor agregado a la comunicación, si aparece como sátira provoca una risa casi instantánea, si aparece como sarcasmo suele ser más hiriente, incluso suele hacernos pensar en las implicaciones de lo que nos atrevemos a decir, como en el siguiente ejemplo:
-	    
-	        \begin{center}
-	        \textit{``(...)En otra ocasión Borges firmaba ejemplares en una librería del Centro. Un joven se acercó con Ficciones y le dijo: `Maestro, usted es inmortal'... Borges le contestó: `Vamos, hombre, no hay por qué ser tan pesimista'."} \cite{Sergio2012}
-	        \vspace{5pt}
-	        \end{center}
-	            \vspace{5pt}
-	   
-	   \par Este ejemplo ilustra muy bien el impacto de la ironía, de cierta forma maximiza la idea que el autor desea. Este impacto suele aportar una mayor carga de información y por lo tanto más interés en conseguirla. Ésta es una de las motivaciones que han tenido diferentes grupos de estudio para abordar la clasificación de la ironía. 
-	   
-	   \par Para hablar de las motivaciones que este problema ha tenido para analizarse podemos empezar por ver el trabajo de \cite{maynard2014cares} quienes se orientan por el análisis de sentimientos en redes sociales cuando este recurso es utilizado; para \cite{utsumi1995interpret} fue uno de los primeros trabajos que se hicieron en este tema y su motivo para realizar un sistema fue para proveer de herramientas a los sistemas NLP(\textit{Natural Language Processing}) y que pudieran manejar la ironía de manera correcta, este sistema consistía en un conjunto de reglas de emociones; \cite{davidov2010semi} crean un sistema semi supervisado el cual tiene buen desempeño y resuelve la clasificación en inglés, algunos de sus motivos fue la monitorización de marcas, resumen de reseñas, sistemas de diálogo y proponen un marco de referencia para crear estos sistemas con detección de sarcasmo. 
-	%Aqui va la intro de los antecedentes
-	\section{Estado del arte}
+
+\par La ironía como un recurso lingüístico se destaca entre otras por su facilidad para satisfacer al lector, la ironía da un valor agregado a la comunicación, si aparece como sátira provoca una risa casi instantánea, si aparece como sarcasmo suele ser más hiriente, incluso suele hacernos pensar en las implicaciones de lo que nos atrevemos a decir, como en el siguiente ejemplo:
+
+\begin{center}
+	\textit{``(...)En otra ocasión Borges firmaba ejemplares en una librería del Centro. Un joven se acercó con Ficciones y le dijo: `Maestro, usted es inmortal'... Borges le contestó: `Vamos, hombre, no hay por qué ser tan pesimista'."} \cite{Sergio2012}
+	\vspace{5pt}
+\end{center}
+\vspace{5pt}
+
+\par Este ejemplo ilustra muy bien el impacto de la ironía, de cierta forma maximiza la idea que el autor desea. Este impacto suele aportar una mayor carga de información y por lo tanto más interés en conseguirla. Ésta es una de las motivaciones que han tenido diferentes grupos de estudio para abordar la clasificación de la ironía.
+
+\par Para hablar de las motivaciones que este problema ha tenido para analizarse podemos empezar por ver el trabajo de \cite{maynard2014cares} quienes se orientan por el análisis de sentimientos en redes sociales cuando este recurso es utilizado; para \cite{utsumi1995interpret} fue uno de los primeros trabajos que se hicieron en este tema y su motivo para realizar un sistema fue para proveer de herramientas a los sistemas NLP(\textit{Natural Language Processing}) y que pudieran manejar la ironía de manera correcta, este sistema consistía en un conjunto de reglas de emociones; \cite{davidov2010semi} crean un sistema semi supervisado el cual tiene buen desempeño y resuelve la clasificación en inglés, algunos de sus motivos fue la monitorización de marcas, resumen de reseñas, sistemas de diálogo y proponen un marco de referencia para crear estos sistemas con detección de sarcasmo.
+%Aqui va la intro de los antecedentes
+\section{Estudio del estado de la técnica}
 \par El problema de la clasificación de la ironía reside en su característica de comprimir ideas en un pequeño conjunto de palabras, como en el siguiente ejemplo:
-    \begin{figure}[ht!]
-        
-    \begin{center}
-        \textit{Me encanta discutir por las mañanas por dios es algo tan :)}
-    \end{center}
-        \caption{\footnotesize{Twitter id 631446828127506432}}
-    \end{figure}
-    
-    \par De esta pequeña frase manualmente podemos extraer las siguientes ideas: La persona no está encantada y a la persona no le gusta discutir. En este ejemplo pudimos extraer dos ideas aparte de la idea que por si sola expresa la frase, y en un contexto general ésta no tiene importancia. El siguiente ejemplo expone un caso mucho más complejo:
-    \begin{figure}[ht!]
-    \centering    
-    
-        \textit{Empieza un bonito día...  Selectividad2015}
-        \caption{\footnotesize{Twitter id 608133042348130304}}
-    \end{figure}
-    
-    \par Esta frase al contrario de la anterior requiere de un contexto para saber que es irónica, ya que la \textit{Selectividad} es un examen que se aplica en España para acceder a la educación universitaria. De esta frase podemos extraer las siguientes suposiciones: La persona se siente nerviosa por el examen, la persona preferiría empezar su día con otra actividad, la selectividad es un examen difícil, etc. En este ejemplo necesitamos de un contexto que nos ayude a intuir hacia donde va dirigida la idea que se quiere comunicar y a la vez esta idea genera más ideas relacionadas con un contexto general, por ejemplo: \textit{A nadie le gustan las pruebas}, \textit{Las personas le tienen miedo al fracaso}, etc. 
-    
-    \par La extracción de información es un problema muy complejo y consiste en el estudio de un texto y la inferencia de la idea. En general la ironía interfiere en esta extracción introduciendo ruido a la inferencia, ya que aunque la ironía en forma de sarcasmo representa un pequeño porcentaje según \cite{liu2007low} modifica la inferencia por ser una figura lingüística que no puede ser tomada literalmente, aquí como sugerencia puede omitirse o invertirse la polaridad de la idea (si es que esto se quiere obtener). Por ejemplo en la extracción de reseñas podemos tomarlas como negativas, debido que la mayoría de las veces que se usa el sarcasmo (tipo de ironía que consiste en herir) es para dañar o para dar una mala opinión, esto dependerá del área de estudio donde se desee aplicar un modelo de extracción de información. Sin embargo la parte central de esto es la detección de la ironía.
-    
-		\subsection{Análisis de los métodos usados}
-		    Los métodos que han sido utilizados pueden clasificarse en las categorías que muestra la tabla \ref{tab:metodos}
-	
-		    \begin{table}[!ht]
-            \begin{tabular}{|l|p{0.8\linewidth}|}
-            \hline
-            Clasificación & Artículos\\
-            \hline
-            Orientados a reglas & \begin{tabular}[c]{p{0.8\linewidth}} \textit{Formalization and rules for recognition of satirical irony
-} \cite{kong2011formalization}\\ \textit{How to interpret irony by computer: A comprehensive framework for irony} \cite{utsumi1995interpret} \end{tabular}\\ \hline
-Supervisado         & \begin{tabular}[c]{p{0.8\linewidth}} \textit{Making objective decisions from subjective data: Detecting irony in customers reviews (POS+features; NB,SVM,DT)}\cite{reyes2012making}\\ \textit{The perfect solution for detecting sarcasm in tweets \#not (Winnow Classification)} \cite{liebrecht2013perfect}\\ \textit{Humans require context to infer ironic intent (so computers probably do, too) (SVM)} \cite{wallace2014humans}\\ \textit{Italian irony detection in Twitter:a first approach (DT)} \cite{barbieri2014italian}\\ \textit{Detecting irony on greel political Tweets: A text mining approach (J48, NB, FT, KStar, Random Forests)} \cite{charalampakis2015detecting}
-\\ \textit{Character and word baselines for irony detection in spanish short texts}(SVM;RF) \cite{lopez2016character} \end{tabular} \\ \hline
-Semi-supervisados   & \textit{Semi-supervised recognition of sarcastic sentences in Twitter and Amazon (HFW,CW,KNN-like)} \cite{davidov2010semi}\\ \hline
-% Existe otro no supervisado sin embargo a mi parecer es truculento ya que únicamente hace embeddings, y tiene un desempeño relativamente bajo, comparado con los otros
-\end{tabular}
-\caption{Algunos de los métodos que se han usado para clasificar la ironía}
-\label{tab:metodos}
+\begin{figure}[ht!]
+
+	\begin{center}
+		\textit{Me encanta discutir por las mañanas por dios es algo tan :)}
+	\end{center}
+	\caption{\footnotesize{Twitter id 631446828127506432}}
+\end{figure}
+
+\par De esta pequeña frase manualmente podemos extraer las siguientes ideas: La persona no está encantada y a la persona no le gusta discutir. En este ejemplo pudimos extraer dos ideas aparte de la idea que por si sola expresa la frase, y en un contexto general ésta no tiene importancia. El siguiente ejemplo expone un caso mucho más complejo:
+\begin{figure}[ht!]
+	\centering
+
+	\textit{Empieza un bonito día...  Selectividad2015}
+	\caption{\footnotesize{Twitter id 608133042348130304}}
+\end{figure}
+
+\par Esta frase al contrario de la anterior requiere de un contexto para saber que es irónica, ya que la \textit{Selectividad} es un examen que se aplica en España para acceder a la educación universitaria. De esta frase podemos extraer las siguientes suposiciones: La persona se siente nerviosa por el examen, la persona preferiría empezar su día con otra actividad, la selectividad es un examen difícil, etc. En este ejemplo necesitamos de un contexto que nos ayude a intuir hacia donde va dirigida la idea que se quiere comunicar y a la vez esta idea genera más ideas relacionadas con un contexto general, por ejemplo: \textit{A nadie le gustan las pruebas}, \textit{Las personas le tienen miedo al fracaso}, etc.
+
+\par La extracción de información es un problema muy complejo y consiste en el estudio de un texto y la inferencia de la idea. En general la ironía interfiere en esta extracción introduciendo ruido a la inferencia, ya que aunque la ironía en forma de sarcasmo representa un pequeño porcentaje según \cite{liu2007low} modifica la inferencia por ser una figura lingüística que no puede ser tomada literalmente, aquí como sugerencia puede omitirse o invertirse la polaridad de la idea (si es que esto se quiere obtener). Por ejemplo en la extracción de reseñas podemos tomarlas como negativas, debido que la mayoría de las veces que se usa el sarcasmo (tipo de ironía que consiste en herir) es para dañar o para dar una mala opinión, esto dependerá del área de estudio donde se desee aplicar un modelo de extracción de información. Sin embargo la parte central de esto es la detección de la ironía.
+
+\subsection{Análisis de los métodos usados}
+Los métodos que han sido utilizados pueden clasificarse en las categorías que muestra la tabla \ref{tab:metodos}
+
+\begin{table}[!ht]
+	\begin{tabular}{|l|p{0.8\linewidth}|}
+		\hline
+		Clasificación       & Artículos                                                                                                                  \\
+		\hline
+		Orientados a reglas & \begin{tabular}[c]{p{0.8\linewidth}} \textit{Formalization and rules for recognition of satirical irony
+			} \cite{kong2011formalization} \\ \textit{How to interpret irony by computer: A comprehensive framework for irony} \cite{utsumi1995interpret}\end{tabular}                                                                                                  \\ \hline
+		Supervisado         & \begin{tabular}[c]{p{0.8\linewidth}} \textit{Making objective decisions from subjective data: Detecting irony in customers reviews (POS+features; NB,SVM,DT)}\cite{reyes2012making} \\ \textit{The perfect solution for detecting sarcasm in tweets \#not (Winnow Classification)} \cite{liebrecht2013perfect}\\ \textit{Humans require context to infer ironic intent (so computers probably do, too) (SVM)} \cite{wallace2014humans}\\ \textit{Italian irony detection in Twitter:a first approach (DT)} \cite{barbieri2014italian}\\ \textit{Detecting irony on greel political Tweets: A text mining approach (J48, NB, FT, KStar, Random Forests)} \cite{charalampakis2015detecting}
+			\\ \textit{Character and word baselines for irony detection in spanish short texts}(SVM;RF) \cite{lopez2016character}\end{tabular}                                                                                                  \\ \hline
+		Semi-supervisados   & \textit{Semi-supervised recognition of sarcastic sentences in Twitter and Amazon (HFW,CW,KNN-like)} \cite{davidov2010semi} \\ \hline
+		% Existe otro no supervisado sin embargo a mi parecer es truculento ya que únicamente hace embeddings, y tiene un desempeño relativamente bajo, comparado con los otros
+	\end{tabular}
+	\caption{Algunos de los métodos que se han usado para clasificar la ironía}
+	\label{tab:metodos}
 \end{table}
 
-        \subsubsection{Orientados a reglas}
-		\par En los métodos utilizados están los que requieren de la programación de reglas, estos métodos también son supervisados, pero difieren de éstos ya que requieren una mayor intervención del experto. Los sistemas basados en reglas pueden utilizar varios paradigmas como lógica difusa, lógica booleana, etc. Lo importante de estos métodos es que te permiten encontrar una respuesta clara del por qué esa muestra ha sido clasificada como irónica o no. Para estos métodos suelen utilizarse herramientas como etiquetas \gls{POS} que ayudan a la clasificación de las palabras dentro de una clase como adjetivos, verbos, adverbios, sustantivos, etc. Esto sirve, por ejemplo, para dar una descripción de como se puede encontrar una sentencia irónica. Una desventaja de estos métodos es que se necesita un experto para la generación de reglas, aunque hay algunos casos de sistemas que pueden generar reglas de manera automática \cite{mitra1995fuzzy} como estos sistemas hay varios. La desventaja es que en estos casos si los sistemas son muy sensibles pueden generar reglas muy generales, que expliquen cosas comunes del idioma e irrelevantes para la tarea, o muy específicas de una oración en particular \cite{kotsiantis2007supervised}. Como se puede ver es un método poderoso para la interacción con una persona, y tal vez de más ayuda cuando se quiere modelar una lengua de manera analítica. Sin embargo carece de adaptabilidad, ya que si cambiamos el idioma o el contexto, como lo hacen las redes sociales, todo el sistema debe volver a crearse. Los principales expositores de este método son \cite{kong2011formalization}, para el idioma chino  y \cite{utsumi1995interpret}, para el idioma inglés. 
-		
-		\subsubsection{Supervisados}
-		
-		\par En esta categoría está el método que se propone en esta tesis, los métodos supervisados son aquellos que requieren de datos de entrenamiento etiquetados para poder encontrar el modelo adecuado, los datos deben ser etiquetados por expertos los cuales puedan distinguir a que clase pertenece una muestra, estos métodos suelen necesitar muchas muestras y un tiempo de entrenamiento considerable. La eficiencia del modelo va a depender de la destreza de los expertos para clasificar las muestras por lo que aún es susceptible a fallos. En esta categoría se encuentran métodos que usan \gls{POS} para encontrar características de las muestras, como lo hace \cite{reyes2012making} después de este preproceso se pasa a un clasificador como \gls{SVM}, \gls{NB} y \gls{DT}, en el caso de \cite{reyes2012making} se extrajeron 6 características de las muestras: \gls{n-grams}, \gls{POS}, funny profiling, positive/negative profiling, affective profiling y pleasantness profiling. Una vez con las características y una función de mapeo, % tal vez deba cambiar de palabra 
-		que transforme las palabras a este conjunto de características, se puede usar un clasificador como los antes mencionados.
-		Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, italiano y español, \cite{charalampakis2015detecting}, \cite{barbieri2014italian} y \cite{lopez2016character} respectivamente, el presente trabajo se centrará en la detección de ironía en español como \cite{lopez2016character}.
-		
-		\subsubsection{Semi-supervisados}
-		
-		\par Los métodos semi-supervisados son aquellos que no requieren la intervención de los expertos. A esta clasificación pertenece únicamente un trabajo previo, el trabajo de \cite{davidov2010semi} que consiste en dos fases: adquisición de patrones de un conjunto pequeño de muestras etiquetadas del 1 al 5, de nada sarcástico a completamente sarcástico,  y la fase de clasificación. Para obtener los patrones del conjunto de muestras etiquetadas se clasifican las palabras en \gls{HFW} y \gls{CW}, lo cual denota cuales son las palabras más relevantes, dependiendo de un umbral de aparición para la \gls{HFW} es $F_H$ y \gls{CW} es $F_C$, al momento de extraer los patrones se ven más o menos así:
-		
-		    \begin{table}[H]
-		        \centering
-		        \begin{tabular}{|c|}
-		            \hline
-		            \textit{[COMPANY] CW  does not CW much}\\
-		            \textit{does not CW much about CW CW or}\\
-		            \hline
-		        \end{tabular}
-		        \caption{\footnotesize{Ejemplo de como se ve un patrón en este sistema, como se puede ver los dos ejemplos pueden aparecer simultáneamente en un misma oración, notesé que las palabras [COMPANY] y ``." son \gls{HFW}. Extraído de \cite{davidov2010semi}}}
-		        \label{tab:ejemplo}
-		    \end{table}
-		
-		\par Estos patrones sirven para después convertir las muestras del conjunto no etiquetado, en vectores que describan la posición de ese patrón en un espacio de características. La clasificación es tan fácil como medir la distancia euclidiana, contar cuantos son no sarcásticos y cuantos son sarcásticos en su vecindad, y asignar una clase dependiendo del promedio de su distancia. Así si la muestra está rodeada de muestras sarcásticas será sarcástica completamente y cuando esté entre un conjunto de muestras que algunas son sarcásticas y algunas no, se le asignará una clase porcentual, que indica que tan sarcástica es.
-		
-		\subsection{Análisis de los corpus usados}
-		
-		\par El corpus en general no cambia mucho de una investigación a otra, como muestra la tabla \ref{tab:corpuses}, la mayoría de los corpus están compuestos por textos provenientes de Twitter ya que provee herramientas simples\footnote{\url{https://developer.twitter.com/}} para extraer tweets automáticamente. También suelen utilizarse corpus de Amazon ya que tienen una \gls{API} para extraer textos\footnote{ \url{https://developer.amazon.com/services-and-apis}}. Hablando de los idiomas donde se han aplicado está el chino, inglés, holandés, italiano, griego y por último el español, idioma del corpus de este estudio.
-		
-		\par Otro ámbito importante de estos experimentos es que consideran un corpus no balanceado, debido a que de acuerdo con \cite{reyes2012making}, \cite{lopez2016character} y \cite{barbieri2014italian}, muestran una clara diferencia entre la cantidad de muestras irónicas o sarcásticas de las que no, por lo que nos permitimos inferir que la proporción del uso de la ironía o sarcasmo es de aproximadamente el 12\%. Resulta importante conocer esto ya que nos aporta información sobre la naturaleza del problema y nos ayuda a decidir mejor como es que debemos de abordarlo.
-		
-		\par En la mayoría de las investigaciones que obtuvieron su propio corpus, éste debió pasar por un proceso de normalización donde se removían datos irrelevantes como links de internet, caracteres especiales que no aportan información como '@' y '\#' como lo hizo \cite{lopez2016character}. Muchas veces se utiliza un conjunto de palabras que se ignoran llamadas \textit{\gls{stopwords}} como en el caso de \cite{reyes2012making}. En adición a esto, algunos autores añadieron el uso de \textit{\gls{tf-idf}}, que ayuda a medir la importancia de una palabra en un documento, dependiendo de como aparece en el documento y que tanto aparece en el corpus completo, como el caso de \cite{reyes2012making}, \cite{wallace2015sparse} y \cite{bamman2015contextualized}. Muchas veces los métodos de extracción de información también atrapan documentos repetidos y éstos deben reducirse a mano o crear algún sistema que los detecte y los borré como en el caso de \cite{charalampakis2015detecting} y \cite{reyes2012making}. En el caso de \cite{ptavcek2014sarcasm} obtuvieron características del texto como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, etc., todo esto lo aplicó a un corpus en checo, de 325 muestras sarcásticas y 6,675 no sarcásticos, y otro en inglés, el corpus en inglés balanceado fue de 50,000 cada clase y el no balanceado fue de 25,000 sarcásticos y 75,000 no sarcásticos.
-\begin{table}[]
-\begin{tabular}{|p{5cm}p{2cm}lp{3cm}|}
-\hline
-\multicolumn{1}{|l|}{Artículo}                                                        & \multicolumn{1}{l|}{Fuente} & \multicolumn{1}{l|}{Idioma} & Tamaño                                               \\ \hline
-\hline
-Semi-supervised Recognition of Sarcastic Sentences in Twitter and Amazon \cite{davidov2010semi}              & Twitter \& Amazon           & Inglés                      & 5.9 millones tweets \& 66,000 reseñas                \\ \hline
-Making Objective Decisions from Subjective Data: Detecting Irony in Customers Reviews \cite{reyes2012making} & Amazon, Slashdot \& TripAdvisor            & Inglés                      & 3,163 $\rightarrow$ 2,861 reseñas                    \\ \hline
-The prefect solution for detecting sarcasm in tweets \#not \cite{liebrecht2013perfect}                            & Twitter                     & Holandés                    & 3.3 millones de tweets                               \\ \hline
-Humans Require Context to Infer Ironic Intent (so Computers Probably do, too) \cite{wallace2014humans}         & Reddit                      & Inglés                      & 3,020 comentarios                                    \\ \hline
-Italian Irony Detection in Twitter: a First Approach \cite{barbieri2014italian}                                  & Twitter                     & Italiano                    & 25,450 tweets (12.5\%/87.5\%)                        \\ \hline
-Detecting Irony on Greek Political Tweets: A Text Mining Approach \cite{charalampakis2015detecting}                     & Twitter                     & Griego                      & 61,427 tweets $\rightarrow$ 44,438 tweets            \\ \hline
-Character and Word Baselines for Irony Detection in Spanish Short Texts \cite{lopez2016character}               & Twitter                     & Español(30/70)                     & 14, 511 tweets irónicos \& 33, 859 tweets no irónicos \\ \hline
-SOUKHRIA: Towards an Irony Detection System for Arabic in Social Media \cite{karoui2017soukhria}                & Twitter                     & Arabe                       & 1,733 tweets irónicos \& 3,746 tweets no irónicos1   \\ \hline
-Sarcasm Detection on Czech and English Twitter \cite{ptavcek2014sarcasm}                & Twitter                     & Checo/Inglés                       & Checo 325/6,675, Inglés (50/50) y (25/75) \\ \hline
-\end{tabular}
-\caption{Descripción de los corpus de experimentos anteriores}
-\label{tab:corpuses}
+\subsubsection{Orientados a reglas}
+\par En los métodos utilizados están los que requieren de la programación de reglas, estos métodos también son supervisados, pero difieren de éstos ya que requieren una mayor intervención del experto. Los sistemas basados en reglas pueden utilizar varios paradigmas como lógica difusa, lógica booleana, etc. Lo importante de estos métodos es que te permiten encontrar una respuesta clara del por qué esa muestra ha sido clasificada como irónica o no. Para estos métodos suelen utilizarse herramientas como etiquetas \gls{POS} que ayudan a la clasificación de las palabras dentro de una clase como adjetivos, verbos, adverbios, sustantivos, etc. Esto sirve, por ejemplo, para dar una descripción de como se puede encontrar una sentencia irónica. Una desventaja de estos métodos es que se necesita un experto para la generación de reglas, aunque hay algunos casos de sistemas que pueden generar reglas de manera automática \cite{mitra1995fuzzy} como estos sistemas hay varios. La desventaja es que en estos casos si los sistemas son muy sensibles pueden generar reglas muy generales, que expliquen cosas comunes del idioma e irrelevantes para la tarea, o muy específicas de una oración en particular \cite{kotsiantis2007supervised}. Como se puede ver es un método poderoso para la interacción con una persona, y tal vez de más ayuda cuando se quiere modelar una lengua de manera analítica. Sin embargo carece de adaptabilidad, ya que si cambiamos el idioma o el contexto, como lo hacen las redes sociales, todo el sistema debe volver a crearse. Los principales expositores de este método son \cite{kong2011formalization}, para el idioma chino  y \cite{utsumi1995interpret}, para el idioma inglés.
+
+\subsubsection{Supervisados}
+
+\par En esta categoría está el método que se propone en esta tesis, los métodos supervisados son aquellos que requieren de datos de entrenamiento etiquetados para poder encontrar el modelo adecuado, los datos deben ser etiquetados por expertos los cuales puedan distinguir a que clase pertenece una muestra, estos métodos suelen necesitar muchas muestras y un tiempo de entrenamiento considerable. La eficiencia del modelo va a depender de la destreza de los expertos para clasificar las muestras por lo que aún es susceptible a fallos. En esta categoría se encuentran métodos que usan \gls{POS} para encontrar características de las muestras, como lo hace \cite{reyes2012making} después de este preproceso se pasa a un clasificador como \gls{SVM}, \gls{NB} y \gls{DT}, en el caso de \cite{reyes2012making} se extrajeron 6 características de las muestras: \gls{n-grams}, \gls{POS}, funny profiling, positive/negative profiling, affective profiling y pleasantness profiling. Una vez con las características y una función de mapeo, % tal vez deba cambiar de palabra 
+que transforme las palabras a este conjunto de características, se puede usar un clasificador como los antes mencionados.
+Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, italiano y español, \cite{charalampakis2015detecting}, \cite{barbieri2014italian} y \cite{lopez2016character} respectivamente, el presente trabajo se centrará en la detección de ironía en español como \cite{lopez2016character}.
+
+\subsubsection{Semi-supervisados}
+
+\par Los métodos semi-supervisados son aquellos que no requieren la intervención de los expertos. A esta clasificación pertenece únicamente un trabajo previo, el trabajo de \cite{davidov2010semi} que consiste en dos fases: adquisición de patrones de un conjunto pequeño de muestras etiquetadas del 1 al 5, de nada sarcástico a completamente sarcástico,  y la fase de clasificación. Para obtener los patrones del conjunto de muestras etiquetadas se clasifican las palabras en \gls{HFW} y \gls{CW}, lo cual denota cuales son las palabras más relevantes, dependiendo de un umbral de aparición para la \gls{HFW} es $F_H$ y \gls{CW} es $F_C$, al momento de extraer los patrones se ven más o menos así:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textit{[COMPANY] CW  does not CW much}  \\
+		\textit{does not CW much about CW CW or} \\
+		\hline
+	\end{tabular}
+	\caption{\footnotesize{Ejemplo de como se ve un patrón en este sistema, como se puede ver los dos ejemplos pueden aparecer simultáneamente en un misma oración, notesé que las palabras [COMPANY] y ``." son \gls{HFW}. Extraído de \cite{davidov2010semi}}}
+	\label{tab:ejemplo}
 \end{table}
-		%--------------------------Omito estos a proposito------------------------
+
+\par Estos patrones sirven para después convertir las muestras del conjunto no etiquetado, en vectores que describan la posición de ese patrón en un espacio de características. La clasificación es tan fácil como medir la distancia euclidiana, contar cuantos son no sarcásticos y cuantos son sarcásticos en su vecindad, y asignar una clase dependiendo del promedio de su distancia. Así si la muestra está rodeada de muestras sarcásticas será sarcástica completamente y cuando esté entre un conjunto de muestras que algunas son sarcásticas y algunas no, se le asignará una clase porcentual, que indica que tan sarcástica es.
+
+\subsection{Análisis de los corpus usados}
+
+\par El corpus en general no cambia mucho de una investigación a otra, como muestra la tabla \ref{tab:corpuses}, la mayoría de los corpus están compuestos por textos provenientes de Twitter ya que provee herramientas simples\footnote{\url{https://developer.twitter.com/}} para extraer tweets automáticamente. También suelen utilizarse corpus de Amazon ya que tienen una \gls{API} para extraer textos\footnote{ \url{https://developer.amazon.com/services-and-apis}}. Hablando de los idiomas donde se han aplicado está el chino, inglés, holandés, italiano, griego y por último el español, idioma del corpus de este estudio.
+
+\par Otro ámbito importante de estos experimentos es que consideran un corpus no balanceado, debido a que de acuerdo con \cite{reyes2012making}, \cite{lopez2016character} y \cite{barbieri2014italian}, muestran una clara diferencia entre la cantidad de muestras irónicas o sarcásticas de las que no, por lo que nos permitimos inferir que la proporción del uso de la ironía o sarcasmo es de aproximadamente el 12\%. Resulta importante conocer esto ya que nos aporta información sobre la naturaleza del problema y nos ayuda a decidir mejor como es que debemos de abordarlo.
+
+\par En la mayoría de las investigaciones que obtuvieron su propio corpus, éste debió pasar por un proceso de normalización donde se removían datos irrelevantes como links de internet, caracteres especiales que no aportan información como '@' y '\#' como lo hizo \cite{lopez2016character}. Muchas veces se utiliza un conjunto de palabras que se ignoran llamadas \textit{\gls{stopwords}} como en el caso de \cite{reyes2012making}. En adición a esto, algunos autores añadieron el uso de \textit{\gls{tf-idf}}, que ayuda a medir la importancia de una palabra en un documento, dependiendo de como aparece en el documento y que tanto aparece en el corpus completo, como el caso de \cite{reyes2012making}, \cite{wallace2015sparse} y \cite{bamman2015contextualized}. Muchas veces los métodos de extracción de información también atrapan documentos repetidos y éstos deben reducirse a mano o crear algún sistema que los detecte y los borré como en el caso de \cite{charalampakis2015detecting} y \cite{reyes2012making}. En el caso de \cite{ptavcek2014sarcasm} obtuvieron características del texto como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, etc., todo esto lo aplicó a un corpus en checo, de 325 muestras sarcásticas y 6,675 no sarcásticos, y otro en inglés, el corpus en inglés balanceado fue de 50,000 cada clase y el no balanceado fue de 25,000 sarcásticos y 75,000 no sarcásticos.
+\begin{table}[]
+	\begin{tabular}{|p{5cm}p{2cm}lp{3cm}|}
+		\hline
+		\multicolumn{1}{|l|}{Artículo}                                                                               & \multicolumn{1}{l|}{Fuente}     & \multicolumn{1}{l|}{Idioma} & Tamaño                                                \\ \hline
+		\hline
+		Semi-supervised Recognition of Sarcastic Sentences in Twitter and Amazon \cite{davidov2010semi}              & Twitter \& Amazon               & Inglés                      & 5.9 millones tweets \& 66,000 reseñas                 \\ \hline
+		Making Objective Decisions from Subjective Data: Detecting Irony in Customers Reviews \cite{reyes2012making} & Amazon, Slashdot \& TripAdvisor & Inglés                      & 3,163 $\rightarrow$ 2,861 reseñas                     \\ \hline
+		The prefect solution for detecting sarcasm in tweets \#not \cite{liebrecht2013perfect}                       & Twitter                         & Holandés                    & 3.3 millones de tweets                                \\ \hline
+		Humans Require Context to Infer Ironic Intent (so Computers Probably do, too) \cite{wallace2014humans}       & Reddit                          & Inglés                      & 3,020 comentarios                                     \\ \hline
+		Italian Irony Detection in Twitter: a First Approach \cite{barbieri2014italian}                              & Twitter                         & Italiano                    & 25,450 tweets (12.5\%/87.5\%)                         \\ \hline
+		Detecting Irony on Greek Political Tweets: A Text Mining Approach \cite{charalampakis2015detecting}          & Twitter                         & Griego                      & 61,427 tweets $\rightarrow$ 44,438 tweets             \\ \hline
+		Character and Word Baselines for Irony Detection in Spanish Short Texts \cite{lopez2016character}            & Twitter                         & Español(30/70)              & 14, 511 tweets irónicos \& 33, 859 tweets no irónicos \\ \hline
+		SOUKHRIA: Towards an Irony Detection System for Arabic in Social Media \cite{karoui2017soukhria}             & Twitter                         & Arabe                       & 1,733 tweets irónicos \& 3,746 tweets no irónicos1    \\ \hline
+		Sarcasm Detection on Czech and English Twitter \cite{ptavcek2014sarcasm}                                     & Twitter                         & Checo/Inglés                & Checo 325/6,675, Inglés (50/50) y (25/75)             \\ \hline
+	\end{tabular}
+	\caption{Descripción de los corpus de experimentos anteriores}
+	\label{tab:corpuses}
+\end{table}
+%--------------------------Omito estos a proposito------------------------
 % 		
 % 		\subsection{Análisis de las herramientas usadas}
 % 		%aqui va la parte del analisis de las herramientas usadas
 % 		\subsection{Análisis del preprocesamiento}
 % 		%aqui va la parte del analisis del preprocesamiento
-		%--------------------------Omito estos a proposito------------------------
-		
-		\subsection{Análisis de resultados}
-		
-		\par Para hablar de los resultados que otros investigadores han tenido nos referiremos a la tabla \ref{tab:resultados} donde se muestra como la mayoría de los trabajos previos han hecho sus experimentos sobre los datos de Twitter. Además la mayoría han usado un método de aprendizaje supervisado y solo uno semi-supervisado \cite{davidov2010semi}, podemos ver también que la distribución de datos está sesgada a la poca aparición del sarcasmo/ironía, como lo menciona \cite{liu2007low} para su corpus de Amazon, esto parece aplicar también para Twitter.
-	
-		
-		\begin{table}[!ht]
-\begin{tabular}{|l|l|l|l|l|p{4cm}|}
-\hline
-Investigadores   & P & R & A & F1 & Detalles                                                                                                                                                                                                                          \\ \hline
-\cite{davidov2010semi}      & 0.912     & 0.756  & 0.947     & 0.827   & Corpus no balanceado (471/5020), método  KNN-like, datos de Amazon \\ \hline
-\cite{reyes2012making}     & 0.771     & 0.725  & 0.7575    & 0.747   & Corpus balanceado, método SVM, datos de  Amazon                                                                                                                                                                                           \\ \hline
-\cite{liebrecht2013perfect}      & NA        & 0.75   & NA        & NA      & Corpus balanceado, método Winnow, datos de Twitter                                                                                                                                                                                   \\ \hline
-\cite{liebrecht2013perfect}      & NA        & 0.56   & NA        & NA      & Corpus no balanceado (25/75), método Winnow, datos de Twitter                                                                                                                                                                                   \\ \hline
-\cite{barbieri2014italian} & 0.75      & 0.76   & NA        & 0.76    & Corpus no balanceado (12/88), método \gls{DT}, datos de  Twitter                                                                                                                                                                                             \\ \hline
+%--------------------------Omito estos a proposito------------------------
 
-\cite{ptavcek2014sarcasm}      & NA        & NA     & NA        & 0.923   & Corpus no balanceado (25/75), método  MaxEnt, datos de Twitter inglés                                                                                                                                                                                       \\ \hline
-\cite{ptavcek2014sarcasm}      & NA        & NA     & NA        & 0.582   & Corpus no balanceado (325/6675), método  SVM, datos de Twitter checo                                                                                                                                                                                       \\ \hline
-\cite{poria2016deeper}      & NA        & NA     & NA        & 0.948   & Corpus no balanceado (25/75), método  CNN-SVM, datos de Twitter                                                                                                                                                                                              \\ \hline
-\cite{lopez2016character}      & NA        & NA     & NA        & 0.80     & Análisis hecho a nivel carácter con un corpus no balanceado, método SVM, datos de Twitter                                                                                       \\ \hline       \cite{lopez2016character}      & NA        & NA     & NA        & 0.80     & Análisis hecho a nivel carácter con un corpus no balanceado, método RF, datos de Twitter                                                                                       \\ \hline                                                                        
-\end{tabular}
-\caption{Algunos resultados de otros investigadores, P  = precisión, R = recall, A = Accuaracy, F1 = F-score}
-\label{tab:resultados}
+\subsection{Análisis de resultados}
+
+\par Para hablar de los resultados que otros investigadores han tenido nos referiremos a la tabla \ref{tab:resultados} donde se muestra como la mayoría de los trabajos previos han hecho sus experimentos sobre los datos de Twitter. Además la mayoría han usado un método de aprendizaje supervisado y solo uno semi-supervisado \cite{davidov2010semi}, podemos ver también que la distribución de datos está sesgada a la poca aparición del sarcasmo/ironía, como lo menciona \cite{liu2007low} para su corpus de Amazon, esto parece aplicar también para Twitter.
+
+
+\begin{table}[!ht]
+	\begin{tabular}{|l|l|l|l|l|p{4cm}|}
+		\hline
+		Investigadores              & P     & R     & A      & F1    & Detalles                                                                                  \\ \hline
+		\cite{davidov2010semi}      & 0.912 & 0.756 & 0.947  & 0.827 & Corpus no balanceado (471/5020), método  KNN-like, datos de Amazon                        \\ \hline
+		\cite{reyes2012making}      & 0.771 & 0.725 & 0.7575 & 0.747 & Corpus balanceado, método SVM, datos de  Amazon                                           \\ \hline
+		\cite{liebrecht2013perfect} & NA    & 0.75  & NA     & NA    & Corpus balanceado, método Winnow, datos de Twitter                                        \\ \hline
+		\cite{liebrecht2013perfect} & NA    & 0.56  & NA     & NA    & Corpus no balanceado (25/75), método Winnow, datos de Twitter                             \\ \hline
+		\cite{barbieri2014italian}  & 0.75  & 0.76  & NA     & 0.76  & Corpus no balanceado (12/88), método \gls{DT}, datos de  Twitter                          \\ \hline
+
+		\cite{ptavcek2014sarcasm}   & NA    & NA    & NA     & 0.923 & Corpus no balanceado (25/75), método  MaxEnt, datos de Twitter inglés                     \\ \hline
+		\cite{ptavcek2014sarcasm}   & NA    & NA    & NA     & 0.582 & Corpus no balanceado (325/6675), método  SVM, datos de Twitter checo                      \\ \hline
+		\cite{poria2016deeper}      & NA    & NA    & NA     & 0.948 & Corpus no balanceado (25/75), método  CNN-SVM, datos de Twitter                           \\ \hline
+		\cite{lopez2016character}   & NA    & NA    & NA     & 0.80  & Análisis hecho a nivel carácter con un corpus no balanceado, método SVM, datos de Twitter \\ \hline       \cite{lopez2016character}      & NA        & NA     & NA        & 0.80     & Análisis hecho a nivel carácter con un corpus no balanceado, método RF, datos de Twitter                                                                                       \\ \hline
+	\end{tabular}
+	\caption{Algunos resultados de otros investigadores, P  = precisión, R = recall, A = Accuaracy, F1 = F-score}
+	\label{tab:resultados}
 \end{table}
-		
-		%aqui va la parte del analisis de resultados
-	    \par Después de ver más de cerca los resultados que reportan estos investigadores, se puede notar que los mejores resultados parecen ser los de \cite{poria2016deeper} cuando usa CNN combinado con SVM y obtiene un valor de  \gls{F-score} de 0.948 que comparado con la mayoría es más grande, este estudio fue la continuación del trabajo de \cite{ptavcek2014sarcasm} el cual consistía en obtener principalmente las características más relevantes como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, etc., con todo esto se usaron dos métodos \gls{SVM} y \gls{MaxEnt} el cuál parece funcionar muy bien para el inglés. Sin embargo para el checo no es así ya que SVM tiene mayor puntaje en F-score (0.582) lo cual es muy bajo, esto según ellos fue por que algunas muestras necesitaban conocimiento general, que con 6,700 muestras no fueron suficientes para obtener, por otro lado en inglés como ya se mencionó sirvió mejor \gls{MaxEnt} y dio un 0.923 de F-score, esto puede indicar que como \cite{domingos2012few} menciona hay dos formas de mejorar el desempeño de esta tarea, una es conseguir más datos y otra en mejorar o encontrar un algoritmo que requiera menos datos. 
-	    
-	    \par Respecto a los demás podemos destacar el trabajo de \cite{reyes2012making} quienes principalmente describen una forma de como obtener el corpus y el trabajo de  \cite{lopez2016character} que obtuvo mejores resultados con un análisis a nivel de caracter, con un corpus no balanceado (30/70), tal vez debido a que en Twitter es necesario explotar más el potencial de los caracteres y suelen verse abreviaciones del texto, como por ejemplo  ``que'' pasa a ser ``q'' cuando el límite de caracteres se ha alcanzado en un tweet. 
+
+%aqui va la parte del analisis de resultados
+\par Después de ver más de cerca los resultados que reportan estos investigadores, se puede notar que los mejores resultados parecen ser los de \cite{poria2016deeper} cuando usa CNN combinado con SVM y obtiene un valor de  \gls{F-score} de 0.948 que comparado con la mayoría es más grande, este estudio fue la continuación del trabajo de \cite{ptavcek2014sarcasm} el cual consistía en obtener principalmente las características más relevantes como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, etc., con todo esto se usaron dos métodos \gls{SVM} y \gls{MaxEnt} el cuál parece funcionar muy bien para el inglés. Sin embargo para el checo no es así ya que SVM tiene mayor puntaje en F-score (0.582) lo cual es muy bajo, esto según ellos fue por que algunas muestras necesitaban conocimiento general, que con 6,700 muestras no fueron suficientes para obtener, por otro lado en inglés como ya se mencionó sirvió mejor \gls{MaxEnt} y dio un 0.923 de F-score, esto puede indicar que como \cite{domingos2012few} menciona hay dos formas de mejorar el desempeño de esta tarea, una es conseguir más datos y otra en mejorar o encontrar un algoritmo que requiera menos datos.
+
+\par Respecto a los demás podemos destacar el trabajo de \cite{reyes2012making} quienes principalmente describen una forma de como obtener el corpus y el trabajo de  \cite{lopez2016character} que obtuvo mejores resultados con un análisis a nivel de caracter, con un corpus no balanceado (30/70), tal vez debido a que en Twitter es necesario explotar más el potencial de los caracteres y suelen verse abreviaciones del texto, como por ejemplo  ``que'' pasa a ser ``q'' cuando el límite de caracteres se ha alcanzado en un tweet.

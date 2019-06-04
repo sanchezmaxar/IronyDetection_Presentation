@@ -1,46 +1,47 @@
 
-  	\chapter{Introducción}\label{cap.introduccion}
-	\pagenumbering{arabic}
-		\onehalfspacing
-  		
-			\par La ironía es una figura retórica que consiste en decir lo contrario de lo que se quiere dar a entender, esta definición es aveces difícil de entender para una persona y por lo tanto es de esperarse más difícil de hacer entender a un sistema de cómputo. Hasta este momento podemos darle a una computadora un conjunto de instrucciones específicas, y si logramos definir de algún modo nuestras intenciones, podemos hacer que una computadora entienda de forma concreta un concepto. Sin embargo, la ironía reta a la lógica y es difícil para una persona explicar si una oración es irónica o es algo literal, muchas veces esto depende del contexto. Es cuando entra la inteligencia artificial, que nos ayuda a no explicar cosas que no entendemos bien o que dependen de muchas condiciones, y hace que nuestro sistema computacional salte la barrera de la lógica dotándola de procesos que simulan el razonamiento humano. La inteligencia artificial se ha usado en otras tareas como conducir un automóvil, clasificar objetos, darle significado a las palabras, entre otras.
-			
-  			\par El objetivo de esta tesis es proponer un modelo de red neuronal que pueda identificar ironía en textos cortos procedentes de Twitter. Dicha solución podría ayudar a los estudios de mercado que buscan la aceptación de un producto mediante el monitoreo de las redes sociales para minar opiniones, incluso en campañas políticas, comerciales o movimientos sociales ya que predeciría la opinión real de una persona sobre cierto tema. A su vez tiene conexión con otros problemas como la búsqueda de significados, minería de opiniones, modelos para detectar contradicciones, entre otros.
-            
- 
-		
-		\par El problema antes descrito ha sido explorado por comunidades de científicos e investigadores alrededor del mundo, en la Tabla \ref{table:AlgunosTrabajos} se pueden ver algunos de los trabajos que se han hecho anteriormente:
-		\begin{table}[h!]
-		\centering
-			\begin{tabular} {|p{3cm}|p{6cm}|p{2cm}| }
- 			\hline
-			Investigador/es & Artículo & Métodos \\[0.5ex]
-			\hline
-			Mihalcea, Strapparava \& Pulman & Learning to laugh (automatically): Computational models for humor recognition.  Computational intelligence & Naive Bayes SVM \\
-			\hline
-			Tsur \& Davidov & Semisupervised recognition of sarcastic sentences in twitter and amazon & k-NN \\
-			\hline
-			Sounjanya Poria, Erik Cambria, Devamanyu Hazarika & A depper look into sarcastic tweets using deep convolutional neural networks & CNN \\[1 ex]
-			\hline
-			\end{tabular}
-			\caption{Algunos trabajos sobre ironía y/o sarcasmo}
-			\label{table:AlgunosTrabajos}
-		\end{table}
-		
-		\par Como se ha podido ver, las redes neuronales se han ocupado para esta tarea, sin embargo muchos sugieren que estas implementaciones pueden mejorarse, las redes neuronales se han utilizado en la universidad de Standford para crear el pie de foto de imágenes, Google las ocupa para reconocer los números de las casa en las fotos que toman sus automóviles y ubicarlas en el mapa, en Mountain View las ocupan para mejorar el reconocimiento de voz de  Android, ahorrar electricidad en sus servidores, y esto es solo una pequeña parte de sus aplicaciones. Por lo que es una motivación para probar como se desempeñan las redes neuronales en esta tarea. 
-		
-		\par La descripción del método es la siguiente:
-		\begin{itemize}
-			\item Obtención del corpus
-			\item Preprocesamiento de los documentos que componen el corpus (embedding, tokenización, normalización, lematización, conversión a vectores), explorar las diversas herramientas que ya existen y destacar la mejor de todas.
-			\item Análisis de la red neuronal que mejor se adapta al problemas, crear un conjunto de caminos viables para elegir los que podrían dar mejores resultados
-			\item Diseño de los experimentos, diseñar las redes neuronales que resolverán la tarea
-			\item Evaluación, elegir las métricas que mejor describan el desempeño del modelo
-			\item Conclusiones, se dará una explicación de los resultados, se analizará las oportunidades de crecimiento, lo que se hizo bien y lo que se hizo mal.
-		\end{itemize}
- 		
- 			\par Debido a que las redes neuronales han tenido un desempeño excelente en una gran variedad de aplicaciones es de esperarse buenos resultados, en caso de que los resultados sean negativos sería muy importante revisar los diferentes parámetros de la red neuronal que se pueden cambiar, por ejemplo el número de capas ocultas, el número de nodos de cada capa, la normalización de los datos, la iniciación pseudoaleatoria de los pesos.
- 			
- 			\par Para finalizar la estructura de esta tesis es la siguiente: primero se presentaran algunos antecedentes y el estado del arte de la tarea que se propone, para después explicar un poco de la teoría detrás del método que se usará para resolverla, por último se obtendrán resultados que se compararán con los obtenidos en la sección de antecedentes para terminar con una conclusión y cuales podrían ser los trabajos a futuro.
- 			
- 			\par En este trabajo se usó el recurso de Google, llamado Colab Research, desde el cual se puede usar un entorno de desarrollo en Python 2 o 3, usando como interfaz Jupyter. La ventaja de usar esta herramienta es que se puede acceder al hardware de procesamiento de tensores de Google, Tensor Processing Unit (TPU), los cuales por experiencia propia llegan a ser hasta 20 veces más rápido que usar una GPU. Los experimentos de esta tesis se encuentran en la siguiente liga \href{ https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}{https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}
+\chapter{Introducción}\label{cap.introduccion}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\onehalfspacing
+
+\par La ironía es una figura retórica que consiste en decir lo contrario de lo que se quiere dar a entender; esta definición es a veces difícil de entender para una persona y por lo tanto es de esperarse que es más difícil de hacer entender a un sistema de cómputo. Hasta este momento, se le puede dar a una computadora un conjunto de instrucciones específicas, y si se logra definir de algún modo las intenciones, se puede hacer que una computadora entienda de forma concreta un concepto. Sin embargo, la ironía reta a la lógica y es difícil para una persona explicar si una oración es irónica o es algo literal, muchas veces esto depende del contexto. Es cuando entra la inteligencia artificial, que ayuda a no explicar cosas que no se entienden bien o que dependen de muchas condiciones y hace que el sistema computacional salte la barrera de la lógica dotándola de procesos que simulan el razonamiento humano. La inteligencia artificial se ha usado en otras tareas como conducir un automóvil, clasificar objetos, darle significado a las palabras, entre otras.
+
+\par El objetivo de esta tesis es proponer un modelo de red neuronal que pueda identificar ironía en textos cortos procedentes de Twitter. Dicha solución podría ayudar a los estudios de mercado que buscan la aceptación de un producto mediante el monitoreo de las redes sociales para la extracción de opiniones, incluso en campañas políticas, comerciales o movimientos sociales, ya que predeciría la opinión real de una persona sobre cierto tema. A su vez tiene conexión con otros problemas como la búsqueda de significados, minería de opiniones, modelos para detectar contradicciones, entre otros.
+
+
+
+\par El problema antes descrito ha sido explorado por comunidades de científicos e investigadores alrededor del mundo; en la tabla \ref{table:AlgunosTrabajos} se pueden ver algunos de los trabajos que se han hecho anteriormente.
+\begin{table}[h!]
+	\centering
+	\caption{Algunos trabajos sobre ironía y/o sarcasmo}
+	\begin{tabular} {|p{3cm}|p{6cm}|p{2cm}| }
+		\hline
+		Investigador/es                                   & Artículo                                                                                                   & Métodos         \\[0.5ex]
+		\hline
+		Mihalcea, Strapparava \& Pulman                   & Learning to laugh (automatically): Computational models for humor recognition.  Computational intelligence & Naive Bayes SVM \\
+		\hline
+		Tsur \& Davidov                                   & Semisupervised recognition of sarcastic sentences in Twitter and Amazon                                    & k-NN            \\
+		\hline
+		Sounjanya Poria, Erik Cambria, Devamanyu Hazarika & A deeper look into sarcastic tweets using deep convolutional neural networks                               & CNN             \\[1 ex]
+		\hline
+	\end{tabular}
+	\label{table:AlgunosTrabajos}
+\end{table}
+
+\par Como se ha podido ver, las redes neuronales se han ocupado para esta tarea; sin embargo muchos sugieren que estas implementaciones pueden mejorarse. Las redes neuronales se han utilizado en la universidad de Stanford para crear el pie de figura de imágenes, Google las ocupa para reconocer los números de las casas en las fotos que toman sus automóviles y ubicarlas en el mapa, en Mountain View las ocupan para mejorar el reconocimiento de voz de  Android, ahorrar electricidad en sus servidores, y esto es solo una pequeña parte de sus aplicaciones. Lo anterior es una motivación para probar cómo se desempeñan las redes neuronales en esta tarea. Para la implementación de las redes neuronales, se deben obtener primero los datos que constituyen la base de conocimiento para el sistema. Estos datos aportarán ejemplos de como se encuentran normalmente las muestras. Esta base de conocimiento pueden ser imágenes, textos, audios, señales, entre otros. A la base de conocimiento también se le conoce como \textit{corpus}.
+
+\par La descripción del método es la siguiente:
+\begin{itemize}
+	\item Obtención del corpus
+	\item Preprocesamiento de los documentos que componen el corpus (embedding, tokenización, normalización, lematización, conversión a vectores), explorar las diversas herramientas que ya existen y destacar la mejor de todas.
+	\item Análisis de la red neuronal que mejor se adapta al problemas, crear un conjunto de caminos viables para elegir los que podrían dar mejores resultados
+	\item Diseño de los experimentos, diseñar las redes neuronales que resolverán la tarea
+	\item Evaluación, elegir las métricas que mejor describan el desempeño del modelo
+	\item Conclusiones, se dará una explicación de los resultados, se analizará las oportunidades de crecimiento, lo que se hizo bien y lo que se hizo mal.
+\end{itemize}
+
+\par Debido a que las redes neuronales han tenido un desempeño excelente en una gran variedad de aplicaciones es de esperarse buenos resultados, en caso de que los resultados sean negativos sería muy importante revisar los diferentes parámetros de la red neuronal que se pueden cambiar, por ejemplo el número de capas ocultas, el número de nodos de cada capa, la normalización de los datos, la iniciación pseudoaleatoria de los pesos.
+
+\par Para finalizar la estructura de esta tesis es la siguiente: primero se presentaran algunos antecedentes y el estado del arte de la tarea que se propone, para después explicar un poco de la teoría detrás del método que se usará para resolverla, por último se obtendrán resultados que se compararán con los obtenidos en la sección de antecedentes para terminar con una conclusión y cuales podrían ser los trabajos a futuro.
+
+\par En este trabajo se usó el recurso de Google, llamado Colab Research, desde el cual se puede usar un entorno de desarrollo en Python 2 o 3, usando como interfaz Jupyter. La ventaja de usar esta herramienta es que se puede acceder al hardware de procesamiento de tensores de Google, Tensor Processing Unit (TPU), los cuales por experiencia propia llegan a ser hasta 20 veces más rápido que usar una GPU. Los experimentos de esta tesis se encuentran en la siguiente liga \href{ https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}{https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}

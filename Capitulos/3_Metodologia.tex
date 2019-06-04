@@ -1,7 +1,7 @@
 \chapter{Metodología}\label{cap.metodologia}
 %aqui va el capitulo de la metodologia
-	
-\par Una vez que hemos visto que trabajos se han llevado acabo en la detección de la ironía/sarcasmo, se expondrá el trabajo que se llevó acabo en este estudio de modo que se justifique el diseño de nuestro modelo. Los métodos antes mencionados nos aportan una perspectiva más amplia para poder explorar mejor el problema y llegar a una solución aceptable.  
+
+\par Una vez que hemos visto que trabajos se han llevado acabo en la detección de la ironía/sarcasmo, se expondrá el trabajo que se llevó acabo en este estudio de modo que se justifique el diseño de nuestro modelo. Los métodos antes mencionados nos aportan una perspectiva más amplia para poder explorar mejor el problema y llegar a una solución aceptable.
 %aqui va la intro de la metodologia
 \section{Obtención del corpus}
 %aqui va la obtencion del corpus
@@ -29,19 +29,19 @@
 
 \vspace{5pt}
 \begin{center}
-	\par https://twitter.com/Josaa01/status/605233873635508224    
+	\par https://twitter.com/Josaa01/status/605233873635508224
 \end{center}
 
 \vspace{5pt}
 \par Luego el siguiente número simboliza si el texto es irónico o no, un 0 para no irónico y un 1 para un irónico y por último el texto del tweet.
 
-\par Para la generación de este corpus se considero que el sarcasmo es un subconjunto de la ironía y se confía absolutamente en la etiqueta que los usuarios proporcionan, aún cuando ésta no sea totalmente fiel a la definición de ironía, cualquiera que quiera considerarse. Pero el corpus de esta tesis no es el mismo que el que usaron \cite{lopez2016character} ya que después de que ellos lo usaron el corpus se sometió a un etiquetado manual. La distribución del corpus es la sugerida en el mismo texto, 90\% no irónicos y 10\% irónicos. Lo cual ya no los hace directamente comparables. 
+\par Para la generación de este corpus se considero que el sarcasmo es un subconjunto de la ironía y se confía absolutamente en la etiqueta que los usuarios proporcionan, aún cuando ésta no sea totalmente fiel a la definición de ironía, cualquiera que quiera considerarse. Pero el corpus de esta tesis no es el mismo que el que usaron \cite{lopez2016character} ya que después de que ellos lo usaron el corpus se sometió a un etiquetado manual. La distribución del corpus es la sugerida en el mismo texto, 90\% no irónicos y 10\% irónicos. Lo cual ya no los hace directamente comparables.
 
 \par De este modo se puede ver desde un principio que la definición que se busca lo que convencionalmente se considera como ironía y no la definición rigurosa de ésta. Por lo que a pesar de tratar de atajar una característica general del lenguaje, esta solución está limitada a las condiciones para las que fue entrenada, es decir para Twitter en idioma español y lo que las personas que etiquetaron manualmente el corpus consideraron como irónico.
 
-\par El corpus se obtuvo mediante la API que Twitter provee para el lenguaje Ruby. Esto diferencia el presente trabajo de algunos otros de la bibliografía. Para obtener los tweets que se usan como background se buscaban diferentes palabras con un significado vació, el cual se proponía no sesgar la búsqueda a un tema específico, estas palabras fueron: donde, quien, como, cuando, este, tiene, porque, dónde, quién, cómo, cuándo, esta, está y por qué. Para obtener los tweets con carácter irónico o sarcástico se uso la búsqueda de \textit{ \#sarcasmo} y \textit{\#ironía}. Adicional a esto se hizo una verificación manual de los tweets que son irónicos y los que no. Se omitieron las referencias a usuarios remplazando el \textit{@user} por \textit{@} y las ligas por \textit{http://link}. 
+\par El corpus se obtuvo mediante la API que Twitter provee para el lenguaje Ruby. Esto diferencia el presente trabajo de algunos otros de la bibliografía. Para obtener los tweets que se usan como background se buscaban diferentes palabras con un significado vació, el cual se proponía no sesgar la búsqueda a un tema específico, estas palabras fueron: donde, quien, como, cuando, este, tiene, porque, dónde, quién, cómo, cuándo, esta, está y por qué. Para obtener los tweets con carácter irónico o sarcástico se uso la búsqueda de \textit{ \#sarcasmo} y \textit{\#ironía}. Adicional a esto se hizo una verificación manual de los tweets que son irónicos y los que no. Se omitieron las referencias a usuarios remplazando el \textit{@user} por \textit{@} y las ligas por \textit{http://link}.
 
-    \par Este es el primer estudio que se hace con el corpus etiquetado manualmente, lo que lo diferencia de la gran mayoría de la bibliografía que confiaban que fueran los autores de las sentencias etiquetaran correctamente las sentencias. Esto tiene dos puntos de vista. Por un lado con el etiquetado manual, no se encuentra una universalidad de lo que es una sentencia irónica, sino que entrenamos al sistema a reconocer las sentencias irónicas que una persona reconoce como tal. Por otro lado si no se etiqueta manualmente, no se tiene un mismo criterio para clasificar a las sentencias, éstas podrían resultar muchas veces contradictorias, por que donde uno ve ironía otro ve enojo, tristeza, etc. 
+\par Este es el primer estudio que se hace con el corpus etiquetado manualmente, lo que lo diferencia de la gran mayoría de la bibliografía que confiaban que fueran los autores de las sentencias etiquetaran correctamente las sentencias. Esto tiene dos puntos de vista. Por un lado con el etiquetado manual, no se encuentra una universalidad de lo que es una sentencia irónica, sino que entrenamos al sistema a reconocer las sentencias irónicas que una persona reconoce como tal. Por otro lado si no se etiqueta manualmente, no se tiene un mismo criterio para clasificar a las sentencias, éstas podrían resultar muchas veces contradictorias, por que donde uno ve ironía otro ve enojo, tristeza, etc.
 
 \section{Preprocesamiento}
 %aqui va la explicacion del preprocesamiento 
@@ -55,30 +55,30 @@
 	\label{fig:funcionHash}
 \end{figure}
 \par Tal como se ve en la figura \ref{fig:funcionHash} nuestra función que interpreta las palabras a objetos (en este caso se usarán números enteros por simplicidad) es una función hash, la cual necesitará primero un conjunto de palabras que conforman los tweets. Dichas palabras\footnote{Considérese
-	una palabra una subcadena que separa de otras por un espacio, coma o punto} deberán aparecer al menos 5 veces\footnote{Este valor se fijo experimentalmente ya que no se ignoraban tantas y filtraba las palabras que menos se mencionaban}. Si la palabra no alcanza ese número de apariciones se considera como \textit{UNK} que significa \textit{unknown} o desconocida lo cual simboliza que existe un pedazo de información que falta o que tiene un significado desconocido. En este proceso que crea el vocabulario no se detuvieron palabras que generalmente no aportan información valiosa para la clasificación, éstas pueden ser como: de, y, a, o, del, el, etc. 
-	
-	\par Otro enfoque es considerar como unidad de información los caracteres que conforman la oración. Esto aporta información diferente ya que en lugar de omitir datos que pueden ser considerados basura, se incluyen todos los datos y dejamos que nuestro modelo decida si son útiles o no. Para esto puede aumentarse el tamaño de la unidad mínima, desde un caracter hasta n, este método se le conoce como n-grams.
-	
+	una palabra una subcadena que separa de otras por un espacio, coma o punto} deberán aparecer al menos 5 veces\footnote{Este valor se fijo experimentalmente ya que no se ignoraban tantas y filtraba las palabras que menos se mencionaban}. Si la palabra no alcanza ese número de apariciones se considera como \textit{UNK} que significa \textit{unknown} o desconocida lo cual simboliza que existe un pedazo de información que falta o que tiene un significado desconocido. En este proceso que crea el vocabulario no se detuvieron palabras que generalmente no aportan información valiosa para la clasificación, éstas pueden ser como: de, y, a, o, del, el, etc.
+
+\par Otro enfoque es considerar como unidad de información los caracteres que conforman la oración. Esto aporta información diferente ya que en lugar de omitir datos que pueden ser considerados basura, se incluyen todos los datos y dejamos que nuestro modelo decida si son útiles o no. Para esto puede aumentarse el tamaño de la unidad mínima, desde un caracter hasta n, este método se le conoce como n-grams.
+
 \subsection{Diferentes enfoques en el preprocesamiento}
 %aqui van los diferentes enfoque en el preprocesamiento
 \par Desde la perspectiva de otros investigadores fue más importante considerar un conjunto de reglas que modelará estrictamente lo que es la ironía como vimos con \cite{utsumi1996unified} y \cite{kong2011formalization}, lo cuál se puede considerar como una buena solución si se desea conocer mejor el lenguaje propio para el cual se  hace el modelo, pero ineficiente y poco adaptable a los casos de la vida real donde el lenguaje está vivo y cambia mucho dependiendo del contexto y del uso de las palabras que queramos darle en cierto momento. Nuestro estudio tiene esta ventaja ya que va a adaptarse a lo que algunos usuarios de esta red social han considerado como irónia o no.
 
 \par Por otro lado algunos investigadores consideraron usar etiquetas \gls{POS} las cuales dan a las palabras características únicas como la de ser un verbo, adjetivo, adverbio, sustantivo, etc. Estas características resultan importantes para obtener las formulas que describirían un texto sarcástico o irónico, como lo hizo \cite{barbieri2014italian} y similar a los que hizo \cite{davidov2010semi}. Sin embargo con este acercamiento hay ciertas precauciones ya que es necesario saber como se usa cierta palabra en un momento dado y vienen a la luz dos tipos de problemas. El primero corresponde al uso indistinto de algunas palabras como \textit{`vino'}, cuando se usa como verbo y cuando se usa como sustantivo, este problema podría manejarse tal vez adaptando el árbol de decisiones que se usó en \cite{barbieri2014italian} para que regrese las diferentes variantes que podría dar como resultado que se considere como verbo o como sustantivo. El segundo problema es cuando se deriva un sustantivo en un verbo, en estos casos no podría entenderse que significado se le puede dar, estos problemas se atajan en nuestra solución debido a no suponemos lo que el usuario quiere decir, con una palabra o que uso quiere darle.
 
-		
+
 \subsection{Complejidad del preprocesamiento}
 %aqui va la complejidad del procesamiento
 La complejidad de este preprocesamiento es lineal ya que debemos leer cada palabra de cada tweet dos veces la primera para obtener las palabras que conforman todo el corpus y contar si esta palabra entrará en el vocabulario y la segunda para asignarle a cada tweet un vector de índices que corresponden al vocabulario que se obtuvo antes.
 \section{Técnica de clasificación}
-	
+
 \par La técnica que se consideró para este problema fue una red neuronal con arquitectura \gls{bi-lstm} la cual le permite formar un resumen de lo que existe delante de su punto de estudio actual y antes de ese punto. La \gls{bi-lstm} se usa en análisis de textos ampliamente, debido a que los textos tienen esta estructura lineal. A continuación se explicará detalladamente en que consiste una red neuronal y posteriormente se describirá el funcionamiento de un \gls{bi-lstm}.
-	
+
 \subsection{Redes neuronales}
 
-\par En el área de la inteligencia artificial existe una técnica de clasificación inspirada en el funcionamiento del cerebro, para el cual primero se modela la función de una neurona como elemento básico, este modelo fue primero elaborado en 1943 por \cite{mcculloch1943logical} en la que modelaba matemáticamente el funcionamiento de una neurona. El enfoque que ellos tomaban era considerar que las neuronas podían tratarse con lógica proposicional, la cual ha ido evolucionando a través de los años.  \cite{rosenblatt1958perceptron} propuso el modelo de un perceptrón simple basado en las ideas de \cite{mcculloch1943logical}, la teoría de Rosenblatt se basaba más en un acercamiento probabilístico del funcionamiento de las neuronas en lugar del booleano de McCulloch, este modelo es un perceptron de dos capas, la de entrada y la de salida. 
-		    
+\par En el área de la inteligencia artificial existe una técnica de clasificación inspirada en el funcionamiento del cerebro, para el cual primero se modela la función de una neurona como elemento básico, este modelo fue primero elaborado en 1943 por \cite{mcculloch1943logical} en la que modelaba matemáticamente el funcionamiento de una neurona. El enfoque que ellos tomaban era considerar que las neuronas podían tratarse con lógica proposicional, la cual ha ido evolucionando a través de los años.  \cite{rosenblatt1958perceptron} propuso el modelo de un perceptrón simple basado en las ideas de \cite{mcculloch1943logical}, la teoría de Rosenblatt se basaba más en un acercamiento probabilístico del funcionamiento de las neuronas en lugar del booleano de McCulloch, este modelo es un perceptron de dos capas, la de entrada y la de salida.
+
 \subsubsection{Funcionamiento}
-		    
+
 \par Este modelo se puede definir como un sistema con entradas y salidas las cuales pasan por una unidad sumadora que las compara con un umbral(\textit{bias}) la cual activa una función de salida no lineal. Su funcionamiento es simple y se puede notar que lo que propone es que la salida de un sistema que se puede clasificar es el resultado de la combinación lineal de las entradas con un valor de desplazamiento a la salida(\textit{bias}). Luego la función de salida podría interpretarse como booleana un 1 si alcanzó el valor de umbral $\theta_{0}$ ó un 0 si no. Lo anterior puede interpretarse como que todo lo que este debajo de una recta definida por $(\theta_0,\theta_1,...,\theta_n)$ se considera que no pertenece a la clase y lo que está por encima de ella pertenece a dicha clase.
 \begin{figure}[H]
 	\centering
@@ -86,8 +86,8 @@ La complejidad de este preprocesamiento es lineal ya que debemos leer cada palab
 	\caption{Concepto básico del perceptrón simple. (Imagen de autoría propia)}
 	\label{fig:perceptron}
 \end{figure}
-		    
-\par Tiempo después se demostró que no podía resolver problemas no lineales, con una sola capa del perceptrón, como la compuerta lógica XOR. 
+
+\par Tiempo después se demostró que no podía resolver problemas no lineales, con una sola capa del perceptrón, como la compuerta lógica XOR.
 \begin{figure}[H]
 	\begin{minipage}{0.5\textwidth}
 		\input{imagenes/tablaxor.tex}
@@ -98,83 +98,83 @@ La complejidad de este preprocesamiento es lineal ya que debemos leer cada palab
 	\caption{No es posible separar con una capa de perceptrón la salida de una compuerta XOR. (Imagen de autoría propia)}
 	\label{fig:xor}
 \end{figure}
-		       
-		       
+
+
 \par Como se ve en la figura \ref{fig:xor} para poder resolver este tipo de problemas se propuso usar mas capas del perceptrón que podrían resolver el problema fácilmente. Ya que cuando se agregan más perceptrones se pueden \textit{`dibujar'} más lineas que puedan ayudarnos a dividir mejor una clase.
-		    
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{imagenes/diagramaXor2.png}
 	\caption{Usando una capa más se puede dividir la salida de la compuerta XOR. (Imagen de autoría propia)}
 	\label{fig:xor2}
 \end{figure}
-		    
+
 \par Al concepto de red neuronal, como un conjunto de perceptrones interconectados que hacen aún más compleja la salida de un simple perceptrón, se le conoce varios nombres como son \textit{fully connected}, \textit{\gls{mlp}} y red neuronal completamente conectada. Para el caso de cada perceptrón deberán aplicarse las mismas operaciones que se habían descrito para un solo perceptrón, en la figura \ref{fig:redneuronal1} se puede observar como se calcula la salida de la primera neurona de la primera capa.
-		    
+
 \begin{figure}[H]
 	\centering
 	\input{imagenes/redNeuronal1.tex}
 	\caption{Cálculo de la salida de la primera neurona de la primera capa de una red neuronal \gls{mlp} (Imagen de autoría propia).}
 	\label{fig:redneuronal1}
 \end{figure}
-		    
-		    
+
+
 \begin{figure}
 	\centering
 	\input{imagenes/redNeuronal.tex}
 	\caption{Arquitectura de la red neuronal \gls{mlp} (Imagen de autoría propia).}
 	\label{fig:redneuronal}
 \end{figure}
-		    
+
 \par Si queremos expresar el funcionamiento de una red neuronal de forma matricial se puede hacer lo siguiente, si se observa la arquitectura de la red neuronal de la figura \ref{fig:redneuronal} se puede ver que las entradas $X$ pueden expresar de forma vectorial igual que las salidas $Y$ y los pesos $\theta$ también se puede expresar de forma matricial.
 \begin{spreadlines}{10pt}
 	\begin{alignat}{4}
 		\label{eq:1}
-		& X=\begin{bmatrix}
-		1\\
-		x_{1}\\
-		x_{2}\\
-		...\\
-		x_{n}
-		\end{bmatrix} \\  \label{eq:2}
-		& \Theta ^{1}_{j} =\begin{bmatrix}
-		\theta ^{1}_{0j}\\
-		\theta ^{1}_{1j}\\
-		\theta ^{1}_{2j}\\
-		.+..\\
-		\theta ^{1}_{nj}
+		 & X=\begin{bmatrix}
+			1     \\
+			x_{1} \\
+			x_{2} \\
+			...   \\
+			x_{n}
+		\end{bmatrix}                \\  \label{eq:2}
+		 & \Theta ^{1}_{j} =\begin{bmatrix}
+			\theta ^{1}_{0j} \\
+			\theta ^{1}_{1j} \\
+			\theta ^{1}_{2j} \\
+			.+..             \\
+			\theta ^{1}_{nj}
 		\end{bmatrix} \\ \label{eq:3}
-		& \Theta ^{i}_{j} =\begin{bmatrix}
-		\theta ^{i}_{0j}\\
-		\theta ^{i}_{1j}\\
-		\theta ^{i}_{2j}\\
-		...\\
-		\theta ^{i}_{mj}
-		\end{bmatrix}\\ \label{eq:4}
-		& A^{i} =\begin{bmatrix}
-		1\\
-		a^{i}_{1}\\
-		a^{i}_{2}\\
-		...\\
-		a^{i}_{m}
-		\end{bmatrix}\\
-		& \Theta ^{i} =\begin{bmatrix}
-		\Theta ^{i}_{1} & \Theta ^{i}_{2} & ... & \Theta ^{i}_{m}\end{bmatrix} 
+		 & \Theta ^{i}_{j} =\begin{bmatrix}
+			\theta ^{i}_{0j} \\
+			\theta ^{i}_{1j} \\
+			\theta ^{i}_{2j} \\
+			...              \\
+			\theta ^{i}_{mj}
+		\end{bmatrix} \\ \label{eq:4}
+		 & A^{i} =\begin{bmatrix}
+			1         \\
+			a^{i}_{1} \\
+			a^{i}_{2} \\
+			...       \\
+			a^{i}_{m}
+		\end{bmatrix}           \\
+		 & \Theta ^{i} =\begin{bmatrix}
+			\Theta ^{i}_{1} & \Theta ^{i}_{2} & ... & \Theta ^{i}_{m}\end{bmatrix}
 	\end{alignat}
 \end{spreadlines}
-		    
+
 \par El superíndice indica la capa a la que pertenece, en el caso de los subíndices de $\Theta$ el primer dígito simboliza la neurona de la que procede y el siguiente es a la que entra. A partir de estas ecuaciones se puede ver que para obtener la matriz $A$ de la primera capa se debe seguir la siguiente ecuación:
-		    
+
 \begin{equation}
-	A^{1} =F\left(\left( \Theta ^{1}\right)^{T} X\right) 
+	A^{1} =F\left(\left( \Theta ^{1}\right)^{T} X\right)
 \end{equation}
-		    
+
 \par Para obtener las matrices $A$ de cada capa se usa la siguiente ecuación:
-		    
+
 \begin{equation}
 	A^{i} =F\left(\left( \Theta ^{i}\right)^{T} A^{i-1}\right)
 \end{equation}
-			
+
 \par En estas dos ecuaciones la función $F$ es la función no lineal que se deseé usar para la salida de cada neurona. En algunas de las aplicaciones se usan funciones como \gls{ReLU} la cual tiene una respuesta como la función escalón, en otras aplicación se usa la función sigmoidal, en otras ocasiones se usa el tangente hiperbólico, en la figura \ref{fig:funciones} se muestran algunas de las funciones más comunes que se usan en las aplicaciones.
 \begin{figure}
 	\centering
@@ -183,23 +183,23 @@ La complejidad de este preprocesamiento es lineal ya que debemos leer cada palab
 	\label{fig:funciones}
 \end{figure}
 \par Por último la salida vectorial de la red neuronal se calcula usando la siguiente ecuación:
-			
+
 \begin{equation}
 	Y\ =F\left(\left( \Theta ^{k+1}\right)^{T} A^{k}\right)
 \end{equation}
-			
+
 \par Al proceso que obtiene la predicción en una red neuronal se le llama \textit{feedforward}.
-			
+
 \subsubsection{Fase de entrenamiento - optimización}
-			
+
 \par La fase entrenamiento de la red neuronal consiste en modificar los pesos $\theta$ que corresponden a cada neurona, esto se hace mediante un proceso llamado \gls{backpropagation}, éste consiste en modificar los pesos de la red de modo que se minimice la función de costo, por medio de la retroalimentación de la red hasta la primera capa. Esta idea fue por primera vez concebida por \cite{rumelhart1986learning} en su artículo \textit{Learning representations by back-propagating errors}, en el cual se calculaba el error total que se veía a la salida de la red neuronal, el cual se calcula con la ecuación \ref{eq:error}
-			
+
 \begin{equation}\label{eq:error}
 	E=\frac{1}{2}\sum _{c}\sum _{j}( y_{j,c} -d_{j,c})^{2}
 \end{equation}
-			
+
 donde $c$ es índice sobre las muestras, $j$ es el índice sobre las unidades se salida, $y$ es el valor de salida de la red y $d$ es el valor deseado. Luego entonces si minimizamos este error el desempeño de nuestra red neuronal con respecto al problema será mejor, este error es únicamente para la última capa, para esto es necesario derivar parcialmente la función del error con respecto a los pesos de las sinapsis de entrada de cada una de las unidades, para esto podemos ver el desarrollo que hizo \cite{rumelhart1986learning} con respecto a la función sigmoidal.
-			
+
 \par Se deriva primero el error $E$ con respecto a $y_{j}$ en cada muestra $c$, por lo tanto se omite.
 \begin{equation}
 	\frac{\partial E}{\partial y_{j}} =y_{j} -d_{j}
@@ -208,96 +208,96 @@ donde $c$ es índice sobre las muestras, $j$ es el índice sobre las unidades se
 \begin{equation}
 	\frac{\partial E}{\partial x_{j}} =\frac{\partial E}{\partial y_{j}}  \frac{\partial y_{j}}{\partial x_{j}}
 \end{equation}
-			
+
 En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto de sustituye la derivada parcial con respecto a $x_{j}$.
 \begin{spreadlines}{10pt}
 	\begin{alignat}{4}
-		  & y_{j} =\frac{1}{1+e^{-x_{j}}}                                                         \\
-		  & \frac{\partial y_{j}}{\partial x_{j}} =\frac{e^{-x_{j}}}{1+e^{-x_{j}}}                \\
-		  & \frac{\partial y_{j}}{\partial x_{j}}=y_{j} (1-y_{j})                                 \\
-		  & \frac{\partial E}{\partial x_{j}} =\frac{\partial E}{\partial y_{j}}  y_{j}( 1-y_{j}) 
+		 & y_{j} =\frac{1}{1+e^{-x_{j}}}                                                         \\
+		 & \frac{\partial y_{j}}{\partial x_{j}} =\frac{e^{-x_{j}}}{1+e^{-x_{j}}}                \\
+		 & \frac{\partial y_{j}}{\partial x_{j}}=y_{j} (1-y_{j})                                 \\
+		 & \frac{\partial E}{\partial x_{j}} =\frac{\partial E}{\partial y_{j}}  y_{j}( 1-y_{j})
 	\end{alignat}
 \end{spreadlines}
-			
+
 \par En esta parte se puede reemplazar la parcial cuando se usa la función \gls{ReLU} o la de la tangente hiperbólica. Después se puede hacer de nuevo la regla de la cadena para obtener la derivada parcial de error con respecto a los pesos.
-			
+
 \begin{spreadlines}{10pt}
 	\begin{alignat}{3}
-		  & x_{j}=\sum_{i} y_{i}\theta_{ji}                                                                                          \\ \vspace{100pt}
-		  & \frac{\partial E}{\partial \theta _{ji}} =\frac{\partial E}{\partial x_{j}} \frac{\partial x_{j}}{\partial \theta _{ji}} \\
-		  & \frac{\partial E}{\partial \theta _{ji}} =\frac{\partial E}{\partial x_{j}}y_{i}                                         
+		 & x_{j}=\sum_{i} y_{i}\theta_{ji}                                                                                          \\ \vspace{100pt}
+		 & \frac{\partial E}{\partial \theta _{ji}} =\frac{\partial E}{\partial x_{j}} \frac{\partial x_{j}}{\partial \theta _{ji}} \\
+		 & \frac{\partial E}{\partial \theta _{ji}} =\frac{\partial E}{\partial x_{j}}y_{i}
 	\end{alignat}
 \end{spreadlines}
-			
+
 \par Después para conseguir la parcial del error con respecto a $x_{j}$ se debe hacer lo siguiente:
-			
+
 \begin{spreadlines}{10pt}
 	\begin{alignat}{3}
-		  & \frac{\partial E}{\partial x_{j}} \frac{\partial x_{j}}{\partial y_{i}} =\frac{\partial E}{\partial x_{j}} \theta _{ji} \\
-		  & \frac{\partial E}{\partial y_{j}} =\sum _{j}\frac{\partial E}{\partial x_{j}} \theta _{ji}                              
+		 & \frac{\partial E}{\partial x_{j}} \frac{\partial x_{j}}{\partial y_{i}} =\frac{\partial E}{\partial x_{j}} \theta _{ji} \\
+		 & \frac{\partial E}{\partial y_{j}} =\sum _{j}\frac{\partial E}{\partial x_{j}} \theta _{ji}
 	\end{alignat}
 \end{spreadlines}
-			
+
 \par Con este resultado se puede calcular progresivamente las derivadas parciales del error con respecto a los pesos, en otras palabras la razón de cambio del error con respecto a la modificación de los pesos. Lo cual nos indica hacia donde está el mínimo local. Entonces para encontrar el incremento de los pesos $\theta$ podemos aplicar la siguiente ecuación:
 \[ \Delta \theta =-\epsilon \frac{\partial E}{\partial \theta }\]
-			
-\par En esta ecuación $\epsilon$ simboliza el coeficiente de aprendizaje el cual indica que tan rápido se avanzará hacia el mínimo local. Este valor también se puede poner en función del tiempo de modo que a medida que se acerque al valor se vuelve más pequeño el paso. Este método fue primeramente descrito por \cite{rumelhart1986learning} y tiene una desventaja muy importante, para actualizar una vez los nuevos pesos es necesario computar el error de todas las muestras, por lo tanto tardará un tiempo considerable en terminar una actualización si tenemos muchas muestras, las cuales son necesarias en la mayoría de los casos para encontrar un buen modelo que generalice el problema. 
+
+\par En esta ecuación $\epsilon$ simboliza el coeficiente de aprendizaje el cual indica que tan rápido se avanzará hacia el mínimo local. Este valor también se puede poner en función del tiempo de modo que a medida que se acerque al valor se vuelve más pequeño el paso. Este método fue primeramente descrito por \cite{rumelhart1986learning} y tiene una desventaja muy importante, para actualizar una vez los nuevos pesos es necesario computar el error de todas las muestras, por lo tanto tardará un tiempo considerable en terminar una actualización si tenemos muchas muestras, las cuales son necesarias en la mayoría de los casos para encontrar un buen modelo que generalice el problema.
 
 \par Este algoritmo de optimización tendrá un gran precio computacional, para este propósito se creó el \gls{SGD} el cual para actualizar los pesos en la red neuronal se obtiene el gradiente de un conjunto aleatorio de muestras, y no es necesario computar el gradiente de todo el conjunto de datos. Sin embargo este método tiene la desventaja que no se encuentra el gradiente general que describirían todas las muestras, sino una aproximación, por lo que el coeficiente de aprendizaje debe ser más pequeño y deberán hacerse más actualizaciones.
 
 \par Otra opción que surgió con el tiempo fue dotar al cambio de los pesos de un momento esto para que aún cuando había encontrado un mínimo local, el paso pudiera pasarlo por alto con la intención de buscar uno que estuviera en la vecindad, este método no resultó tan bueno ya que podía estancarse en zonas llanas aún más altas que el mínimo local que había ignorado. Luego de este método surgió otro que consideraría una adaptación a las condiciones del gradiente, es decir que en zonas donde fuera necesario que $\epsilon$ fuera más pequeño para conseguir converger, pudiera adaptarse, entonces surgió Adagrad. Luego se pensó que se podría hacer variar de igual modo el momento ese fue el surgimiento de Adam, el cual es el método usado en esta tesis, no se pensó en probar con otros ya que Adam ha reportado mejores resultados en la literatura que sus alternativas, este método fue ideado por \cite{kingma2014adam}.  Sin embargo, como se ha visto en diferentes investigaciones, los mejores resultados se obtienen al usar como optimizador el Root Mean Square(RMS) el cual es un Gradient Descent con momento.
 \nocite{DBLP:journals/corr/Ruder16}
 % 			Aqui tal vez tenga que meter la explicación de Adam http://ruder.io/optimizing-gradient-descent/index.html#adam
-			
+
 \subsubsection{Éxito del método}
-			
-\par Las redes neuronales han sido ocupadas para muchas aplicaciones hoy en día, sin embargo en sus inicios en 1943 cuando \cite{mcculloch1943logical} investigaba como guardaba información no se pensaba que sería tan utilizado, fue con \cite{rosenblatt1958perceptron} 15 años después cuando apenas se vería un avance significativo con respecto a lo son hoy día, incluso se construyeron proyectos como Mark 1 perceptron. Sin embargo los proyectos que llegaban a ver la luz, apenas podían distinguir entre clases y con un desempeño precario, debido principalmente al poder de computo que es necesario para entrenarlas, fue más bien a partir de los años 2000 con la entrada al mercado y el desarrollo de las API por parte de NVIDIA, AMD e INTEL que la investigación comenzó a tomar el impulso que necesitaba, ahora existen muchas API de desarrollo de sistemas inteligentes como Keras, Tensorflow, Sklearn, etc. con un continuo crecimiento. Hoy en día las redes neuronales son el algoritmo número uno bio-inspirado que los investigadores usan para hacer sus experimentos (63.04\% en el 2016). Como lo menciona \cite{kar2016bio} existen muchos más algoritmos que se pueden explorar más como Artificial Plant Optimization, pero aún por mucho tiempo se prevé que las redes neuronales controlen el mercado y las investigaciones científicas gracias a que aportan resultados confiables y de rápido desarrollo sin la necesidad de conocer rigurosamente las matemáticas detrás de ellas. 
-			
-\par Entre los usos que se les han dado están los siguientes: en el artículo \textit{Performance Analysis of Domestic Refrigerator Using Hydrocarbon Refrigerant Mixtures with ANN} de \cite{reddy2019performance} lo usan para analizar el rendimiento de un refrigerador usando diferentes refrigerantes, en el artículo \textit{Assessing the culture of fruit farmers from Calvillo, Aguascalientes, Mexico with an artificial neural network: An approximation of sustainable land management} de \cite{santos2019assessing} se buscan soluciones para el cultivo sustentable en la región de Calvillo en Aguascalientes, en el artículo \textit{LED color prediction using a boosting neural network model for a visual-MIMO system} de \cite{banik2018led} se usa un modelo de red neuronal que predice el color de un LED, entre otras. 
-			
+
+\par Las redes neuronales han sido ocupadas para muchas aplicaciones hoy en día, sin embargo en sus inicios en 1943 cuando \cite{mcculloch1943logical} investigaba como guardaba información no se pensaba que sería tan utilizado, fue con \cite{rosenblatt1958perceptron} 15 años después cuando apenas se vería un avance significativo con respecto a lo son hoy día, incluso se construyeron proyectos como Mark 1 perceptron. Sin embargo los proyectos que llegaban a ver la luz, apenas podían distinguir entre clases y con un desempeño precario, debido principalmente al poder de computo que es necesario para entrenarlas, fue más bien a partir de los años 2000 con la entrada al mercado y el desarrollo de las API por parte de NVIDIA, AMD e INTEL que la investigación comenzó a tomar el impulso que necesitaba, ahora existen muchas API de desarrollo de sistemas inteligentes como Keras, Tensorflow, Sklearn, etc. con un continuo crecimiento. Hoy en día las redes neuronales son el algoritmo número uno bio-inspirado que los investigadores usan para hacer sus experimentos (63.04\% en el 2016). Como lo menciona \cite{kar2016bio} existen muchos más algoritmos que se pueden explorar más como Artificial Plant Optimization, pero aún por mucho tiempo se prevé que las redes neuronales controlen el mercado y las investigaciones científicas gracias a que aportan resultados confiables y de rápido desarrollo sin la necesidad de conocer rigurosamente las matemáticas detrás de ellas.
+
+\par Entre los usos que se les han dado están los siguientes: en el artículo \textit{Performance Analysis of Domestic Refrigerator Using Hydrocarbon Refrigerant Mixtures with ANN} de \cite{reddy2019performance} lo usan para analizar el rendimiento de un refrigerador usando diferentes refrigerantes, en el artículo \textit{Assessing the culture of fruit farmers from Calvillo, Aguascalientes, Mexico with an artificial neural network: An approximation of sustainable land management} de \cite{santos2019assessing} se buscan soluciones para el cultivo sustentable en la región de Calvillo en Aguascalientes, en el artículo \textit{LED color prediction using a boosting neural network model for a visual-MIMO system} de \cite{banik2018led} se usa un modelo de red neuronal que predice el color de un LED, entre otras.
+
 \subsubsection{Bi-directional Long Short Term Memory}
-			
+
 \par Como se vio en la sección anterior las redes neuronales han servido ampliamente a muchas áreas del conocimiento, sin embargo para cada uno de los problemas se debe usar una arquitectura de red neuronal que sea apropiada y que se justifique que puede resolver el problema. Esta arquitectura no siempre es fácil encontrarla y muchas veces es necesario probar con más de una arquitectura con el fin de comparar resultados y decidirse por una. En otros casos es necesario utilizar modelos de forma secuencial de manera que la salida de uno sea la entrada de otro, como se puede ver, no existe nada escrito en cuanto al diseño que debe tener un modelo para resolver determinado problema. A continuación se explicará un poco sobre la arquitectura que se uso en nuestro problema y la justificación que se tuvo en mente.
-            
+
 \par Para explicar una \gls{bi-lstm} primero debemos abordar ¿Qué es una red neuronal recurrente?¿Qué es una LSTM?
-            
+
 \par Una red neuronal recurrente es una red neuronal cuyas neuronas tienen una entrada secuencial, por ejemplo una serie de palabras, una serie de caracteres, de imágenes etc. Lo que se busca con esta arquitectura es que las neuronas tengan una forma de retener información sobre los datos que han sido vistos, por lo que se puede decir que posee la capacidad de tener memoria, el modelo de esa neurona es el siguiente:
-            
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/RNN-unrolled.png}
 	\caption[]{Modelo de una red neuronal recurrente. (Imagen extraída de \cite{christopher_olah_2015}) }
 \end{figure}
-            
+
 \par El problema principal de que las neuronas guarden toda la información de lo que han visto es que en muchos casos es mucho más relevante la información actual que todo lo que se ha visto anteriormente, por ejemplo si en nuestro conjunto de muestras tenemos un tweet que contiene lo siguiente:
 \vspace{5pt}
 \begin{center}
-	\textit{``Ayer me desperté temprano para ir a trabajar y cuando llegué ahí me dí cuenta que era sábado, de regreso a mi casa se me recargo una señora en el metro, gracias reloj \#thanks''}, 
+	\textit{``Ayer me desperté temprano para ir a trabajar y cuando llegué ahí me dí cuenta que era sábado, de regreso a mi casa se me recargo una señora en el metro, gracias reloj \#thanks''},
 	\label{fig:frase}
 \end{center}
 \vspace{5pt}
-            
+
 \par En este texto se puede ver que si la red neuronal esta recordando todo lo que ve, entonces ésta ``considera'' que para identificar algo como sarcasmo es igual de relevante la parte en la que se le recargo una señora que haber ido a su empleo en su día de descanso. Para dicha tarea en la que la información puede o no ser relevante se tiene la \gls{lstm} la cuales tiene una estructura similar a la siguiente:
-            
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/LSTM3-chain.png}
 	\caption[]{Arquitectura de una \gls{lstm}. (Imagen extraída de \cite{christopher_olah_2015})}
 \end{figure}
-            
-            
-\par Esta arquitectura tiene diferentes partes, dentro de las cuales se pueden distinguir las siguientes: la parte que decide si olvidar o no, la parte que añade el concepto actual al concepto acumulado y la parte que pasa los parámetros de salida a la entrada de la siguiente unidad. 
-           
+
+
+\par Esta arquitectura tiene diferentes partes, dentro de las cuales se pueden distinguir las siguientes: la parte que decide si olvidar o no, la parte que añade el concepto actual al concepto acumulado y la parte que pasa los parámetros de salida a la entrada de la siguiente unidad.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/LSTM3-focus-f.png}
 	\caption[]{Sección de la unidad \gls{lstm} que decide si olvida o no.(Imagen extraída de \cite{christopher_olah_2015})}
 	\label{fig:lstmOlvidar}
 \end{figure}
-           
-           
-\par En la figura \ref{fig:lstmOlvidar} $\sigma$ es la función sigmoidal que recibe la concatenación del valor que le aporta la unidad anterior y la información que actualmente puede ver, y tiene el propósito de pasar a la unidad que multiplica un valor cercano a 1, que indica que recordará todo lo que ha visto, o un valor 0 para borrar completamente lo que había visto. 
-           
+
+
+\par En la figura \ref{fig:lstmOlvidar} $\sigma$ es la función sigmoidal que recibe la concatenación del valor que le aporta la unidad anterior y la información que actualmente puede ver, y tiene el propósito de pasar a la unidad que multiplica un valor cercano a 1, que indica que recordará todo lo que ha visto, o un valor 0 para borrar completamente lo que había visto.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/LSTM3-focus-i.png}
@@ -305,32 +305,32 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 	\label{fig:lstmAnadir}
 \end{figure}
 
-           
-\par En la figura \ref{fig:lstmAnadir} se puede ver como se crean dos vectores uno $\widetilde{C_t}$ y $i_t$ los cuales simbolizan respectivamente los valores candidatos para el resumen y una máscara que filtrará los valores que la red neuronal, después de la retroalimentación, considere importantes. El filtro se aplica cuando se pasa por la unidad que multiplica. 
-           
+
+\par En la figura \ref{fig:lstmAnadir} se puede ver como se crean dos vectores uno $\widetilde{C_t}$ y $i_t$ los cuales simbolizan respectivamente los valores candidatos para el resumen y una máscara que filtrará los valores que la red neuronal, después de la retroalimentación, considere importantes. El filtro se aplica cuando se pasa por la unidad que multiplica.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/LSTM3-focus-C.png}
 	\caption[]{Sección que toma los valores que genera el conocimiento que se añadirá al conocimiento anterior. (Imagen extraída de \cite{christopher_olah_2015})}
 	\label{fig:lstmSuma}
 \end{figure}
-           
+
 \par En la figura \ref{fig:lstmSuma} se muestra como las entradas de una unidad cambian para convertirse en la entrada de la siguiente unidad, la unidad para multiplicar tiene el propósito de borrar la memoria de la unidad mientras que la suma tiene el propósito de añadir conocimiento a la siguiente unidad.
-           
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagenes/LSTM3-focus-o.png}
 	\caption[]{Sección que borra o añade el conocimiento al previo. (Imagen extraída de \cite{christopher_olah_2015})}
 	\label{fig:lstmFinal}
 \end{figure}
-           
-           
-\par En la figura \ref{fig:lstmFinal} se puede ver que en la unidad se genera la salida actual de la unidad $h_t$ que también es el entrada que recibe la siguiente unidad el cual determinará si la siguiente unidad olvidará o no. 
-           
-\par Una \gls{bi-lstm} cambia el concepto de LSTM para encontrar la información hacia delante y hacia atrás. Añadiendo una capa que lee hacia atrás, entonces ésta se puede conecta a otra capa de red neuronal (completamente conectada) que los convierte en una salida binaria que decidirá si es irónica o no. Para que podamos ver como es la arquitectura de todo el proyecto podemos ver la figura \ref{fig:arquitectura}. 
-           
+
+
+\par En la figura \ref{fig:lstmFinal} se puede ver que en la unidad se genera la salida actual de la unidad $h_t$ que también es el entrada que recibe la siguiente unidad el cual determinará si la siguiente unidad olvidará o no.
+
+\par Una \gls{bi-lstm} cambia el concepto de LSTM para encontrar la información hacia delante y hacia atrás. Añadiendo una capa que lee hacia atrás, entonces ésta se puede conecta a otra capa de red neuronal (completamente conectada) que los convierte en una salida binaria que decidirá si es irónica o no. Para que podamos ver como es la arquitectura de todo el proyecto podemos ver la figura \ref{fig:arquitectura}.
+
 \begin{landscape}
-	           
+
 	\begin{figure}
 		\centering
 		\input{imagenes/arquitectura.tex}
@@ -340,85 +340,85 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 \end{landscape}
 %aqui me quedo estoy revisando lo que escribio colah sobre esto, http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 %aqui explico que son las redes neuronales profundas
-		
+
 \section{Técnica de evaluación}
-	
-\par Una de las partes fundamentales de los modelos de inteligencia es la evaluación, en este proceso se mide de manera cuantitativa como se desempeña un sistema. Para esto existen diferentes métricas para cuantificar este desempeño. Para este experimento se usaron \textit{precision}, \textit{recall} y \textit{F-score}. 
-	
+
+\par Una de las partes fundamentales de los modelos de inteligencia es la evaluación, en este proceso se mide de manera cuantitativa como se desempeña un sistema. Para esto existen diferentes métricas para cuantificar este desempeño. Para este experimento se usaron \textit{precision}, \textit{recall} y \textit{F-score}.
+
 \subsection{Precision}
-	
-\par La \textit{precision} o precisión en español se refiere a una medida de desempeño que se usa principalmente en tareas no balanceadas, esta medida trata de reconocer cuantas predicciones positivas fueron correctas entre el total de las respuesta correctas, esto se refiere principalmente a que tan bien funciona nuestro modelo en detectar nuestras muestras relevantes(en este caso las positivas). La fórmula es la siguiente: 
+
+\par La \textit{precision} o precisión en español se refiere a una medida de desempeño que se usa principalmente en tareas no balanceadas, esta medida trata de reconocer cuantas predicciones positivas fueron correctas entre el total de las respuesta correctas, esto se refiere principalmente a que tan bien funciona nuestro modelo en detectar nuestras muestras relevantes(en este caso las positivas). La fórmula es la siguiente:
 \begin{figure}[H]
-    \centering
-    \begin{equation*}
-        Precision\ =\ \frac{TP}{TP+FP}    
-    \end{equation*}
-        \caption*{TP = True positive (muestras que se predicen positivas y que lo son) , FP = False Positive(muestras que se predicen negativas y que lo son)}
+	\centering
+	\begin{equation*}
+		Precision\ =\ \frac{TP}{TP+FP}
+	\end{equation*}
+	\caption*{TP = True positive (muestras que se predicen positivas y que lo son) , FP = False Positive(muestras que se predicen negativas y que lo son)}
 \end{figure}
 
 
 \subsection{Recall}
 
 \par El \textit{recall} o reclamo en español se refiere a la medida de desempeño de un modelo que igual que la precisión se usa en tareas con datos no balanceados. Su interpretación índica cual es la porción de muestras que se predicen positivas y lo son, entre el total de las muestras que son positivas, su fórmula es la siguiente:
-	
-	\begin{figure}[H]
-    \centering
-    \begin{equation*}
-        Recall\ =\ \frac{TP}{P}\ =\ \frac{TP}{TP+FN}    
-    \end{equation*}
-        \caption*{TP = True positive (muestras que se predicen positivas y que lo son) , FP = False Positive(muestras que se predicen negativas y que lo son), P total de medidas que son positivas}
+
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		Recall\ =\ \frac{TP}{P}\ =\ \frac{TP}{TP+FN}
+	\end{equation*}
+	\caption*{TP = True positive (muestras que se predicen positivas y que lo son) , FP = False Positive(muestras que se predicen negativas y que lo son), P total de medidas que son positivas}
 \end{figure}
-	
-\subsection{F-score}	
+
+\subsection{F-score}
 
 \par El \textit{F-Score} es una medida del desempeño que combina el \textit{recall} y el \textit{precision}, para obtener la media armónica, esto es por que las dos esta relacionadas y si una sube la otra baja. Lo importante es tener un equilibrio el cual haría el \textit{f-score} más grande. Una media armónica que trata de no sesgar el resultado de la media al valor más grande sino al mas bajo. La fórmula del f-score es la siguiente:
 
-	\begin{figure}[H]
-    \centering
-    \begin{equation*}
-        F-score\ =\ 2 \times  \frac{precision*recall}{precision\ +recall}
-    \end{equation*}
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		F-score\ =\ 2 \times  \frac{precision*recall}{precision\ +recall}
+	\end{equation*}
 \end{figure}
-	
+
 \subsection{Descripción de la forma de evaluación cruzada}
-		
-\par Para la forma de evaluación el corpus se subdividió en 5 partes del 20\% cada una, de las cuales se formaron 5 distribuciones del corpus, esto se puede ver mejor en la figura \ref{fig:corpusDiv}. 
+
+\par Para la forma de evaluación el corpus se subdividió en 5 partes del 20\% cada una, de las cuales se formaron 5 distribuciones del corpus, esto se puede ver mejor en la figura \ref{fig:corpusDiv}.
 
 \begin{figure}
-    \centering
-    \input{imagenes/corpusSeccion.tex}
-    \caption{Del corpus total se separaron 5 versiones las cuales cambian su sección de prueba y de entrenamiento, para después promediar sus puntajes.}
-    \label{fig:corpusDiv}
+	\centering
+	\input{imagenes/corpusSeccion.tex}
+	\caption{Del corpus total se separaron 5 versiones las cuales cambian su sección de prueba y de entrenamiento, para después promediar sus puntajes.}
+	\label{fig:corpusDiv}
 \end{figure}
 
-\par Sobre estos 5 grupos se entrenó el mismo clasificador usando el 80\% para entrenamiento y el 20\% para la fase de evaluación. Los datos que se ven en el capítulo \ref{cap.experimentos} se promedian y se reportan. 
+\par Sobre estos 5 grupos se entrenó el mismo clasificador usando el 80\% para entrenamiento y el 20\% para la fase de evaluación. Los datos que se ven en el capítulo \ref{cap.experimentos} se promedian y se reportan.
 
 \subsection{ROC y AUC}
 
-\par Otra forma de evaluación que se realizará es la métrica ROC y AUC. Una gráfica \textit{`receiver operating characteristics (ROC)'} es un método gráfico para calificar el desempeño de un clasificador. 
-\par En nuestro caso consistirá desplazar el umbral de discretización para observar como se da el aumento de los \textit{true positive rate} y \textit{false positive rate}. Esta gráfica es bastante sencilla, sin embargo su interpretación no es nada trivial, por lo que no se tratará a fondo en esta tesis.  
+\par Otra forma de evaluación que se realizará es la métrica ROC y AUC. Una gráfica \textit{`receiver operating characteristics (ROC)'} es un método gráfico para calificar el desempeño de un clasificador.
+\par En nuestro caso consistirá desplazar el umbral de discretización para observar como se da el aumento de los \textit{true positive rate} y \textit{false positive rate}. Esta gráfica es bastante sencilla, sin embargo su interpretación no es nada trivial, por lo que no se tratará a fondo en esta tesis.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/confusionMatrix.png}
-    \caption{Matriz de confusión. Imagen extraída de \cite{fawcett2006introduction}}
-    \label{fig:confMat}
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/confusionMatrix.png}
+	\caption{Matriz de confusión. Imagen extraída de \cite{fawcett2006introduction}}
+	\label{fig:confMat}
 \end{figure}
 
 \par Esta métrica nos ayuda a visualizar fácilmente que pasa con el comportamiento de un clasificador cuando se le cambia el umbral. Para entenderla se debe analizar una curva ROC muestra.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/ROC_Exp3_1.png}
-    \caption{Curva ROC experimento 3}
-    \label{fig:ROCMuestra}
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/ROC_Exp3_1.png}
+	\caption{Curva ROC experimento 3}
+	\label{fig:ROCMuestra}
 \end{figure}
 
 \par En \ref{fig:ROCMuestra} se puede observar una recta a \ang{45} la cual es la recta que se obtendría si se hace una clasificación aleatoria. Luego la recta azul es la recta que se obtuvo de mover el umbral de 0 a 1. Se Puede ver que cuando el umbral es 0, todas las muestras serán positivas entonces nuestro \textit{false positive rate} y el  \textit{true positive rate} aumentarán a 1 o lo que es lo mismo se tendrá un punto en (1,1). Por el lado contrario si se tiene el umbral en 1 el \textit{false positive rate} y el  \textit{true positive rate} disminuirán a 0 y se tendrá un punto en (0,0). Lo que buscamos con nuestro modelo es tener el \textit{true positive rate} en 1 y el \textit{false positive rate} en 0 o lo que es lo mismo tener un punto en (0,1). Como es muy probable que nuestro modelo tenga dicho punto, se puede considerar que entre más cerca mejor y esto se logra si tenemos bien separadas nuestras clases. Es decir, cuando tenemos una clase en un extremo de nuestro umbral y la otra del otro, de este modo el movimiento de nuestro umbral no afectará tanto en la clasificación. Esto es lo que mide la gráfica ROC.
 
 \par Hablado ahora del \textit{area under the curve} es la reducción de la gráfica ROC a un escalar el cual es representado por el área bajo la curva, esto nos dirá que tanto nos pudimos acercar al punto deseado (0,1) y que tan estable es nuestro modelo al clasificar.
 
-\subsection{Justificación}	
+\subsection{Justificación}
 
 \par El \textit{recall} y el \textit{precision} son las medidas que generalmente se usan para medir el desempeño, principalmente por que aportan información sobre que tan bien realizan la tarea cuando los datos no están balanceados, lo cual sucede la mayoría de las veces. Además el \textit{f-score} nos aporta una mejor utilidad ya que aporta información de ambas medidas, sin tender a sesgar el resultado por el valor más grande sino por el más pequeño.
 

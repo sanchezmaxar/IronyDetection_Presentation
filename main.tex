@@ -1,9 +1,10 @@
 % \documentclass[11pt,spanish]{report}
-\documentclass[oneside,letterpapper,openany]{book}
+\documentclass[twoside,letterpapper,openright]{book}
 \usepackage{setspace}  
 \usepackage{parskip}
 \usepackage{siunitx}
 \usepackage{textcomp}
+\usepackage{layouts}
 \parskip=15pt
 \usepackage{lscape}
 \usepackage[dvipsnames]{xcolor}
@@ -36,9 +37,43 @@
 % footnote per page
 \usepackage{perpage} %the perpage package
 \MakePerPage{footnote} %the perpage package command
+\usepackage{titlesec}
+\titlelabel{\thetitle \quad}
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \fancyhead[LE]{\thepage}
+% \fancyhead[RE]{right}
+% \fancyhead[LO]{left}
+% \fancyhead[RO]{\thepage}
+\renewcommand{\chaptermark}[1]{%
+\markboth{\MakeUppercase{%
+\chaptername\ \thechapter%
+\ #1}}{}}
+
+% \renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\MakeUppercase{%
+\sectiontitle\ \thesection%
+\ #1}}{}}
+% \renewcommand{\headrulewidth}{2pt}
+
+\widowpenalty10000
+\clubpenalty10000
+\usepackage[all]{nowidow}
 
 \captionsetup[table]{name=Tabla}
+\captionsetup[table]{labelsep=space}
+\captionsetup[figure]{labelsep=space}
 \usepackage{array}
+\usepackage{afterpage}
+\usepackage{titletoc}
+\addto\captionsspanish{ \renewcommand{\contentsname}{Contenido}}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
 \makeindex
 \allowdisplaybreaks
 \lstset{columns=fullflexible,
@@ -95,58 +130,75 @@ literate=
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
 }
+\usepackage[inner=35mm,outer=30mm,top=25mm,bottom=25mm]{geometry}
+% \addtolength{\oddsidemargin}{-.875in}
+% 	\addtolength{\evensidemargin}{-.875in}
+% 	\addtolength{\textwidth}{1.75in}
+% 	\addtolength{\topmargin}{-.875in}
+% 	\addtolength{\textheight}{1.75in}
+
 
 \input{misc/abreviaturas.tex}
+
+% \renewcommand{\thesection}{\arabic{section}}
+% \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+% \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+
 \begin{document}
 
-    \includepdf[]{portada_tesis}
-    
-    %modificar asi solo va a ser un lado
-    \def\amboslados{0}	
-    % \input{misc/scripts.tex}
-    \input{Capitulos/0_Agradecimientos.tex}
 
-	\tableofcontents
+%modificar asi solo va a ser un lado
+\def\amboslados{0}
 
-	\input{Capitulos/1_Introduccion.tex}
-	\input{Capitulos/2_EstadoDelArte.tex}
-	\input{Capitulos/3_Metodologia.tex}
-	\input{Capitulos/4_Experimentos.tex}
-	\input{Capitulos/5_Conclusiones.tex}
-	
-	
-	
-	\newpage
-	\bibliographystyle{Estilos/UNAMThesis.bst}
+% \input{misc/scripts.tex}
+
+\pagenumbering{roman}
+\includepdf[]{portada_tesis}
+% \setcounter{page}{4}
+\input{Capitulos/0_Agradecimientos.tex}
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+
+\input{Capitulos/1_Introduccion.tex}
+% \input{Capitulos/2_EstadoDelArte.tex}
+% \input{Capitulos/3_Metodologia.tex}
+% \input{Capitulos/4_Experimentos.tex}
+% \input{Capitulos/5_Conclusiones.tex}
+
+
+
+\newpage
+\bibliographystyle{Estilos/UNAMThesis.bst}
 % 	\bibliographystyle{Estilos/te.bst}
 
 \nocite{*}
-	\bibliography{bibliografias}
-	\printglossary[type=\acronymtype,title=Abreviaturas]
+\bibliography{bibliografias}
+\printglossary[type=\acronymtype,title=Abreviaturas]
 
-    \newpage
-    \printglossary[type=main]
-    \appendix
-    
+\newpage
+\printglossary[type=main]
+\appendix
+
 %     \chapter{Preprocesamiento por palabra}
 % 	\lstinputlisting[language=Python,breaklines,numbers=left,
 %     stepnumber=1]{codigos/Preprocesamiento.py}
-	
+
 % 	\chapter{Experimento por palabra}
 % 	\lstinputlisting[language=Python,breaklines,numbers=left,
 %     stepnumber=1]{codigos/experimento1_porpalabras.py}
-    
+
 %     \chapter{Preprocesamiento por caracter}
 % 	\lstinputlisting[language=Python,breaklines,numbers=left,
 %     stepnumber=1]{codigos/Preprocesamiento2.py}
-	
+
 % 	\chapter{Experimento por caracter}
 % 	\lstinputlisting[language=Python,breaklines,numbers=left,
 %     stepnumber=1]{codigos/experimento1_porpalabras.py}
-    
-    
+
+
 %     \chapter{Modelo.json}
 %     \lstinputlisting[language=json,firstnumber=1,breaklines,numbers=left]{codigos/modelo.json}
-    
-	
+
+
 \end{document}
