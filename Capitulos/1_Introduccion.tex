@@ -11,12 +11,12 @@
 
 
 \par El problema antes descrito ha sido explorado por comunidades de científicos e investigadores alrededor del mundo; en la tabla \ref{table:AlgunosTrabajos} se pueden ver algunos de los trabajos que se han hecho anteriormente.
-\begin{table}[h!]
+\begin{table}[h]
 	\centering
-	\caption{Algunos trabajos sobre ironía y/o sarcasmo}
+	\caption{Algunos trabajos sobre ironía y/o sarcasmo.}
 	\begin{tabular} {|p{3cm}|p{6cm}|p{2cm}| }
 		\hline
-		Investigador/es                                   & Artículo                                                                                                   & Métodos         \\[0.5ex]
+		Investigador                                   & Artículo                                                                                                   & Métodos         \\[0.5ex]
 		\hline
 		Mihalcea, Strapparava \& Pulman                   & Learning to laugh (automatically): Computational models for humor recognition.  Computational intelligence & Naive Bayes SVM \\
 		\hline
@@ -28,20 +28,20 @@
 	\label{table:AlgunosTrabajos}
 \end{table}
 
-\par Como se ha podido ver, las redes neuronales se han ocupado para esta tarea; sin embargo muchos sugieren que estas implementaciones pueden mejorarse. Las redes neuronales se han utilizado en la universidad de Stanford para crear el pie de figura de imágenes, Google las ocupa para reconocer los números de las casas en las fotos que toman sus automóviles y ubicarlas en el mapa, en Mountain View las ocupan para mejorar el reconocimiento de voz de  Android, ahorrar electricidad en sus servidores, y esto es solo una pequeña parte de sus aplicaciones. Lo anterior es una motivación para probar cómo se desempeñan las redes neuronales en esta tarea. Para la implementación de las redes neuronales, se deben obtener primero los datos que constituyen la base de conocimiento para el sistema. Estos datos aportarán ejemplos de como se encuentran normalmente las muestras. Esta base de conocimiento pueden ser imágenes, textos, audios, señales, entre otros. A la base de conocimiento también se le conoce como \textit{corpus}.
+\par Como se ha podido ver, las redes neuronales se han ocupado para esta tarea; sin embargo, muchos sugieren que estas implementaciones pueden mejorarse. Las redes neuronales se han utilizado en la universidad de Stanford para crear el pie de figura de imágenes, Google las ocupa para reconocer los números de las casas en las fotos que toman sus automóviles y ubicarlas en el mapa, en Mountain View las ocupan para mejorar el reconocimiento de voz de  Android, ahorrar electricidad en sus servidores, y esto es solo una pequeña parte de sus aplicaciones. Lo anterior es una motivación para probar cómo se desempeñan las redes neuronales en esta tarea. Para la implementación de las redes neuronales, se deben obtener primero los datos que constituyen la base de conocimiento para el sistema. Estos datos aportarán ejemplos de como se encuentran normalmente las muestras. Esta base de conocimiento pueden ser imágenes, textos, audios, señales, entre otros. A la base de conocimiento también se le conoce como \textit{corpus}.
 
 \par La descripción del método es la siguiente:
 \begin{itemize}
 	\item Obtención del corpus
-	\item Preprocesamiento de los documentos que componen el corpus (embedding, tokenización, normalización, lematización, conversión a vectores), explorar las diversas herramientas que ya existen y destacar la mejor de todas.
-	\item Análisis de la red neuronal que mejor se adapta al problemas, crear un conjunto de caminos viables para elegir los que podrían dar mejores resultados
+	\item Preprocesamiento de los documentos que componen el corpus (encaje o inmersión (en inglés \textit{embedding}), lexematización, normalización, lematización, conversión a vectores), explorar las diversas herramientas que ya existen y destacar la mejor de todas.
+	\item Análisis de la red neuronal que mejor se adapta al problema, crear un conjunto de procedimientos viables para elegir los que podrían dar mejores resultados
 	\item Diseño de los experimentos, diseñar las redes neuronales que resolverán la tarea
 	\item Evaluación, elegir las métricas que mejor describan el desempeño del modelo
-	\item Conclusiones, se dará una explicación de los resultados, se analizará las oportunidades de crecimiento, lo que se hizo bien y lo que se hizo mal.
+	\item Conclusiones, se dará una explicación de los resultados y se analizarán las oportunidades de crecimiento.
 \end{itemize}
 
-\par Debido a que las redes neuronales han tenido un desempeño excelente en una gran variedad de aplicaciones es de esperarse buenos resultados, en caso de que los resultados sean negativos sería muy importante revisar los diferentes parámetros de la red neuronal que se pueden cambiar, por ejemplo el número de capas ocultas, el número de nodos de cada capa, la normalización de los datos, la iniciación pseudoaleatoria de los pesos.
+\par Debido a que las redes neuronales han tenido un desempeño excelente en una gran variedad de aplicaciones, es de esperarse obtener buenos resultados. En caso de que los resultados sean negativos, sería muy importante revisar los diferentes parámetros de la red neuronal que se pueden cambiar, por ejemplo, el número de capas ocultas, el número de nodos de cada capa, la normalización de los datos, la iniciación pseudoaleatoria de los pesos, para conseguir una mejor extracción de la información de los datos, que por ende mejore el desempeño del sistema.
 
-\par Para finalizar la estructura de esta tesis es la siguiente: primero se presentaran algunos antecedentes y el estado del arte de la tarea que se propone, para después explicar un poco de la teoría detrás del método que se usará para resolverla, por último se obtendrán resultados que se compararán con los obtenidos en la sección de antecedentes para terminar con una conclusión y cuales podrían ser los trabajos a futuro.
+\par Para finalizar, la estructura de esta tesis es la siguiente: primero se presentarán algunos antecedentes y el estudio del estado de la técnica de la tarea que se propone, para después explicar un poco la teoría detrás del método que se usará para resolverla; por último se obtendrán resultados que se compararán con los obtenidos en la sección de antecedentes, para terminar con una conclusión y cuál podría ser el trabajo a futuro.
 
-\par En este trabajo se usó el recurso de Google, llamado Colab Research, desde el cual se puede usar un entorno de desarrollo en Python 2 o 3, usando como interfaz Jupyter. La ventaja de usar esta herramienta es que se puede acceder al hardware de procesamiento de tensores de Google, Tensor Processing Unit (TPU), los cuales por experiencia propia llegan a ser hasta 20 veces más rápido que usar una GPU. Los experimentos de esta tesis se encuentran en la siguiente liga \href{ https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}{https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}
+\par En este trabajo se usó el recurso de Google, llamado Colab Research, con el cual se puede usar un entorno de desarrollo en Python 2 o 3, usando como interfaz de desarrollo la aplicación web \textit{Jupyter}. La ventaja de usar esta herramienta es que se puede acceder al hardware de procesamiento de tensores de Google, \textit{unidad de procesamiento de tensores}(TPU por sus siglas en inglés), el cúal, por experiencia propia, llega a ser hasta 20 veces más rápido que usar una \textit{unidad de procesamiento gráfico} (GPU por sus siglas en inglés). Los experimentos realizados en esta tesis se encuentran disponibles en la siguiente liga \href{ https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}{https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}
