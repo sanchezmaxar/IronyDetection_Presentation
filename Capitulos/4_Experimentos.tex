@@ -1,20 +1,20 @@
 \chapter{Experimentos}\label{cap.experimentos}
 
 
-\par El modelo propuesto de clasificación de ironía se implementó en Python. Este capítulo consiste en presentar, comparar y dar una explicación sobre por que salen dichos resultados, para cada uno de los experimentos se probó con diferentes configuraciones para compararlos entre ellos, con el objetivo de encontrar la que nos presente mejores resultados.
+\par El modelo propuesto de clasificación de ironía se implementó en Python. Este capítulo consiste en presentar, comparar y dar una explicación sobre por que se obtienen dichos resultados, para cada uno de los experimentos se probó con diferentes configuraciones para compararlos entre ellos, con el objetivo de encontrar la que nos presente mejores resultados.
 
 \section{Primer experimento}
 
-\par En este primer experimento se probó con una arquitectura con una primera capa de embedding de 128 unidades de salida, seguida de una capa \gls{bi-lstm} de 200 unidades, después una capa de dropout con parámetro de 0.5, seguida de una capa Dense con una única salida que representa el resultado binario que indica si la oración es irónica o no. Este experimento se distingue de los demás ya que no tomamos en cuenta los caracteres especiales, únicamente el texto el cual se normaliza a ASCII con el propósito de no darle tanta importancia a la ortografía. Se agrega al final un caracter que delimita si es el final de la sentencia.
+\par En este primer experimento se probó con una arquitectura con una primera capa de embedding de 128 unidades de salida, seguida de una capa \gls{bi-lstm} de 200 unidades, después una capa de dropout con parámetro de 0.5, seguida de una capa Dense con una única salida que representa el resultado binario que indica si la oración es irónica o no. Este experimento se distingue de los demás ya que no tomamos en cuenta los caracteres especiales, únicamente el texto el cual se normaliza a ASCII con el propósito de no darle tanta importancia a la ortografía. Se agrega al final un carácter que delimita si es el final de la sentencia.
 
 \subsection{Evaluación}
 \begin{center}
 	\input{imagenes/tablaExp1.tex}
 \end{center}
 
-\par Como se puede apreciar en la tabla \ref{tab:exp1} la precisión medida sobre el modelo, es similar a la obtenida en la bibliografía, lo cual indica que este modelo se desempeña bastante bien en reconocer la ironía. Sin embargo como vemos, el \textit{recall} es considerablemente bajo, por lo que este modelo tiende a no encontrar un gran porcentaje de las muestras irónicas. Ademá se puede ver que el \textit{F-score} es bastante similar a los de la bibliografía.
+\par Como se puede apreciar en la tabla \ref{tab:exp1} la precisión medida sobre el modelo, es similar a la obtenida en la bibliografía, lo cual indica que este modelo se desempeña bastante bien en reconocer la ironía. Sin embargo, como se vió, el \textit{recall} es considerablemente bajo, por lo que este modelo tiende a no encontrar un gran porcentaje de las muestras irónicas. Ademá se puede ver que el \textit{F-score} es bastante similar a los de la bibliografía.
 
-\par A continuación en la figura \ref{fig:Roc1} se muestran algunas de las gráficas ROC que muestran que tan bien se desempeña esta arquitectura y preprocesamiento.
+\par A continuación en la figura \ref{fig:Roc1} se muestran algunas de las gráficas ROC qué muestran que tan bien se desempeña esta arquitectura y preprocesamiento.
 \begin{figure}
 
 	\begin{table}[H]
@@ -44,7 +44,7 @@
 
 \subsection{Propuesta de mejora}
 
-\par Mi propuesta de mejora es que en lugar de considerar las palabras como tokens, se consideren los caracteres. Esto podría mejorar el desempeño ya que dejaríamos que la red neuronal aprendiera de la forma que escriben los usuarios y no se esforzaría tanto por encontrar correlaciones con palabras que no se encuentran en una oración. Similar a como los humanos leemos las palabras, ya que nosotros podemos extraer características diferentes de dos textos que tienen un contenido similar por ejemplo: `hola' y `holaaaaaaa' en la primera podemos notar que es ortográficamente correcta. No obstante no da mucha información por si misma, con la segunda podemos ver que no es ortográficamente correcta, por lo que muy probablemente no este en el vocabulario que se extrajo del conjunto de entrenamiento. Si la palabra tiene los últimos caracteres repetidos puede indicar que se quiere hacer algún tipo de énfasis, o que el emisor quiere señalar algo evidente. Estos son ejemplos de características que se pueden obtener si se hace un análisis caracter por caracter y la principal motivación para el siguiente experimento.
+\par Mi propuesta de mejora es que en lugar de considerar las palabras como tokens, se consideren los caracteres. Esto podría mejorar el desempeño ya que dejaríamos que la red neuronal aprendiera de la forma que escriben los usuarios y no se esforzaría tanto por encontrar correlaciones con palabras que no se encuentran en una oración. Similar a como los humanos leemos las palabras, ya que nosotros podemos extraer características diferentes de dos textos que tienen un contenido similar por ejemplo: `hola' y `holaaaaaaa' en la primera podemos notar que es ortográficamente correcta. No obstante no da mucha información por sí misma, con la segunda podemos ver que no es ortográficamente correcta, por lo que muy probablemente no este en el vocabulario que se extrajo del conjunto de entrenamiento. Si la palabra tiene los últimos caracteres repetidos puede indicar que se quiere hacer algún tipo de énfasis, o que el emisor quiere señalar algo evidente. Estos son ejemplos de características que se pueden obtener si se hace un análisis carácter por carácter y la principal motivación para el siguiente experimento.
 
 \section{Segundo experimento}
 \par En este segundo experimento se quiso cambiar el preprocesamiento, realizando lo más sencillo, pasar el tweet a una lista de caracteres y considerar cada uno como unidad de información. Entonces el vocabulario sería cada uno de los caracteres que se encuentran presentes en el corpus distinguiendo si eran mayúsculas o minúsculas. Tampoco se excluyeron los caracteres especiales, para de este modo captar la mayor información posible.
@@ -87,9 +87,9 @@
 \subsection{Propuesta de mejora} %%Hasta aqui revise 15 Abril
 
 \par Al analizar los resultados obtenidos se pudo observar una mejora considerable, tanto el \textit{recall} como en \textit{precision} lo que indica que este modelo es mucho mejor que el primero. Esto puede ser debido a que en las redes sociales las reglas gramaticales y de ortografía son más flexibles, y para poner un ejemplo: escribir
-``hola ¿Que haces?'' es lo mismo que decir ``ola k ase'', semánticamente hablando, por lo que analizando palabra por palabra la similitud entre estas palabras es pequeña mientras que caracter por caracter es más grande debido a la red neuronal puede encontrar secuencias de caracteres que realmente importa como `ola'  y también encontrar una correlación entre `que' y `k' lo cual significaría que se adapta al uso de la lengua.
+``hola ¿Que haces?'' es lo mismo que decir ``ola k ase'', semánticamente hablando, por lo que analizando palabra por palabra la similitud entre estas palabras es pequeña mientras que carácter por carácter es más grande debido a la red neuronal puede encontrar secuencias de caracteres que realmente importa como `ola'  y también encontrar una correlación entre `que' y `k' lo cual significaría que se adapta al uso de la lengua.
 
-\par El \textit{recall} como se explicó previamente es la medida que nos indica que porcentaje de muestras relevantes es encontrada. Los números nos están diciendo que en el experimento 1 de 100 muestras irónicas, pudo distinguir 76 y en el experimento 2 pudo distinguir 86. Mientras que el \textit{precision} es la medida que nos indica que porcentaje de las muestras clasificadas como irónicas fue de verdad irónica. Por lo tanto en números el experimento 1 detectó 100 muestras irónicas, de las cuales el 90.92 \% fue de verdad irónica y el experimento 2 de 100 detectó 95.52 \% irónicas. En ambas métricas el segundo experimento es mucho mejor.
+\par El \textit{recall} como se explicó previamente es la medida que indica qué porcentaje de muestras relevantes es encontrada. Los números nos están diciendo que en el experimento 1 de 100 muestras irónicas, pudo distinguir 76 y en el experimento 2 pudo distinguir 86. Mientras que el \textit{precision} es la medida que muestra que porcentaje de las muestras clasificadas como irónicas fue de verdad irónica. Por lo tanto en números el experimento 1 detectó 100 muestras irónicas, de las cuales el 90.92 \% fue de verdad irónica y el experimento 2 de 100 detectó 95.52 \% irónicas. En ambas métricas el segundo experimento es mucho mejor.
 
 \par Con el fin de mejorar este resultado se propone aumentar el tamaño del n-gram a dos. Esto aportaría mayor información de la vecindad de los caracteres, pudiendo encontrar mejores patrones que describan más globalmente la esencia de los datos.
 

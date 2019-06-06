@@ -4,7 +4,11 @@
 \usepackage{parskip}
 \usepackage{siunitx}
 \usepackage{textcomp}
-\usepackage{layouts}
+\usepackage{multirow}
+\usepackage[style=apa,backend=biber]{biblatex}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\bibliography{bibliografias}
 \parskip=15pt
 \usepackage{lscape}
 \usepackage[dvipsnames]{xcolor}
@@ -12,7 +16,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{makeidx}
 \usepackage{caption}
-\usepackage{natbib}
+% \usepackage{natbib}
 \usepackage{xcolor}
  
 \usepackage[acronym]{glossaries}
@@ -161,19 +165,19 @@ literate=
 
 
 \input{Capitulos/1_Introduccion.tex}
-% \input{Capitulos/2_EstadoDelArte.tex}
-% \input{Capitulos/3_Metodologia.tex}
-% \input{Capitulos/4_Experimentos.tex}
-% \input{Capitulos/5_Conclusiones.tex}
+\input{Capitulos/2_EstadoDelArte.tex}
+\input{Capitulos/3_Metodologia.tex}
+\input{Capitulos/4_Experimentos.tex}
+\input{Capitulos/5_Conclusiones.tex}
 
 
 
 \newpage
-\bibliographystyle{Estilos/UNAMThesis.bst}
+% \bibliographystyle{Estilos/UNAMThesis.bst}
 % 	\bibliographystyle{Estilos/te.bst}
 
 \nocite{*}
-\bibliography{bibliografias}
+\printbibliography[title=Referencias]
 \printglossary[type=\acronymtype,title=Abreviaturas]
 
 \newpage
