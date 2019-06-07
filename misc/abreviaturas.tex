@@ -74,7 +74,7 @@
 
 \newglossaryentry{n-grams}{
     name={n-grams},
-    description={Es una forma de obtener el vocabulario con el cual se modelará un texto,n corresponde al número de palabras juntas serán tomadas en cuenta como una entidad única},
+    description={Es una forma de obtener el vocabulario con el cual se modelará un texto, n corresponde al número de palabras juntas serán tomadas en cuenta como una entidad única.},
     first={n-grams},
 }
 
@@ -143,7 +143,7 @@
 \newglossaryentry{bi-lstm}{
     type=\acronymtype,
     name={BI-LSTM},
-    description={Redes de gran memoria de corto plazo},
+    description={Redes bidireccionales de gran memoria de corto plazo},
     first={Redes bidireccionales de gran memoria de corto plazo (BI-LSTM por sus siglas en inglés)\glsadd{bi-lstmg}},
     see=[Glosario:]{bi-lstmg}
 }
@@ -186,7 +186,7 @@
 
 \newglossaryentry{SGDg}{
     name={SGDg},
-    description={Algoritmo de optimización similar a gradient descent, pero que actua con cada error que se computa}
+    description={Algoritmo de optimización similar a gradient descent, pero que actúa con cada error que se computa}
 }
 
 \newglossaryentry{lstm}{
@@ -202,7 +202,59 @@
     description={Arquitectura de redes neuronales recurrentes que tienen la capacidad de retener información de lo que ya han visto}
 }
 
+\newglossaryentry{precision}{
+    type=\acronymtype,
+    name={precisión},
+    description={Métrica de desempeño\glsadd{precisiong}},
+    first={precisión},
+    see=[Glosario:]{precisiong}
+}
+
+\newglossaryentry{precisiong}{
+    name={precisión},
+    description={Es una métrica que consiste en medir qué tan bien funciona el modelo en detectar las muestras relevantes}
+}
+
+\newglossaryentry{exactitud}{
+    type=\acronymtype,
+    name={exactitud},
+    description={Métrica de desempeño\glsadd{exactitudg}},
+    see=[Glosario:]{exactitudg}
+}
+
+\newglossaryentry{exactitudg}{
+    name={exactitud},
+    description={Es una métrica que consiste en medir qué tantas veces se acierta en predecir una muestra cual sea}
+}
+
+
+\newglossaryentry{reclamo}{
+    type=\acronymtype,
+    name={reclamo},
+    description={Métrica de desempeño\glsadd{reclamog}},
+    see=[Glosario:]{reclamog}
+}
+
+\newglossaryentry{reclamog}{
+    name={reclamo},
+    description={Es una métrica que consiste en medir que porcentaje de las muestras positivas se logran encontrar}
+}
+
+
+\newglossaryentry{valor-F}{
+    type=\acronymtype,
+    name={valor-F},
+    description={Métrica de desempeño\glsadd{valor-Fg}},
+    see=[Glosario:]{valor-Fg}
+}
+
+\newglossaryentry{valor-Fg}{
+    name={valor-F},
+    description={Es una promedio ponderado qué tiene como propósito no propiciar que se alcancen altos puntajes si existen puntajes muy bajos, esto es para encontrar un mejor equilibrio, y no sólo un comportamiento promedio}
+}
+
+
 \newglossaryentry{padding}{
     name={padding},
-    description={Es el proceso por el cual un vector de cierta naturaleza se normaliza a una longitud específica, rellenando o truncando el vector original, en nuestro caso se lleno con 0 ya que el vector era numérico}
+    description={Es el proceso por el cuál un vector de cierta naturaleza se normaliza a una longitud específica, rellenando o truncando el vector original, en nuestro caso se lleno con 0 ya que el vector era numérico}
 }

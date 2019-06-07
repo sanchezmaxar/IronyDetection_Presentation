@@ -1,11 +1,11 @@
 \chapter{Experimentos}\label{cap.experimentos}
 
 
-\par El modelo propuesto de clasificación de ironía se implementó en Python. Este capítulo consiste en presentar, comparar y dar una explicación sobre por que se obtienen dichos resultados, para cada uno de los experimentos se probó con diferentes configuraciones para compararlos entre ellos, con el objetivo de encontrar la que nos presente mejores resultados.
+\par El modelo propuesto de clasificación de ironía se implementó en Python. Este capítulo consiste en presentar, comparar y dar una explicación sobre por que se obtienen dichos resultados, para cada uno de los experimentos se probó con diferentes configuraciones para compararlos entre ellos, con el objetivo de encontrar la que presente mejores resultados.
 
 \section{Primer experimento}
 
-\par En este primer experimento se probó con una arquitectura con una primera capa de embedding de 128 unidades de salida, seguida de una capa \gls{bi-lstm} de 200 unidades, después una capa de dropout con parámetro de 0.5, seguida de una capa Dense con una única salida que representa el resultado binario que indica si la oración es irónica o no. Este experimento se distingue de los demás ya que no tomamos en cuenta los caracteres especiales, únicamente el texto el cual se normaliza a ASCII con el propósito de no darle tanta importancia a la ortografía. Se agrega al final un carácter que delimita si es el final de la sentencia.
+\par En este primer experimento se probó con una arquitectura con una primera capa de embedding de 128 unidades de salida, seguida de una capa \gls{bi-lstm} de 200 unidades, después una capa de dropout con parámetro de 0.5, seguida de una capa completamente conectada con una única salida que representa el resultado binario que indica si la oración es irónica o no. Este experimento se distingue de los demás ya que no tomamos en cuenta los caracteres especiales, únicamente el texto el cual se normaliza a ASCII con el propósito de no darle tanta importancia a la ortografía. Se agrega al final un carácter que delimita si es el final de la sentencia.
 
 \subsection{Evaluación}
 \begin{center}
@@ -14,9 +14,9 @@
 
 \par Como se puede apreciar en la tabla \ref{tab:exp1} la precisión medida sobre el modelo, es similar a la obtenida en la bibliografía, lo cual indica que este modelo se desempeña bastante bien en reconocer la ironía. Sin embargo, como se vió, el \textit{recall} es considerablemente bajo, por lo que este modelo tiende a no encontrar un gran porcentaje de las muestras irónicas. Ademá se puede ver que el \textit{F-score} es bastante similar a los de la bibliografía.
 
-\par A continuación en la figura \ref{fig:Roc1} se muestran algunas de las gráficas ROC qué muestran que tan bien se desempeña esta arquitectura y preprocesamiento.
-\begin{figure}
+\par A continuación en la figura \ref{fig:Roc1} se muestran algunas de las gráficas ROC qué muestran qué tan bien se desempeña esta arquitectura y preprocesamiento.
 
+\begin{figure}
 	\begin{table}[H]
 		\centering
 		\makebox[10pt][c]{
@@ -36,15 +36,14 @@
 			\end{tabular}
 		}
 	\end{table}
-
-	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Primer Experimento preprocesamiento por palabra.}
+	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Primer Experimento preprocesamiento por palabra. En este experimento se puede apreciar como las gráficas ROC tiene un línea más accidentada, lo cual determina que tan estable es el modelo, si se mueve el umbral. El área bajo la curva alcanza 0.96, es un buen resultado, sin embargo, al compararlo con los demás experimentos se puede notar que no es tan relevante.}
 	\label{fig:Roc1}
 \end{figure}
 
 
 \subsection{Propuesta de mejora}
 
-\par Mi propuesta de mejora es que en lugar de considerar las palabras como tokens, se consideren los caracteres. Esto podría mejorar el desempeño ya que dejaríamos que la red neuronal aprendiera de la forma que escriben los usuarios y no se esforzaría tanto por encontrar correlaciones con palabras que no se encuentran en una oración. Similar a como los humanos leemos las palabras, ya que nosotros podemos extraer características diferentes de dos textos que tienen un contenido similar por ejemplo: `hola' y `holaaaaaaa' en la primera podemos notar que es ortográficamente correcta. No obstante no da mucha información por sí misma, con la segunda podemos ver que no es ortográficamente correcta, por lo que muy probablemente no este en el vocabulario que se extrajo del conjunto de entrenamiento. Si la palabra tiene los últimos caracteres repetidos puede indicar que se quiere hacer algún tipo de énfasis, o que el emisor quiere señalar algo evidente. Estos son ejemplos de características que se pueden obtener si se hace un análisis carácter por carácter y la principal motivación para el siguiente experimento.
+\par Mi propuesta de mejora es que en lugar de considerar las palabras como tokens, se consideren los caracteres. Esto podría mejorar el desempeño ya que dejaríamos que la red neuronal aprendiera de la forma que escriben los usuarios y no se esforzaría tanto por encontrar correlaciones con palabras que no se encuentran en una oración. Similar a como los humanos leemos las palabras, ya que podemos extraer características diferentes de dos textos que tienen un contenido similar por ejemplo: `hola' y `holaaaaaaa' en la primera podemos notar que es ortograficamente correcta. No obstante no da mucha información por sí misma, con la segunda podemos ver que no es ortograficamente correcta, por lo que muy probablemente no este en el vocabulario que se extrajo del conjunto de entrenamiento. Si la palabra tiene los últimos caracteres repetidos puede indicar que se quiere hacer algún tipo de énfasis, o que el emisor quiere señalar algo evidente. Estos son ejemplos de características que se pueden obtener si se hace un análisis carácter por carácter y la principal motivación para el siguiente experimento.
 
 \section{Segundo experimento}
 \par En este segundo experimento se quiso cambiar el preprocesamiento, realizando lo más sencillo, pasar el tweet a una lista de caracteres y considerar cada uno como unidad de información. Entonces el vocabulario sería cada uno de los caracteres que se encuentran presentes en el corpus distinguiendo si eran mayúsculas o minúsculas. Tampoco se excluyeron los caracteres especiales, para de este modo captar la mayor información posible.
@@ -54,7 +53,7 @@
 \end{center}
 
 
-\par En la tabla \ref{tab:exp2} se puede notar un mejora considerable ya que pasa de tener un 83.04 \% de \textit{F-score} promedio a un 90.84\% . Esto es debido a que se pudieron obtener mejores características de las secuencias de caracteres. A continuación en la figura \ref{fig:Roc2} se muestran algunas de las gráficas ROC que muestran que tan bien se desempeña este modelo.
+\par En la tabla \ref{tab:exp2} se puede notar un mejora considerable ya que pasa de tener un 83.04 \% de \textit{F-score} promedio a un 90.84\% . Esto es debido a que se pudieron obtener mejores características de las secuencias de caracteres. A continuación en la figura \ref{fig:Roc2} se muestran algunas de las gráficas ROC que muestran qué tan bien se desempeña este modelo.
 
 \begin{figure}
 
@@ -78,7 +77,7 @@
 		}
 
 	\end{table}
-	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Segundo experimento por caracteres n-gram  es 1. }
+	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Segundo experimento por caracteres n-gram  es 1. Se puede notar un crecimiento abrupto al inicio de la gráfica, lo cuál indica que las predicciones se separan más, con respecto al experimento 1. Se puede notar una mejora en el desarrollo de la recta, siendo más suave en la mayoría de las gráficas. Además, hay una mejora significativa en el área bajo la curva, llegando a 0.99.}
 
 	\label{fig:Roc2}
 \end{figure}
@@ -89,7 +88,7 @@
 \par Al analizar los resultados obtenidos se pudo observar una mejora considerable, tanto el \textit{recall} como en \textit{precision} lo que indica que este modelo es mucho mejor que el primero. Esto puede ser debido a que en las redes sociales las reglas gramaticales y de ortografía son más flexibles, y para poner un ejemplo: escribir
 ``hola ¿Que haces?'' es lo mismo que decir ``ola k ase'', semánticamente hablando, por lo que analizando palabra por palabra la similitud entre estas palabras es pequeña mientras que carácter por carácter es más grande debido a la red neuronal puede encontrar secuencias de caracteres que realmente importa como `ola'  y también encontrar una correlación entre `que' y `k' lo cual significaría que se adapta al uso de la lengua.
 
-\par El \textit{recall} como se explicó previamente es la medida que indica qué porcentaje de muestras relevantes es encontrada. Los números nos están diciendo que en el experimento 1 de 100 muestras irónicas, pudo distinguir 76 y en el experimento 2 pudo distinguir 86. Mientras que el \textit{precision} es la medida que muestra que porcentaje de las muestras clasificadas como irónicas fue de verdad irónica. Por lo tanto en números el experimento 1 detectó 100 muestras irónicas, de las cuales el 90.92 \% fue de verdad irónica y el experimento 2 de 100 detectó 95.52 \% irónicas. En ambas métricas el segundo experimento es mucho mejor.
+\par El \textit{recall} como se explicó previamente es la medida que indica qué porcentaje de muestras relevantes es encontrada. Los números indican que en el experimento 1 de 100 muestras irónicas, pudo distinguir 76 y en el experimento 2 pudo distinguir 86. Mientras que el \textit{precision} es la medida que muestra que porcentaje de las muestras clasificadas como irónicas fue de verdad irónica. Por lo tanto en números el experimento 1 detectó 100 muestras irónicas, de las cuales el 90.92 \% fue de verdad irónica y el experimento 2 de 100 detectó 95.52 \% irónicas. En ambas métricas el segundo experimento es mucho mejor.
 
 \par Con el fin de mejorar este resultado se propone aumentar el tamaño del n-gram a dos. Esto aportaría mayor información de la vecindad de los caracteres, pudiendo encontrar mejores patrones que describan más globalmente la esencia de los datos.
 
@@ -101,7 +100,7 @@
 	\input{imagenes/tablaExp3.tex}
 \end{center}
 
-\par En la tabla \ref{tab:exp3} se puede ver una mejora leve con respecto al experimento anterior con un promedio de \textit{F-score} de 91.57 \% un aumento de casi 1 \%. A continuación en la figura \ref{fig:Roc3}  se muestran algunas de las gráficas ROC que muestran que tan bien se desempeña este algoritmo.
+\par En la tabla \ref{tab:exp3} se puede ver una mejora leve con respecto al experimento anterior con un promedio de \textit{F-score} de 91.57 \% un aumento de casi 1 \%. A continuación en la figura \ref{fig:Roc3}  se muestran algunas de las gráficas ROC que muestran qué tan bien se desempeña este algoritmo.
 
 \begin{figure}
 
@@ -125,28 +124,28 @@
 		}
 
 	\end{table}
-	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Tercer experimento por caracteres n-gram  es 2.}
+	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Tercer experimento por caracteres n-gram  es 2. Se puede notar una mejora sutíl con respecto al segundo experimento. Cabe destacar que el segmento 1 tiene una desarrollo más accidentado, el cuál puede notarse igualmente en experimento dos; esto puede deberse a que la distribución de las muestras es más desfavorable para ese segmento. El área bajo la curva se mantiene en 0.99 y sólo la del segmento 1 es 0.98.}
 	\label{fig:Roc3}
 \end{figure}
 
 
 
 \subsection{Análisis}
-\par En este experimento se pudo notar una mejora leve con respecto a los resultados previos. Se pudo ver que los resultados de \textit{accuracy}, \textit{recall} y \textit{f-score} mejoran con respecto al segundo experimento, lo que nos indica directamente que es un mejor modelo. Sin embargo la única métrica que no mejora es la \textit{precision} lo que indica que de las muestras que reconoce como irónicas el segundo experimento tiene menores probabilidades de equivocarse. Sin embargo también tiene menores probabilidades de encontrar las muestras irónicas (\textit{recall}). Y si consideramos el promedio de las dos métricas, se comporta mejor este modelo que el primero.
+\par En este experimento se pudo notar una mejora leve con respecto a los resultados previos. Se pudo ver que los resultados de \textit{accuracy}, \textit{recall} y \textit{f-score} mejoran con respecto al segundo experimento, lo que indica directamente que es un mejor modelo. Sin embargo, la única métrica que no mejora es la \textit{precision} lo que indica que de las muestras que reconoce como irónicas el segundo experimento tiene menores probabilidades de equivocarse. Sin embargo, también tiene menores probabilidades de encontrar las muestras irónicas (\textit{recall}). Y si consideramos el promedio de las dos métricas, se comporta mejor este modelo que el primero.
 
 \par Como propuesta para siguientes experimentos, puede aumentarse el tamaño del n-gram para tratar de encontrar un punto medio que mejore estas métricas, aunque probablemente ya se haya encontrado o esté por encontrarse.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{imagenes/ironia1.png}
-	\caption{Texto irónico tomado a prueba. En esta muestra se obtuvo un 0.985333 de porcentaje de ironía. Para el experimento 3.} %%%ACTUALIZAR
+	\caption{Texto irónico tomado a prueba. En esta muestra se obtuvo un 0.997028 de porcentaje de ironía. Para el experimento 3.} %%%ACTUALIZAR
 	\label{fig:ironyTest1}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{imagenes/ironia2.png}
-	\caption{Texto no irónico tomado a prueba. En esta muestra se obtuvo un 0.003657 de porcentaje de ironía. Para el experimento 3} %%%ACTUALIZAR
+	\caption{Texto no irónico tomado a prueba. En esta muestra se obtuvo un 0.0135374 de porcentaje de ironía. Para el experimento 3} %%%ACTUALIZAR
 	\label{fig:ironyTest2}
 \end{figure}
 
@@ -164,9 +163,9 @@
 
 \par Se puede notar en la tabla \ref{tab:exp4} que el \textit{f-score} es el peor de todos los experimentos, lo cual indica que el equilibrio que se buscaba al aumentar el n-gram ya se había alcanzado con el tercer experimento.
 
-\par Sin embargo un punto a recalcar en este experimento es que su medida de \textit{recall} es la mejor de los 4 experimentos. Lo cual sería importante si fuera uno de esos problemas en lo que es más importante predecir la mayor parte de las muestras positivas aunque haya muchas veces falsas alarmas, como en sismos, desastres naturales, etc.
+\par Sin embargo, un punto a recalcar en este experimento es que su medida de \textit{recall} es la mejor de los 4 experimentos. Lo cual sería importante si fuera uno de esos problemas en lo que es más importante predecir la mayor parte de las muestras positivas aunque haya muchas veces falsas alarmas, como en sismos, desastres naturales, etc.
 
-\par A continuación en la figura \ref{fig:Roc4}  se muestran algunas de las gráficas ROC que muestran que tan bien se desempeña este algoritmo.
+\par A continuación en la figura \ref{fig:Roc4}  se muestran algunas de las gráficas ROC que muestran qué tan bien se desempeña este algoritmo. En estas gráficas se puede ver que son peores que la de cualquier experimento, pero siguen teniendo una buena área bajo la curva, lo que indica que es un experimento bastante bueno.
 
 \begin{figure}
 
@@ -190,33 +189,33 @@
 		}
 
 	\end{table}
-	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Cuarto experimento por caracteres n-gram  es 3.}
+	\caption{Gráficas ROC de los segmentos en que se dividió el corpus. Cuarto experimento por caracteres n-gram  es 3. Se puede notar una desmejora, general con respecto a los dos experimentos anteriores. Comparado con el experimento 1, este tiene un desarrollo de la recta más suave, lo qué indica que tiene un comportamiento más estable, si se mueve el umbral. El área bajo la curva alcanza a lo más 0.98.}
 	\label{fig:Roc4}
 \end{figure}
 
-\par En estas gráficas se puede ver que son peores que la de cualquier experimento, pero siguen teniendo una buena área bajo la curva, lo que indica que es un experimento bastante bueno.
+\par En la figura \ref{fig:ironyTest3} y \ref{fig:ironyTest4} se pueden ver ejemplos de cómo el modelo del experimento 4 detecta una muestra irónica y otra que no es irónica.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{imagenes/ironia3.png}
-	\caption{Texto medianamente irónico tomado a prueba. En esta muestra se obtuvo un 0.356429 de porcentaje de ironía. Para el experimento 4.} %%%ACTUALIZAR
+	\includegraphics[width=0.6\textwidth]{imagenes/ironia3.png}
+	\caption{Texto medianamente irónico tomado a prueba. En esta muestra se obtuvo un 0.87694 de porcentaje de ironía. Para el experimento 4.} %%%ACTUALIZAR
 	\label{fig:ironyTest3}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{imagenes/ironia4.png}
-	\caption{Texto no irónico tomado a prueba. En esta muestra se obtuvo un 0.003036 de porcentaje de ironía. Para el experimento 4} %%%ACTUALIZAR
+	\includegraphics[width=0.6\textwidth]{imagenes/ironia4.png}
+	\caption{Texto no irónico tomado a prueba. En esta muestra se obtuvo un 0.00296568 de porcentaje de ironía. Para el experimento 4} %%%ACTUALIZAR
 	\label{fig:ironyTest4}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\textwidth]{imagenes/ironia1.png}
-	\caption{Texto irónico tomado a prueba. En esta muestra se obtuvo un 0.992789 de porcentaje de ironía. Para el experimento 4} %%%ACTUALIZAR
-	\label{fig:ironyTest5}
-\end{figure}
-
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[width=0.6\textwidth]{imagenes/ironia1.png}
+% 	\caption{Texto irónico tomado a prueba. En esta muestra se obtuvo un 0.998463 de porcentaje de ironía. Para el experimento 4} %%%ACTUALIZAR
+% 	\label{fig:ironyTest5}
+% \end{figure}
+\section{Análisis}
 \par Para concluir este capítulo se muestra una tabla que compara directamente las diferentes medidas obtenidas en esta fase de experimentos.
 
 \begin{center}
@@ -227,5 +226,5 @@
 	\end{table}
 \end{center}
 
-\par En esta tabla se puede notar que el tercer experimento de 2-gram tiene dos métricas mejor que cualquier otro experimento, la primera es el \textit{accuracy} con un 98.35\% y el \textit{F-score} de 91.57\% lo cual está indicando se comporta en general como un mejor modelo que cualquiera de los otros 3. Sin embargo, en el \textit{recall} se puede ver que es mejor el del cuarto experimento, llegando a 90.66\% lo cual como se mencionó puede ser mejor en algunos casos que sea muy importante encontrar la mayor parte de las muestras positivas, sin embargo su \textit{precision} cae abruptamente. Hablando del \textit{precision} se puede ver que es mejor el segundo experimento, sin dejar caer tanto el \textit{recall} por lo que sería un mejor modelo en un caso en el que se requiera obtener una gran parte de muestras positivas sin disparar tantas falsas alarmas.
+\par En esta tabla se puede notar que el tercer experimento de 2-gram tiene dos métricas mejor que cualquier otro experimento, la primera es el \textit{accuracy} con un 98.35\% y el \textit{F-score} de 91.57\% lo cual está indicando se comporta en general como un mejor modelo que cualquiera de los otros 3. Sin embargo, en el \textit{recall} se puede ver que es mejor el del cuarto experimento, llegando a 90.66\% lo cual como se mencionó puede ser mejor en algunos casos que sea muy importante encontrar la mayor parte de las muestras positivas; sin embargo, su \textit{precision} cae abruptamente. Hablando del \textit{precision} se puede ver que es mejor el segundo experimento, sin dejar caer tanto el \textit{recall} por lo que sería un mejor modelo en un caso en el que se requiera obtener una gran parte de muestras positivas sin disparar tantas falsas alarmas.
 

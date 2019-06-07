@@ -1,6 +1,8 @@
 % \documentclass[11pt,spanish]{report}
 \documentclass[twoside,letterpapper,openright]{book}
 \usepackage{setspace}  
+\usepackage{lipsum}
+\usepackage{titling}
 \usepackage{parskip}
 \usepackage{siunitx}
 \usepackage{textcomp}
@@ -12,7 +14,7 @@
 \parskip=15pt
 \usepackage{lscape}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[spanish]{babel} 
+\usepackage[spanish,english]{babel} 
 \usepackage[utf8]{inputenc}
 \usepackage{makeidx}
 \usepackage{caption}
@@ -36,6 +38,13 @@
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 \usepackage{pdfpages}
+
+
+\title{Detección de ironía en textos cortos}
+\author{Max Armando Sánchez Hernández}
+\date{\today}
+
+
 %IMPORTANTE--IMPORTANTE--IMPORTANTE--IMPORTANTE
 %Es probable que debas compilar esto dos veces para corregir el error de
 % footnote per page
@@ -61,9 +70,9 @@
 \ #1}}{}}
 % \renewcommand{\headrulewidth}{2pt}
 
-\widowpenalty10000
-\clubpenalty10000
-\usepackage[all]{nowidow}
+\widowpenalty2000
+\clubpenalty2000
+% \usepackage[all]{nowidow}
 
 \captionsetup[table]{name=Tabla}
 \captionsetup[table]{labelsep=space}
@@ -150,22 +159,18 @@ literate=
 
 \begin{document}
 
-
-%modificar asi solo va a ser un lado
-\def\amboslados{0}
-
-% \input{misc/scripts.tex}
-
 \pagenumbering{roman}
 \includepdf[]{portada_tesis}
 % \setcounter{page}{4}
+\input{Capitulos/00_abstract.tex}
+\selectlanguage{spanish}
 \input{Capitulos/0_Agradecimientos.tex}
 \setcounter{tocdepth}{2}
 \tableofcontents
 
-
-\input{Capitulos/1_Introduccion.tex}
-\input{Capitulos/2_EstadoDelArte.tex}
+\input{Capitulos/1_2IntroAnte.tex}
+% \input{Capitulos/1_Introduccion.tex}
+% \input{Capitulos/2_EstadoDelArte.tex}
 \input{Capitulos/3_Metodologia.tex}
 \input{Capitulos/4_Experimentos.tex}
 \input{Capitulos/5_Conclusiones.tex}

@@ -1,6 +1,12 @@
-\chapter{Estudio del estado de la técnica}\label{cap.antecedentes}
 
-\par La ironía como un recurso lingüístico se destaca entre otras por su facilidad para satisfacer al lector; la ironía da un valor agregado a la comunicación, si aparece como sátira provoca una risa casi instantánea, si aparece como sarcasmo suele ser más hiriente, incluso suele hacer pensar en las implicaciones de lo que se atreve uno a decir, como en el siguiente ejemplo:
+\chapter{Introducción}\label{cap.introduccion}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\onehalfspacing
+
+\par La ironía es una figura retórica que consiste en decir lo contrario de lo que se quiere dar a entender; esta definición es a veces difícil de entender para una persona y por lo tanto es de esperarse que es más difícil de hacer entender a un sistema de cómputo. Hasta este momento, se le puede dar a una computadora un conjunto de instrucciones específicas, y si se logra definir de algún modo las intenciones, se puede hacer que una computadora entienda de forma concreta un concepto. Sin embargo, la ironía reta a la lógica y es difícil para una persona explicar si una oración es irónica o es algo literal, muchas veces esto depende del contexto. Es cuando entra la inteligencia artificial, que ayuda a no explicar cosas que no se entienden bien o que dependen de muchas condiciones y hace que el sistema computacional salte la barrera de la lógica dotándola de procesos que simulan el razonamiento humano. La inteligencia artificial se ha usado en otras tareas como conducir un automóvil, clasificar objetos, darle significado a las palabras, entre otras.
+
+\par La ironía como un recurso lingüístico se destaca entre otras por su facilidad para satisfacer al lector; dando un valor agregado a la comunicación, si aparece como sátira provoca una risa casi instantánea, si aparece como sarcasmo suele ser más hiriente, incluso suele hacer pensar en las implicaciones de lo que se atreve uno a decir, como en el siguiente ejemplo:
 
 \begin{center}
 	\textit{``... En otra ocasión Borges firmaba ejemplares en una librería del Centro. Un joven se acercó con Ficciones y le dijo: `Maestro, usted es inmortal'... Borges le contestó: `Vamos, hombre, no hay por qué ser tan pesimista'."} \textcite{Sergio2012}
@@ -83,7 +89,7 @@ Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, i
 
 \section{Análisis de los corpus utilizados}
 
-\par Para el empleo de los métodos supervisados se debe tener un conjunto de datos que constituyan una muestra significativa de como se encuentran las muestras que se desean clasificar. A este conjunto de datos se les llama \textit{corpus} o \textit{dataset} en inglés.
+\par Para el empleo de los métodos supervisados se deben obtener primero los datos que constituyen la base de conocimiento para el sistema. Estos datos aportarán ejemplos de como se encuentran normalmente las muestras. Esta base de conocimiento pueden ser imágenes, textos, audios, señales, entre otros. A la base de conocimiento también se le conoce como \textit{corpus}.
 
 \par El corpus en general no cambia mucho de una investigación a otra, como muestra la tabla \ref{tab:corpuses},. La mayoría de los corpus están compuestos por textos provenientes de Twitter, ya que provee herramientas simples\footnote{\url{https://developer.twitter.com/}} para extraer tweets automáticamente. También suelen utilizarse corpus de Amazon ya que tienen una \gls{API} para extraer textos\footnote{ \url{https://developer.amazon.com/services-and-apis}}. Hablando de los idiomas sobre los que se han aplicado, está el chino, inglés, holandés, italiano, griego y por último el español, idioma del corpus de este estudio.
 
@@ -144,3 +150,25 @@ Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, i
 \par Después de ver más de cerca los resultados que reportan estos investigadores, se puede notar que los mejores resultados parecen ser los de \textcite{poria2016deeper} cuando usa CNN combinado con SVM y obtiene un valor de  \gls{F-score} de 0.948, que comparado con la mayoría es más grande. Este estudio fue la continuación del trabajo de \textcite{ptavcek2014sarcasm}, el cual consistía en obtener principalmente las características más relevantes como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, entre otros, con todo esto se usaron dos métodos \gls{SVM} y \gls{MaxEnt} el cuál parece funcionar muy bien para el inglés. Sin embargo, para el checo no es así ya que SVM tiene mayor puntaje en F-score (0.582) lo cual es muy bajo, esto según ellos fue porqué algunas muestras necesitaban conocimiento general, que con 6,700 muestras no fueron suficientes para obtener. Por otro lado en inglés, como ya se mencionó, sirvió mejor \gls{MaxEnt}, tal vez debido a que este clasificador no asume independencia entre las características. \gls{MaxEnt} dio un 0.923 de F-score, esto puede indicar que como \textcite{domingos2012few} menciona, hay dos formas de mejorar el desempeño de esta tarea, una es conseguir más datos y otra en mejorar o encontrar un algoritmo que requiera menos datos.
 
 \par Respecto a los demás métodos, se puede destacar el trabajo de \textcite{reyes2012making} quienes principalmente describen una forma de cómo obtener el corpus y el trabajo de  \textcite{lopez2016character}, que obtuvo mejores resultados con un análisis a nivel de carácter, con un corpus no balanceado (30/70), tal vez debido a que en Twitter es necesario explotar más el potencial de los caracteres y suelen verse abreviaciones del texto, como por ejemplo  ``que'' pasa a ser ``q'', cuando el límite de caracteres se ha alcanzado en un tweet.
+
+\par Como se ha podido ver, las redes neuronales se han ocupado para esta tarea; sin embargo, muchos sugieren que estas implementaciones pueden mejorarse. Las redes neuronales se han utilizado en la universidad de Stanford para crear el pie de figura de imágenes, Google las ocupa para reconocer los números de las casas en las fotos que toman sus automóviles y ubicarlas en el mapa, en Mountain View las ocupan para mejorar el reconocimiento de voz de  Android, ahorrar electricidad en sus servidores, y esto es solo una pequeña parte de sus aplicaciones. Lo anterior es una motivación para probar cómo se desempeñan las redes neuronales en esta tarea. 
+
+\par El objetivo de esta tesis es proponer un modelo de red neuronal que pueda identificar ironía en textos cortos procedentes de Twitter. Dicha solución podría ayudar a los estudios de mercado que buscan la aceptación de un producto mediante el monitoreo de las redes sociales para la extracción de opiniones, incluso en campañas políticas, comerciales o movimientos sociales, ya que predeciría la opinión real de una persona sobre cierto tema. A su vez tiene conexión con otros problemas como la búsqueda de significados, minería de opiniones, modelos para detectar contradicciones, entre otros.
+
+
+\par Debido a que las redes neuronales han tenido un desempeño excelente en una gran variedad de aplicaciones, es de esperarse obtener buenos resultados. En caso de que los resultados sean negativos, sería muy importante revisar los diferentes parámetros de la red neuronal que se pueden cambiar, por ejemplo, el número de capas ocultas, el número de nodos de cada capa, la normalización de los datos, la iniciación pseudoaleatoria de los pesos, para conseguir una mejor extracción de la información de los datos, que por ende mejore el desempeño del sistema.
+
+
+\par La descripción del método es la siguiente:
+\begin{itemize}
+	\item Obtención del corpus
+	\item Preprocesamiento de los documentos que componen el corpus (encaje o inmersión (en inglés \textit{embedding}), lexematización, normalización, lematización, conversión a vectores), explorar las diversas herramientas que ya existen y destacar la mejor de todas.
+	\item Análisis de la red neuronal que mejor se adapta al problema, crear un conjunto de procedimientos viables para elegir los que podrían dar mejores resultados
+	\item Diseño de los experimentos, diseñar las redes neuronales que resolverán la tarea
+	\item Evaluación, elegir las métricas que mejor describan el desempeño del modelo
+	\item Conclusiones, se dará una explicación de los resultados y se analizarán las oportunidades de crecimiento.
+\end{itemize}
+
+\par Para finalizar, la estructura de esta tesis es la siguiente: primero se presentarán algunos antecedentes y el estudio del estado de la técnica de la tarea que se propone, para después explicar un poco la teoría detrás del método que se usará para resolverla; por último se obtendrán resultados que se compararán con los obtenidos en la sección de antecedentes, para terminar con una conclusión y cuál podría ser el trabajo a futuro.
+
+\par En este trabajo se usó el recurso de Google, llamado Colab Research, con el cual se puede usar un entorno de desarrollo en Python 2 o 3, usando como interfaz de desarrollo la aplicación web \textit{Jupyter}. La ventaja de usar esta herramienta es que se puede acceder al hardware de procesamiento de tensores de Google, \textit{unidad de procesamiento de tensores}(TPU por sus siglas en inglés), el cúal, por experiencia propia, llega a ser hasta 20 veces más rápido que usar una \textit{unidad de procesamiento gráfico} (GPU por sus siglas en inglés). Los experimentos realizados en esta tesis se encuentran disponibles en la siguiente liga \href{ https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}{https://drive.google.com/open?id=1oV5X1ZlOxXT-3nxp89BRwWcmSuSbOm43}
