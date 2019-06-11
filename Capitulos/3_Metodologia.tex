@@ -6,10 +6,10 @@
 \section{Obtención del corpus}
 %aqui va la obtencion del corpus
 \par El corpus que se usó para entrenar al sistema fue extraído de Twitter por \textcite{lopez2016character} y presentado en el artículo \textit{Character and word baselines systems for irony detection in Spanish short texts}. Este corpus se distingue de los de la bibliografía, ya que es el primero en español, y se basaron en lo explicado por \textcite{reyes2012making} y \textcite{liebrecht2013perfect} en sus respectivos artículos, y consideró que las etiquetas que marcaba explícitamente el usuario de Twitter eran correctas. Como \textcite{lopez2016character} explican, Twitter funciona como una red social en donde se publican ideas concretas que no excedan más de 140 carácteres\footnote[1]{En noviembre del 2017 se cambio el límite a 280, sin embargo, cuando se obtuvo el corpus se tenia como límite los 140 caracteres.}, a esto se le conoce como tweet. En los tweets se pueden identificar referencias a otros usuarios\footnote{Se pueden presentar como @user, donde user es el id del usuario.}, etiquetas llamadas hashtags (usan \textit{\#} para denotarlos), también se pueden usar ligas a sitios web externos los cuales solo ocupan 23 carácteres cada uno cuando se usan, además en Twitter, cuando se desea ampliar una idea, se pueden publicar tweets en serie a los que se les llama \textit{hilo}, y entre otras características como la publicación de imágenes, vídeos, etc.
-
+\newpage
 \par El corpus consiste en 76,530 tweets de los cuales 7,653 son irónicos, el 10\%, y 68,877 son no irónicos, el 90\%; dicha distribución es más apegada a qué tan frecuente se encuentra la ironía normalmente. Este corpus se encuentra disponible en la siguiente liga: \url{http://ivanvladimir.github.io/sitio-corpus-ironia/} y esta licenciado bajo \textit{Creative Commons} que permite al usuario compartir y adaptar el recurso.
 
-\par Para los propósitos de éste experimento, se tomará únicamente el texto. Por ejemplo, del siguiente tweet:
+\par Para los propósitos de éste experimento, se tomará únicamente el texto. Por ejemplo, en el tweet que se muestra en la figura \ref{fig:ejTweet}:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/ejemploTweet.png}
@@ -78,11 +78,11 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 
 \subsection{Funcionamiento}
 
-\par Este modelo se puede definir como un sistema con entradas y salidas las cuales pasan por una unidad sumadora que las compara con un umbral (\textit{bias} en inglés), la cual activa una función de salida no lineal. Su funcionamiento es simple, y se puede notar que lo que propone es que la salida de un sistema que se puede clasificar es el resultado de la combinación lineal de las entradas con un valor de desplazamiento a la salida(\textit{bias}). Luego, la función de salida podría interpretarse como booleana, un 1 si alcanzó el valor de umbral $\theta_{0}$ o un 0 si no. Lo anterior puede interpretarse como que todo lo que esté debajo de una recta definida por $(\theta_0,\theta_1,...,\theta_n)$ se considera que no pertenece a la clase y lo que está por encima de ella pertenece a dicha clase.
+\par Este modelo se puede definir como un sistema con entradas y salidas las cuales pasan por una unidad sumadora que las compara con un umbral (\textit{bias} en inglés), la cual activa una función de salida no lineal. Su funcionamiento es simple, y se puede notar que lo que propone es que la salida de un sistema que se puede clasificar es el resultado de la combinación lineal de las entradas con un valor de desplazamiento a la salida(\textit{bias}). Luego, la función de salida podría interpretarse como booleana, un 1 si alcanzó el valor de umbral $\theta_{0}$ o un 0 si no. Lo anterior puede interpretarse como que todo lo que esté debajo de una recta definida por $(\theta_0,\theta_1,...,\theta_n)$ se considera que no pertenece a la clase y lo que está por encima de ella pertenece a dicha clase. En la figura \ref{fig:perceptron} se puede ver el funcionamiento de una sola neurona.
 \begin{figure}[H]
 	\centering
 	\input{imagenes/perceptron.tex}
-	\caption{Concepto básico del perceptrón simple.}
+	\caption{Concepto básico del perceptrón simple. Se puede notar que la neurona se activa cuando la combinación lineal de sus entradas producen un resultado mayor al que se tiene como umbral.}
 	\label{fig:perceptron}
 \end{figure}
 
@@ -99,7 +99,7 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 \end{figure}
 
 
-\par Como se ve en la figura \ref{fig:xor} para poder resolver este tipo de problemas se propuso usar más capas del perceptrón que podrían resolver el problema fácilmente, ya que cuando se agregan más perceptrones, se pueden \textit{`dibujar'} más lineas que puedan ayudar a dividir mejor una clase.
+\par Como se ve en la figura \ref{fig:xor} para poder resolver este tipo de problemas se propuso usar más capas del perceptrón que podrían resolver el problema fácilmente, ya que cuando se agregan más perceptrones, se pueden \textit{`dibujar'} más lineas que puedan ayudar a dividir mejor una clase. Como se puede ver en la figura \ref{xor2}.
 
 \begin{figure}[H]
 	\centering
@@ -118,7 +118,7 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 
 \par En la figura \ref{fig:redneuronal1} se puede observar cómo se calcula la salida de la primera neurona de la primera capa.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\input{imagenes/redNeuronal1.tex}
 	\caption{Cálculo de la salida de la primera neurona de la primera capa de una red neuronal \gls{mlp}.}
@@ -126,7 +126,7 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\input{imagenes/redNeuronal.tex}
 	\caption{Arquitectura de la red neuronal \gls{mlp}.}
@@ -183,7 +183,7 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 \end{equation*}
 
 \par En estas dos ecuaciones la función $F$ es la función no lineal que se deseé usar para la salida de cada neurona. En algunas de las aplicaciones se usan funciones como \gls{ReLU} la cual tiene una respuesta como la función escalón, en otras aplicación se usa la función sigmoidal, en otras ocasiones se usa el tangente hiperbólico, en la figura \ref{fig:funciones} se muestran algunas de las funciones más comunes que se usan en las aplicaciones.
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{imagenes/graficaF.png}
 	\caption{Ejemplo de algunas de las salidas de una neurona artificial.}
@@ -340,7 +340,7 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 
 \begin{landscape}
 
-	\begin{figure}
+	\begin{figure}[h]
 		\centering
 		\input{imagenes/arquitectura.tex}
 		\caption{En esta figura se puede ver como es la arquitectura general del modelo que se plantea, primero de los textos extraídos de Twitter se pasan por una función de mapeo que convierte el texto en vectores, estos vectores pueden tener diferentes longitudes, por lo que pasa por un \gls{padding} que regulariza su longitud, después pasa al embedding que tiene como salida vectores de 128 dimensiones, estos a su vez pasan a la capa de BI-LSTM que 64 a su salida un vector de 64 unidades, las cuales pasan a una única neurona con salida binaria, la cual indica si el texto que entró es irónico o no.}
@@ -435,7 +435,7 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 	\label{fig:ROCMuestra}
 \end{figure}
 
-\par En \ref{fig:ROCMuestra} se puede observar una recta a \ang{45} la cual es la recta que se obtendría si se hace una clasificación aleatoria. Luego la recta azul es la recta que se obtuvo de mover el umbral de 0 a 1. Se puede ver que cuando el umbral es 0, todas las muestras serán positivas entonces el \textit{false positive rate} y el  \textit{true positive rate} aumentarán a 1 o lo que es lo mismo se tendrá un punto en (1,1). Por el lado contrario si se tiene el umbral en 1 el \textit{false positive rate} y el  \textit{true positive rate} disminuirán a 0 y se tendrá un punto en (0,0). Lo que se busca con este modelo es tener el \textit{true positive rate} en 1 y el \textit{false positive rate} en 0 o lo que es lo mismo tener un punto en (0,1). Como es muy probable que el modelo tenga dicho punto, se puede considerar que entre más cerca mejor y esto se logra si se tienen bien separadas las clases. Es decir, cuando se tiene una clase en un extremo del umbral y la otra del otro, de este modo, el movimiento del umbral no afectará tanto en la clasificación. Esto es lo que mide la gráfica ROC.
+\par En la figura \ref{fig:ROCMuestra} se puede observar una recta a \ang{45} la cual es la recta que se obtendría si se hace una clasificación aleatoria. Luego la recta azul es la recta que se obtuvo de mover el umbral de 0 a 1. Se puede ver que cuando el umbral es 0, todas las muestras serán positivas entonces el \textit{false positive rate} y el  \textit{true positive rate} aumentarán a 1 o lo que es lo mismo se tendrá un punto en (1,1). Por el lado contrario si se tiene el umbral en 1 el \textit{false positive rate} y el  \textit{true positive rate} disminuirán a 0 y se tendrá un punto en (0,0). Lo que se busca con este modelo es tener el \textit{true positive rate} en 1 y el \textit{false positive rate} en 0 o lo que es lo mismo tener un punto en (0,1). Como es muy probable que el modelo tenga dicho punto, se puede considerar que entre más cerca mejor y esto se logra si se tienen bien separadas las clases. Es decir, cuando se tiene una clase en un extremo del umbral y la otra del otro, de este modo, el movimiento del umbral no afectará tanto en la clasificación. Esto es lo que mide la gráfica ROC.
 
 \par Para hablar del \textit{area under the curve} es la reducción de la gráfica ROC a un escalar el cual es representado por el área bajo la curva, esto indica qué tanto se pudo acercar al punto deseado (0,1) y qué tan estable es el modelo al clasificar.
 
