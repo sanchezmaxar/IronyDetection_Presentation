@@ -1,4 +1,4 @@
-% \documentclass[11pt,spanish]{report}
+
 \documentclass[twoside,letterpapper,openright]{book}
 \usepackage{setspace}  
 \usepackage{lipsum}
@@ -18,7 +18,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{makeidx}
 \usepackage{caption}
-% \usepackage{natbib}
 \usepackage{xcolor}
  
 \usepackage[acronym]{glossaries}
@@ -30,7 +29,6 @@
 \usepackage{float}
 \usepackage{listingsutf8}
 \usepackage{listings}
-% \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage[titletoc]{appendix}
@@ -38,42 +36,23 @@
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 \usepackage{pdfpages}
-
-
 \title{Detección de ironía en textos cortos}
 \author{Max Armando Sánchez Hernández}
 \date{\today}
-
-
-%IMPORTANTE--IMPORTANTE--IMPORTANTE--IMPORTANTE
-%Es probable que debas compilar esto dos veces para corregir el error de
-% footnote per page
 \usepackage{perpage} %the perpage package
 \MakePerPage{footnote} %the perpage package command
 \usepackage{titlesec}
 \titlelabel{\thetitle \quad}
-% \usepackage{fancyhdr}
-% \pagestyle{fancy}
-% \fancyhead[LE]{\thepage}
-% \fancyhead[RE]{right}
-% \fancyhead[LO]{left}
-% \fancyhead[RO]{\thepage}
 \renewcommand{\chaptermark}[1]{%
 \markboth{\MakeUppercase{%
 \chaptername\ \thechapter%
 \ #1}}{}}
-
-% \renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}}
 \renewcommand{\sectionmark}[1]{%
 \markright{\MakeUppercase{%
 \sectiontitle\ \thesection%
 \ #1}}{}}
-% \renewcommand{\headrulewidth}{2pt}
-
 \widowpenalty2000
 \clubpenalty2000
-% \usepackage[all]{nowidow}
-
 \captionsetup[table]{name=Tabla}
 \captionsetup[table]{labelsep=space}
 \captionsetup[figure]{labelsep=space}
@@ -81,7 +60,6 @@
 \usepackage{afterpage}
 \usepackage{titletoc}
 \addto\captionsspanish{ \renewcommand{\contentsname}{Contenido}}
-
 \newcommand\blankpage{%
     \null
     \thispagestyle{empty}%
@@ -110,11 +88,9 @@ literate=
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
 \colorlet{numb}{magenta!60!black}
-
 \newcommand*{\addheight}[2][1ex]{%
   \raisebox{0pt}[\dimexpr\height+(#1)\relax]{#2}%
 }
-
 \lstdefinelanguage{json}{
     basicstyle=\normalfont\ttfamily,
     numbers=left,
@@ -144,68 +120,24 @@ literate=
       {]}{{{\color{delim}{]}}}}{1},
 }
 \usepackage[inner=35mm,outer=30mm,top=25mm,bottom=25mm]{geometry}
-% \addtolength{\oddsidemargin}{-.875in}
-% 	\addtolength{\evensidemargin}{-.875in}
-% 	\addtolength{\textwidth}{1.75in}
-% 	\addtolength{\topmargin}{-.875in}
-% 	\addtolength{\textheight}{1.75in}
-
-
 \input{misc/abreviaturas.tex}
-
-% \renewcommand{\thesection}{\arabic{section}}
-% \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
-% \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
-
 \begin{document}
-
 \pagenumbering{roman}
 \includepdf[]{portada_tesis}
-% \setcounter{page}{4}
 \input{Capitulos/00_abstract.tex}
 \selectlanguage{spanish}
 \input{Capitulos/0_Agradecimientos.tex}
 \setcounter{tocdepth}{2}
 \tableofcontents
-
 \input{Capitulos/1_2IntroAnte.tex}
-% \input{Capitulos/1_Introduccion.tex}
-% \input{Capitulos/2_EstadoDelArte.tex}
 \input{Capitulos/3_Metodologia.tex}
 \input{Capitulos/4_Experimentos.tex}
 \input{Capitulos/5_Conclusiones.tex}
-
-
-
 \newpage
-
 \nocite{*}
 \printbibliography[title=Referencias]
 \printglossary[type=\acronymtype,title=Abreviaturas]
-
 \newpage
 \printglossary[type=main]
 \appendix
-
-%     \chapter{Preprocesamiento por palabra}
-% 	\lstinputlisting[language=Python,breaklines,numbers=left,
-%     stepnumber=1]{codigos/Preprocesamiento.py}
-
-% 	\chapter{Experimento por palabra}
-% 	\lstinputlisting[language=Python,breaklines,numbers=left,
-%     stepnumber=1]{codigos/experimento1_porpalabras.py}
-
-%     \chapter{Preprocesamiento por caracter}
-% 	\lstinputlisting[language=Python,breaklines,numbers=left,
-%     stepnumber=1]{codigos/Preprocesamiento2.py}
-
-% 	\chapter{Experimento por caracter}
-% 	\lstinputlisting[language=Python,breaklines,numbers=left,
-%     stepnumber=1]{codigos/experimento1_porpalabras.py}
-
-
-%     \chapter{Modelo.json}
-%     \lstinputlisting[language=json,firstnumber=1,breaklines,numbers=left]{codigos/modelo.json}
-
-
 \end{document}

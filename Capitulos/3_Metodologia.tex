@@ -1,10 +1,10 @@
 \chapter{Metodología}\label{cap.metodologia}
-%aqui va el capitulo de la metodologia
+
 
 \par Una vez que se estudió qué trabajos se han llevado a cabo en la detección de la ironía/sarcasmo, se expondrá el trabajo que se llevó a cabo en este estudio, de modo que se justifique el diseño del modelo. Los métodos antes mencionados aportan una perspectiva más amplia para poder explorar mejor el problema y llegar a una solución aceptable.
-%aqui va la intro de la metodologia
+
 \section{Obtención del corpus}
-%aqui va la obtencion del corpus
+
 \par El corpus que se usó para entrenar al sistema fue extraído de Twitter por \textcite{lopez2016character} y presentado en el artículo \textit{Character and word baselines systems for irony detection in Spanish short texts}. Este corpus se distingue de los de la bibliografía, ya que es el primero en español, y se basaron en lo explicado por \textcite{reyes2012making} y \textcite{liebrecht2013perfect} en sus respectivos artículos, y consideró que las etiquetas que marcaba explícitamente el usuario de Twitter eran correctas. Como \textcite{lopez2016character} explican, Twitter funciona como una red social en donde se publican ideas concretas que no excedan más de 140 carácteres\footnote[1]{En noviembre del 2017 se cambio el límite a 280, sin embargo, cuando se obtuvo el corpus se tenia como límite los 140 caracteres.}, a esto se le conoce como tweet. En los tweets se pueden identificar referencias a otros usuarios\footnote{Se pueden presentar como @user, donde user es el id del usuario.}, etiquetas llamadas hashtags (usan \textit{\#} para denotarlos), también se pueden usar ligas a sitios web externos los cuales solo ocupan 23 carácteres cada uno cuando se usan, además en Twitter, cuando se desea ampliar una idea, se pueden publicar tweets en serie a los que se les llama \textit{hilo}, y entre otras características como la publicación de imágenes, vídeos, etc.
 \newpage
 \par El corpus consiste en 76,530 tweets de los cuales 7,653 son irónicos, el 10\%, y 68,877 son no irónicos, el 90\%; dicha distribución es más apegada a qué tan frecuente se encuentra la ironía normalmente. Este corpus se encuentra disponible en la siguiente liga: \url{http://ivanvladimir.github.io/sitio-corpus-ironia/} y esta licenciado bajo \textit{Creative Commons} que permite al usuario compartir y adaptar el recurso.
@@ -43,8 +43,8 @@
 \par Este es el primer estudio que se hace con el corpus etiquetado manualmente, lo que lo diferencia de la gran mayoría de los de la bibliografía, que confiaban que fueran los autores de las sentencias los que etiquetaran correctamente las oraciones. Esto tiene dos puntos de vista: por un lado con el etiquetado manual, no se encuentra una universalidad de lo que es una sentencia irónica, sino que se entrena al sistema a reconocer las oraciones irónicas que una persona reconoce como tal. Por otro lado, si no se etiqueta manualmente, no se tiene un mismo criterio para clasificar a las oraciones, éstas podrían resultar muchas veces contradictorias, por que donde uno ve ironía otro ve enojo, tristeza, etc.
 
 \section{Preprocesamiento}
-%aqui va la explicacion del preprocesamiento 
-\par Una vez obtenido el corpus, el primer paso que se debe llevar a cabo es la interpretación del texto crudo a un dominio que la computadora pueda manejar correctamente; con esta intención existen muchos enfoques, como se vio en el capítulo \ref{cap.antecedentes} y en este estudio se uso el que se presenta a continuación.
+
+\par Una vez obtenido el corpus, el primer paso que se debe llevar a cabo es la interpretación del texto crudo a un dominio que la computadora pueda manejar correctamente; con esta intención existen muchos enfoques, como se vio en el capítulo \ref{cap.introduccion} y en este estudio se uso el que se presenta a continuación.
 \subsection{Proceso de preprocesamiento}
 \par Con el objetivo de convertir las cadenas de texto en objetos que la computadora pueda manejar fácilmente, se propuso usar una función hash que trabaja como diccionario para las palabras que se han visto en el corpus\footnote{Más concretamente en el subconjunto de entrenamiento.}.
 \begin{figure}[h]
@@ -59,14 +59,14 @@
 \par Otro enfoque es considerar como unidad de información los carácteres que conforman la oración. Esto aporta información diferente, ya que en lugar de omitir datos que pueden ser considerados basura, se incluyen todos los datos y se permite que el modelo decida si son útiles o no. Para esto puede aumentarse el tamaño de la unidad mínima, desde un carácter hasta n; este método se le conoce como n-gramas o \textit{n-grams} en inglés.
 
 \subsection{Diferentes enfoques en el preprocesamiento}
-%aqui van los diferentes enfoque en el preprocesamiento
+
 \par Desde la perspectiva de otros investigadores, fue más importante considerar un conjunto de reglas que modelara estrictamente lo que es la ironía, como se vio con \textcite{utsumi1996unified} y \textcite{kong2011formalization}, lo cual se puede considerar como una buena solución si se desea conocer mejor el lenguaje propio para el cual se  hace el modelo, pero ineficiente y poco adaptable a los casos de la vida real dónde el lenguaje está vivo y cambia mucho dependiendo del contexto y del uso de las palabras. Este estudio tiene esta ventaja ya que va a adaptarse a lo que algunos usuarios de esta red social han considerado como ironía o no.
 
 \par Por otro lado, algunos investigadores consideraron usar etiquetas \gls{POS} las cuales dan a las palabras características únicas como la de ser un verbo, adjetivo, adverbio, sustantivo, entre otras. Estas características resultan importantes para obtener las fórmulas que describirían un texto sarcástico o irónico, como lo hizo \textcite{barbieri2014italian} y similar a los que hizo \textcite{davidov2010semi}. Sin embargo, con este acercamiento hay ciertas precauciones, ya que es necesario saber cómo se usa cierta palabra en un momento dado y vienen a la luz dos tipos de problemas. El primero corresponde al uso indistinto de algunas palabras como \textit{`vino'}, cuando se usa como verbo y cuando se usa como sustantivo. Este problema podría manejarse tal vez adaptando el árbol de decisiones que se usó en \textcite{barbieri2014italian} para que regrese las diferentes variantes que podría dar como resultado que se considere como verbo o como sustantivo. El segundo problema es cuando se deriva un sustantivo en un verbo; en estos casos no podría entenderse qué significado se le puede dar; estos problemas se atajan en la solución debido a que no se da por hecho lo que el usuario quiere decir, con una palabra o qué uso quiere darle.
 
 
 \subsection{Complejidad del preprocesamiento}
-%aqui va la complejidad del procesamiento
+
 La complejidad de este preprocesamiento es lineal, ya que se debe leer cada palabra de cada tweet dos veces, la primera para obtener las palabras que conforman todo el corpus y contar si esta palabra entrará en el vocabulario, y la segunda para asignarle a cada tweet un vector de índices que corresponden al vocabulario que se obtuvo antes.
 
 
@@ -99,7 +99,7 @@ La complejidad de este preprocesamiento es lineal, ya que se debe leer cada pala
 \end{figure}
 
 
-\par Como se ve en la figura \ref{fig:xor} para poder resolver este tipo de problemas se propuso usar más capas del perceptrón que podrían resolver el problema fácilmente, ya que cuando se agregan más perceptrones, se pueden \textit{`dibujar'} más lineas que puedan ayudar a dividir mejor una clase. Como se puede ver en la figura \ref{xor2}.
+\par Como se ve en la figura \ref{fig:xor} para poder resolver este tipo de problemas se propuso usar más capas del perceptrón que podrían resolver el problema fácilmente, ya que cuando se agregan más perceptrones, se pueden \textit{`dibujar'} más lineas que puedan ayudar a dividir mejor una clase. Como se puede ver en la figura \ref{fig:xor2}.
 
 \begin{figure}[H]
 	\centering
@@ -254,7 +254,7 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 
 \par Otra opción que surgió con el tiempo fue dotar al cambio de los pesos de un momento esto para que aún cuando había encontrado un mínimo local, el paso pudiera pasarlo por alto con la intención de buscar uno que estuviera en la vecindad, este método no resultó tan bueno ya que podía estancarse en zonas llanas aún más altas que el mínimo local que había ignorado. Luego de este método surgió otro que consideraría una adaptación a las condiciones del gradiente, es decir que en zonas donde fuera necesario que $\epsilon$ fuera más pequeño para conseguir converger, pudiera adaptarse, entonces surgió Adagrad. Luego se pensó que se podría hacer variar de igual modo el momento ese fue el surgimiento de Adam, el cual es el método usado en esta tesis, no se pensó en probar con otros ya que Adam ha reportado mejores resultados en la literatura que sus alternativas, este método fue ideado por \textcite{kingma2014adam}.  Sin embargo, como se ha visto en diferentes investigaciones, los mejores resultados se obtienen al usar como optimizador el Root Mean Square(RMS) el cual es un Gradient Descent con momento.
 \nocite{DBLP:journals/corr/Ruder16}
-% 			Aqui tal vez tenga que meter la explicación de Adam http://ruder.io/optimizing-gradient-descent/index.html#adam
+
 
 \subsection{Éxito del método}
 
@@ -347,8 +347,8 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 		\label{fig:arquitectura}
 	\end{figure}
 \end{landscape}
-%aqui me quedo estoy revisando lo que escribio colah sobre esto, http://colah.github.io/posts/2015-08-Understanding-LSTMs/
-%aqui explico que son las redes neuronales profundas
+
+
 
 \section{Técnica de evaluación}
 
@@ -445,5 +445,4 @@ En donde $y_{j}$ está dado por la función sigmoidal en este caso por lo tanto 
 
 \par La gráfica ROC y el AUC son métodos gráficos ampliamente utilizados que pueden servir para rápidamente identificar si un modelo tiene un buen desempeño o no, por lo que se considera valioso para los experimentos.
 
-% incluir esto en la tesis
-%https://en.wiktionary.org/wiki/User:Matthias_Buchmeier#Spanish_frequency_list
+

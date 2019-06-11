@@ -85,17 +85,17 @@
 \end{figure}
 \par Se puede notar que los segmentos de este experimento están siempre tiene un AUC por encima del máximo del experimento 1. Lo cual indica directamente que es un mejor modelo.
 
-\subsection{Propuesta de mejora} %%Hasta aqui revise 15 Abril
+\subsection{Propuesta de mejora} 
 
 \par Al analizar los resultados obtenidos se pudo observar una mejora considerable, tanto el \textit{recall} como en \textit{precision} lo que indica que este modelo es mucho mejor que el primero. Esto puede ser debido a que en las redes sociales las reglas gramaticales y de ortografía son más flexibles, y para poner un ejemplo: escribir
-``hola ¿Que haces?'' es lo mismo que decir ``ola k ase'', semánticamente hablando, por lo que analizando palabra por palabra la similitud entre estas palabras es pequeña mientras que carácter por carácter es más grande debido a la red neuronal puede encontrar secuencias de caracteres que realmente importa como `ola'  y también encontrar una correlación entre `que' y `k' lo cual significaría que se adapta al uso de la lengua.
+``hola ¿Que haces?'' es lo mismo que decir ``ola k ase'', semanticamente hablando, por lo que analizando palabra por palabra la similitud entre estas palabras es pequeña mientras que carácter por carácter es más grande debido a la red neuronal puede encontrar secuencias de caracteres que realmente importa como `ola'  y también encontrar una correlación entre `que' y `k' lo cual significaría que se adapta al uso de la lengua.
 
 \par El \textit{recall} como se explicó previamente es la medida que indica qué porcentaje de muestras relevantes es encontrada. Los números indican que en el experimento 1 de 100 muestras irónicas, pudo distinguir 76 y en el experimento 2 pudo distinguir 86. Mientras que el \textit{precision} es la medida que muestra que porcentaje de las muestras clasificadas como irónicas fue de verdad irónica. Por lo tanto en números el experimento 1 detectó 100 muestras irónicas, de las cuales el 90.92 \% fue de verdad irónica y el experimento 2 de 100 detectó 95.52 \% irónicas. En ambas métricas el segundo experimento es mucho mejor.
 
 \par Con el fin de mejorar este resultado se propone aumentar el tamaño del n-gram a dos. Esto aportaría mayor información de la vecindad de los caracteres, pudiendo encontrar mejores patrones que describan más globalmente la esencia de los datos.
 
 \section{Tercer Experimento}
-\par En este experimento se incrementó el tamaño de los tokens ahora serán tomados por parejas de caracteres. Por lo que algunos tokens podrían ser los siguientes: `ho', `ol', `la'. Lo que se busca con este experimento es obtener más flexibilidad que cuando procesa por palabra y mayor rigidez que cuando procesa por caracter. Los resultados fueron los siguientes:
+\par En este experimento se incrementó el tamaño de los tokens ahora serán tomados por parejas de caracteres. Por lo que algunos tokens podrían ser los siguientes: `ho', `ol', `la'. Lo que se busca con este experimento es obtener más flexibilidad que cuando procesa por palabra y mayor rigidez que cuando procesa por carácter. Los resultados fueron los siguientes:
 
 \subsection{Evaluación}
 \begin{center}
@@ -211,12 +211,12 @@
 	\label{fig:ironyTest4}
 \end{figure}
 
-% \begin{figure}[h]
-% 	\centering
-% 	\includegraphics[width=0.6\textwidth]{imagenes/ironia1.png}
-% 	\caption{Texto irónico tomado a prueba. En esta muestra se obtuvo un 0.998463 de porcentaje de ironía. Para el experimento 4} %%%ACTUALIZAR
-% 	\label{fig:ironyTest5}
-% \end{figure}
+
+
+
+
+
+
 \section{Análisis}
 \par Para concluir este capítulo se muestra una tabla que compara directamente las diferentes medidas obtenidas en esta fase de experimentos.
 

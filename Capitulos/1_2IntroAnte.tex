@@ -4,7 +4,7 @@
 \setcounter{page}{1}
 \onehalfspacing
 
-\par La ironía es una figura retórica que consiste en decir lo contrario de lo que se quiere dar a entender; esta definición es a veces difícil de entender para una persona y por lo tanto es de esperarse que es más difícil de hacer entender a un sistema de cómputo. Hasta este momento, se le puede dar a una computadora un conjunto de instrucciones específicas, y si se logra definir de algún modo las intenciones, se puede hacer que una computadora entienda de forma concreta un concepto. Sin embargo, la ironía reta a la lógica y es difícil para una persona explicar si una oración es irónica o es algo literal, muchas veces esto depende del contexto. Es cuando entra la inteligencia artificial, que ayuda a no explicar cosas que no se entienden bien o que dependen de muchas condiciones y hace que el sistema computacional salte la barrera de la lógica dotándola de procesos que simulan el razonamiento humano. La inteligencia artificial se ha usado en otras tareas como conducir un automóvil, clasificar objetos, darle significado a las palabras, entre otras.
+\par La ironía es una figura retórica que consiste en decir lo contrario de lo que se quiere dar a entender; esta definición es a veces difícil de entender para una persona y por lo tanto es de esperarse que sea más difícil de hacer entender a un sistema de cómputo. Hasta este momento, se le puede dar a una computadora un conjunto de instrucciones específicas, y si se logra definir de algún modo las intenciones, se puede hacer que una computadora entienda de forma concreta un concepto. Sin embargo, la ironía reta a la lógica y es difícil para una persona explicar si una oración es irónica o es algo literal, muchas veces esto depende del contexto. Es cuando entra la inteligencia artificial, que ayuda a no explicar cosas que no se entienden bien o que dependen de muchas condiciones y hace que el sistema computacional salte la barrera de la lógica dotándola de procesos que simulan el razonamiento humano. La inteligencia artificial se ha usado en otras tareas como conducir un automóvil, clasificar objetos, darle significado a las palabras, entre otras.
 
 \par La ironía como un recurso lingüístico se destaca entre otras por su facilidad para satisfacer al lector; dando un valor agregado a la comunicación, si aparece como sátira provoca una risa casi instantánea, si aparece como sarcasmo suele ser más hiriente, incluso suele hacer pensar en las implicaciones de lo que se atreve uno a decir, como en el siguiente ejemplo:
 
@@ -17,7 +17,7 @@
 \par Este ejemplo ilustra muy bien el impacto de la ironía, de cierta forma maximiza la idea que el autor desea. Este impacto suele aportar una mayor carga de información y por lo tanto más interés en conseguirla. Ésta es una de las motivaciones que han tenido diferentes grupos de estudio para abordar la clasificación de la ironía.
 
 \par Para hablar de las motivaciones que este problema ha tenido para analizarse, se puede empezar por ver el trabajo de \textcite{maynard2014cares} quienes se orientan por el análisis de sentimientos en redes sociales cuando este recurso es utilizado; para \textcite{utsumi1995interpret} fue uno de los primeros trabajos que se hicieron en este tema y su motivo para realizar un sistema fue para proveer de herramientas a los sistemas de \textit{procesamiento de lenguaje natural} NLP (\textit{Natural Language Processing}) y que pudieran manejar la ironía de manera correcta, este sistema consistía en un conjunto de reglas de emociones; \textcite{davidov2010semi} crean un sistema semi supervisado el cual tiene buen desempeño y resuelve la clasificación en inglés, algunos de sus motivos fue el monitoreo de marcas, resumen de reseñas, sistemas de diálogo y proponen un marco de referencia para crear estos sistemas con detección de sarcasmo.
-%Aqui va la intro de los antecedentes
+
 \par El problema de la clasificación de la ironía reside en su característica de comprimir ideas en un pequeño conjunto de palabras, como en el siguiente ejemplo:
 
 \begin{center}
@@ -70,7 +70,7 @@ Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, i
 \par Los métodos semi-supervisados son aquellos que no requieren la intervención de los expertos. A esta clasificación pertenece únicamente un trabajo previo, el trabajo de \textcite{davidov2010semi} que consiste en dos fases: adquisición de patrones de un conjunto pequeño de muestras etiquetadas del 1 al 5, de nada sarcástico a completamente sarcástico,  y la fase de clasificación. Para obtener los patrones del conjunto de muestras etiquetadas se clasifican las palabras en \gls{HFW} y \gls{CW}, lo cual denota cuales son las palabras más relevantes, basado en con que frecuencia aparece una palabra y que palabras tienen contenido y no son solo de uso gramatical. Al momento de extraer los patrones se ven similar a los mostrados en la tabla \ref{tab:ejemplo}.
 \begin{center}
 	\begin{table}[h]
-		\caption{\footnotesize{Ejemplo de cómo se ve un patrón en este sistema; como se puede ver, los dos ejemplos pueden aparecer simultáneamente en una misma oración. Notesé que las palabras [COMPANY] y los símbolos de puntuación como el punto son \gls{HFW}. Extraído de \textcite{davidov2010semi}}}
+		\caption{\footnotesize{Ejemplo de cómo se ve un patrón en este sistema; como se puede ver, los dos ejemplos pueden aparecer simultáneamente en una misma oración. Nótese que las palabras [COMPANY] y los símbolos de puntuación como el punto son \gls{HFW}. Extraído de \textcite{davidov2010semi}}}
 		\label{tab:ejemplo}
 		\begin{tabular}{|p{6.5cm}|p{7cm}|}
 			\hline
@@ -114,13 +114,13 @@ Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, i
 	\end{tabular}
 	\label{tab:corpuses}
 \end{table}
-%--------------------------Omito estos a proposito------------------------
-% 		
-% 		\subsection{Análisis de las herramientas usadas}
-% 		%aqui va la parte del analisis de las herramientas usadas
-% 		\subsection{Análisis del preprocesamiento}
-% 		%aqui va la parte del analisis del preprocesamiento
-%--------------------------Omito estos a proposito------------------------
+
+
+
+
+
+
+
 
 \section{Análisis de resultados}
 
@@ -147,7 +147,7 @@ Aquí las diferentes aproximaciones se concentran en el idioma ingles, griego, i
 	\label{tab:resultados}
 \end{table}
 
-%aqui va la parte del analisis de resultados
+
 \par Después de ver más de cerca los resultados que reportan estos investigadores, se puede notar que los mejores resultados parecen ser los de \textcite{poria2016deeper} cuando usa CNN combinado con SVM y obtiene un valor de  \gls{F-score} de 0.948, que comparado con la mayoría es más grande. Este estudio fue la continuación del trabajo de \textcite{ptavcek2014sarcasm}, el cual consistía en obtener principalmente las características más relevantes como los \gls{n-grams}, etiquetas \gls{POS}, patrones con \gls{HFW}, otras como emoticones, signos de puntuación y otras características de los caracteres como el número de mayúsculas, minúsculas, entre otros, con todo esto se usaron dos métodos \gls{SVM} y \gls{MaxEnt} el cuál parece funcionar muy bien para el inglés. Sin embargo, para el checo no es así ya que SVM tiene mayor puntaje en F-score (0.582) lo cual es muy bajo, esto según ellos fue porqué algunas muestras necesitaban conocimiento general, que con 6,700 muestras no fueron suficientes para obtener. Por otro lado en inglés, como ya se mencionó, sirvió mejor \gls{MaxEnt}, tal vez debido a que este clasificador no asume independencia entre las características. \gls{MaxEnt} dio un 0.923 de F-score, esto puede indicar que como \textcite{domingos2012few} menciona, hay dos formas de mejorar el desempeño de esta tarea, una es conseguir más datos y otra en mejorar o encontrar un algoritmo que requiera menos datos.
 
 \par Respecto a los demás métodos, se puede destacar el trabajo de \textcite{reyes2012making} quienes principalmente describen una forma de cómo obtener el corpus y el trabajo de  \textcite{lopez2016character}, que obtuvo mejores resultados con un análisis a nivel de carácter, con un corpus no balanceado (30/70), tal vez debido a que en Twitter es necesario explotar más el potencial de los caracteres y suelen verse abreviaciones del texto, como por ejemplo  ``que'' pasa a ser ``q'', cuando el límite de caracteres se ha alcanzado en un tweet.
